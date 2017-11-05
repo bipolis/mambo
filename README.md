@@ -1,0 +1,2 @@
+# mambo
+OSGi Platform
