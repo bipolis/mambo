@@ -1,6 +1,6 @@
 package org.bipolis.mambo.report;
 
-import org.osgi.service.component.annotations.*;
+import org.osgi.service.component.annotations.Component;
 
 @Component
 public class Example {
