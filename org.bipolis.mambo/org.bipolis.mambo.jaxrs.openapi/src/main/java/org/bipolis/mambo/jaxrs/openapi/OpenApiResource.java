@@ -49,7 +49,7 @@ public class OpenApiResource extends BaseOpenApiResource {
 		String ctxId = ServletConfigContextUtils.getContextIdFromServletConfig(config);
 		OpenApiContext ctx = new JaxrsOpenApiContextBuilder().servletConfig(config).application(app)
 				.resourcePackages(resourcePackages).configLocation(configLocation)
-				.openApiConfiguration(openApiConfiguration).ctxId(null).buildContext(true);
+				.openApiConfiguration(openApiConfiguration).ctxId(ctxId).buildContext(true);
 		OpenAPI oas = ctx.read();
 
 		if (oas == null) {

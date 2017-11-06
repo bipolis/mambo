@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bipolis</groupId>
 	<artifactId>org.bipolis.mambo</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>_distro</module>
 		<module>_index</module>
 		<module>_assembly</module>
-		<module>org.bipolis.mambo.hello</module>
-		<module>org.bipolis.mambo.hello.itest</module>
+		
+		
 		<module>org.bipolis.mambo.jaxrs.openapi</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
