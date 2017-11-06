@@ -1,0 +1,20 @@
+Bundle-SymbolicName: ${project.artifactId}
+Bundle-Version: ${project.version}
+
+Bundle-Name: Name from Bundle Header
+Bundle-Description: Description from Bundle Header
+Bundle-Category: Category from Bundle Header
+
+
+
+Private-Package: \
+	org.bipolis.mambo.jaxrs.openapi.example,\
+	org.bipolis.mambo.jaxrs.openapi.example.basic,\
+	org.bipolis.mambo.jaxrs.openapi.example.info.annotationheader,\
+	org.bipolis.mambo.jaxrs.openapi.example.info.bundleheader
+
+Bundle-Copyright: Copyright from Bundle Header
+Bundle-License: License from Bundle Header
+Bundle-Vendor: Vendor from Bundle Header
+Bundle-ContactAddress: Contact Address from Bundle Header
+Bundle-DocURL: Documentation URL from Bundle Header
