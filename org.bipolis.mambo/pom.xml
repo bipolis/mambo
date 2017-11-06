@@ -16,7 +16,7 @@
 		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
 		<module>org.bipolis.mambo.jaxrs.itest</module>
-		<module>org.bipolis.mambo.jaxrs.example</module>
+		
 		<module>org.bipolis.mambo.jaxrs.restconsole</module>
 		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
 		<module>org.bipolis.mambo.report</module>

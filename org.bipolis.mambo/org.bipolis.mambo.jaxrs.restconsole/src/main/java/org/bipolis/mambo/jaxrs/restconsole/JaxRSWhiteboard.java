@@ -18,9 +18,10 @@ import org.osgi.service.jaxrs.runtime.dto.RuntimeDTO;
 		JAX_RS_APPLICATION_SELECT + "=(" + JAX_RS_NAME + "=" + RestConsoleApp.APPLICATION_NAME + ")",
 		JAX_RS_RESOURCE + "=true", JAX_RS_NAME + "=JaxRSWhiteboard" })
 //
-//@JaxrsApplicationSelect("(+JAX_RS_WHITEBOARD_TARGET+=" + RestConsoleApplication.APPLICATION_NAME + ")")
-//@JaxrsName("JaxRSWhiteboard")
-//@JaxrsResource
+// @JaxrsApplicationSelect("(+JAX_RS_WHITEBOARD_TARGET+=" +
+// RestConsoleApplication.APPLICATION_NAME + ")")
+// @JaxrsName("JaxRSWhiteboard")
+// @JaxrsResource
 @Path("/JaxRSWhiteboard")
 public class JaxRSWhiteboard {
 	@Reference(cardinality = ReferenceCardinality.OPTIONAL)

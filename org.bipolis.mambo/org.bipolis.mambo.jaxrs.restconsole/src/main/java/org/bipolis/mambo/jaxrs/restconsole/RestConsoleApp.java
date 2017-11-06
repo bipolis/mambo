@@ -13,6 +13,7 @@ import org.osgi.service.component.annotations.Component;
 // @JaxrsName(RestConsoleApplication.APPLICATION_NAME)
 // @JaxrsApplicationBase("/" + RestConsoleApplication.APPLICATION_NAME)
 // @JaxrsWhiteboardTarget(RestConsoleApplication.TARGET)
+
 public class RestConsoleApp extends Application {
 
 	public static final String APPLICATION_NAME = "RestConsole";

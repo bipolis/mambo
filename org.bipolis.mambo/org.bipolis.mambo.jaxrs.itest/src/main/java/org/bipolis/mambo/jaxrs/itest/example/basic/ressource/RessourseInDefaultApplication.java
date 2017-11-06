@@ -1,8 +1,7 @@
-package org.bipolis.mambo.jaxrs.example;
+package org.bipolis.mambo.jaxrs.itest.example.basic.ressource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.JaxRSWhiteboardConstants;
@@ -11,20 +10,18 @@ import org.osgi.service.jaxrs.whiteboard.JaxRSWhiteboardConstants;
 		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name="
 				+ JaxRSWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")",
 		JaxRSWhiteboardConstants.JAX_RS_RESOURCE + "=true",
-		JaxRSWhiteboardConstants.JAX_RS_NAME + "=Base" }, service = SimpleRessourseInDefaultApplication.class)
+		JaxRSWhiteboardConstants.JAX_RS_NAME + "=" + RessourseInDefaultApplication.RESSOURCE_NAME })
 
-@Path("/simple")
-public class SimpleRessourseInDefaultApplication {
-	@GET
-	@Path("/a")
-	public String getRuntime() {
-		return "a=a";
-	}
+@Path("/" + RessourseInDefaultApplication.RESSOURCE_NAME)
+public class RessourseInDefaultApplication {
+
+	public static final String RESSOURCE_NAME = "RessourseInDefaultApplication";
 
 	@GET
-	@Path("/b")
-	public Response getR() {
-		return Response.ok("b").build();
+	@Path("/value")
+	public String getValue() {
+		return getClass().getName();
+
 	}
 
 };

@@ -1,0 +1,5 @@
+Bundle-SymbolicName: ${project.artifactId}
+Bundle-Version: ${project.version}
+
+    
+Private-Package: org.bipolis.mambo.jaxrs.restconsole

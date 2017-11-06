@@ -1,1 +1,6 @@
 Test-Cases: ${classes;NAMED;*Test}
+Private-Package: \
+	org.bipolis.mambo.jaxrs.itest,\
+	org.bipolis.mambo.jaxrs.itest.example,\
+	org.bipolis.mambo.jaxrs.itest.example.basic.application,\
+	org.bipolis.mambo.jaxrs.itest.example.basic.ressource
