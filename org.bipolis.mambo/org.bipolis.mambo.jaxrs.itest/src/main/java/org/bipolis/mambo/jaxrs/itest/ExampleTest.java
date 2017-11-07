@@ -44,8 +44,8 @@ public class ExampleTest {
 		con.setRequestProperty("User-Agent", "Mozilla/5.0");
 
 		int responseCode = con.getResponseCode();
-		if(responseCode!=200) {
-			throw new Exception("responsecode "+responseCode);
+		if (responseCode != 200) {
+			throw new Exception("responsecode " + responseCode);
 		}
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
