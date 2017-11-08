@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>org.bipolis.mambo.report.core</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.osgi</groupId>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>_distro</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 			<scope>runtime</scope>
 			<type>pom</type>
 		</dependency>

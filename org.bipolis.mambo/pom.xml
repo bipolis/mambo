@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bipolis</groupId>
 	<artifactId>org.bipolis.mambo</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>_distro</module>
@@ -21,6 +21,7 @@
 		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
 		<module>org.bipolis.mambo.report</module>
 		<module>org.bipolis.mambo.report.core</module>
+		
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->
@@ -52,7 +53,7 @@
 			<url>https://oss.sonatype.org/content/groups/osgi</url>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
+				<updatePolicy>interval:60</updatePolicy>
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
@@ -61,10 +62,21 @@
 			<url>https://repository.apache.org/content/groups/snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
+				<updatePolicy>interval:60</updatePolicy>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories>	
+<!-- 		<repositories> -->
+<!-- 		<repository> -->
+<!-- 			<id>Apache Snapshot</id> -->
+<!-- 			<name>Apache Snapshot</name> -->
+<!-- 			<url>https://repository.apache.org/content/groups/snapshots</url> -->
+<!-- 			<snapshots> -->
+<!-- 				<enabled>true</enabled> -->
+<!-- 				<updatePolicy>interval:60</updatePolicy> -->
+<!-- 			</snapshots> -->
+<!-- 		</repository> -->
+<!-- 	</repositories> -->
 	<dependencyManagement>
 		<dependencies>
 			<!-- PROVIDED -->

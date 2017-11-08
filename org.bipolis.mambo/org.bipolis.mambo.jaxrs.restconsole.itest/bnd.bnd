@@ -1,1 +1,3 @@
 Test-Cases: ${classes;NAMED;*Test}
+
+-standalone: 
