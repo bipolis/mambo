@@ -66,17 +66,17 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>	
-<!-- 		<repositories> -->
-<!-- 		<repository> -->
-<!-- 			<id>Apache Snapshot</id> -->
-<!-- 			<name>Apache Snapshot</name> -->
-<!-- 			<url>https://repository.apache.org/content/groups/snapshots</url> -->
-<!-- 			<snapshots> -->
-<!-- 				<enabled>true</enabled> -->
-<!-- 				<updatePolicy>interval:60</updatePolicy> -->
-<!-- 			</snapshots> -->
-<!-- 		</repository> -->
-<!-- 	</repositories> -->
+		<repositories>
+		<repository>
+			<id>Apache Snapshot</id>
+			<name>Apache Snapshot</name>
+			<url>https://repository.apache.org/content/groups/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>interval:60</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 	<dependencyManagement>
 		<dependencies>
 			<!-- PROVIDED -->
