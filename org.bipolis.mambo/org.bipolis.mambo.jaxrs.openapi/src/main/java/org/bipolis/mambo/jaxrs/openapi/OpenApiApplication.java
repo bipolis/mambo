@@ -10,8 +10,8 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 @Component(service = Application.class, property = { JaxRSWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=/api-doc",
 		JaxRSWhiteboardConstants.JAX_RS_NAME + "=" + OpenApiApplication.APPLICATION_NAME })
 
-@JaxrsName(OpenApiApplication.APPLICATION_NAME)
-@JaxrsApplicationBase("/" + OpenApiApplication.APPLICATION_NAME)
+//@JaxrsName(OpenApiApplication.APPLICATION_NAME)
+//@JaxrsApplicationBase("/" + OpenApiApplication.APPLICATION_NAME)
 public class OpenApiApplication extends Application {
 
 	public static final String APPLICATION_NAME = "OpenApiApplication";

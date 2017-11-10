@@ -1,0 +1,15 @@
+Bundle-SymbolicName: ${project.artifactId}
+Bundle-Version: ${project.version}
+
+
+    
+Import-Package:\
+    !com.google.errorprone.*,\
+    *
+
+-includeresource:\
+ 	lib/commons-lang3.jar=commons-lang3-*.jar;lib:=true,\
+  
+    
+    
+Export-Package: org.bipolis.mambo.report

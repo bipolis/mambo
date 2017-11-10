@@ -1,10 +1,15 @@
 package org.bipolis.mambo.report;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
-@Component
+@Component(service = Object.class, immediate = true)
 public class Example {
 
-	// TODO: class provided by template
+	@Activate
+	private void runfirst() {
+		System.out.println("activate");
+
+	}
 
 }

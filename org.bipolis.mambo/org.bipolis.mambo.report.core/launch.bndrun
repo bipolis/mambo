@@ -8,15 +8,19 @@
 -resolve.effective: active; skip:="osgi.service"
 
 -runrequires: \
-        osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
-        osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
-        osgi.identity;filter:='(osgi.identity=org.apache.felix.log)',\
-        osgi.identity;filter:='(osgi.identity=org.bipolis.mambo.report.core)'
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.log)',\
+	osgi.identity;filter:='(osgi.identity=org.bipolis.mambo.report.core)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.servicemix.bundles.batik)'
 
 -runbundles: \
-        org.apache.felix.gogo.runtime,\
-        org.apache.felix.gogo.command,\
-        org.apache.felix.gogo.shell,\
-        org.apache.felix.log,\
-        org.apache.felix.scr,\
-        org.bipolis.mambo.report.core
+	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
+	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
+	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
+	org.apache.felix.log;version='[1.0.1,1.0.2)',\
+	org.apache.felix.scr;version='[2.0.10,2.0.11)',\
+	org.apache.servicemix.bundles.xerces;version='[2.11.0,2.11.1)',\
+	org.apache.servicemix.bundles.xmlresolver;version='[1.2.0,1.2.1)',\
+	org.apache.servicemix.specs.jaxp-api-1.4;version='[2.8.0,2.8.1)',\
+	org.bipolis.mambo.report.core;version='[0.0.1,0.0.2)'

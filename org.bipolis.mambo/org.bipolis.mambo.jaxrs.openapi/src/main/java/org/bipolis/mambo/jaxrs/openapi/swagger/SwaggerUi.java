@@ -15,9 +15,9 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
 import org.osgi.service.log.LogService;
 
-@Component(service = SwaggerUi.class, immediate = true, property = {
-		HttpWhiteboardConstants.HTTP_WHITEBOARD_RESOURCE_PATTERN + "=" + SWAGGER_UI_PATH_PATTERN,
-		HttpWhiteboardConstants.HTTP_WHITEBOARD_RESOURCE_PREFIX + "=/org/bipolis/mambo/jaxrs/openapi/swagger/ui" })
+//@Component(service = SwaggerUi.class, immediate = true, property = {
+//		HttpWhiteboardConstants.HTTP_WHITEBOARD_RESOURCE_PATTERN + "=" + SWAGGER_UI_PATH_PATTERN,
+//		HttpWhiteboardConstants.HTTP_WHITEBOARD_RESOURCE_PREFIX + "=/org/bipolis/mambo/jaxrs/openapi/swagger/ui" })
 public class SwaggerUi {
 
 	public static final Set<String> CORS_HEADERS = new HashSet<>(

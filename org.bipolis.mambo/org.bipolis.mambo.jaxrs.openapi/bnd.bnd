@@ -1,8 +1,6 @@
 Bundle-SymbolicName: ${project.artifactId}
 Bundle-Version: ${project.version}
 
-#-exportcontents:\
-#    io.swagger.*
     
 Import-Package:\
     !com.google.errorprone.*,\
@@ -27,11 +25,6 @@ Import-Package:\
     lib/validation-api.jar=validation-api-*.jar;lib:=true
     
     
-#    lib/javax.annotation=javax.annotation-*.jar;lib:=true,\
-#    lib/javax.inject=javax.inject-*.jar;lib:=true,\
-#    lib/javax.ws.rs=javax.ws.rs-*.jar;lib:=true,\
-#    lib/jersey-client=jersey-client-*.jar;lib:=true,\
-#    lib/jersey-common=jersey-common-*.jar;lib:=true,\
-#    lib/jersey-media-jaxb=jersey-media-jaxb-*.jar;lib:=true,\
-#    lib/jersey-server=jersey-server-*.jar;lib:=true,\
-#    lib/osgi-resource-locator=osgi-resource-locator-*.jar;lib:=true,\
+Private-Package: \
+	org.bipolis.mambo.jaxrs.openapi,\
+	org.bipolis.mambo.jaxrs.openapi.swagger

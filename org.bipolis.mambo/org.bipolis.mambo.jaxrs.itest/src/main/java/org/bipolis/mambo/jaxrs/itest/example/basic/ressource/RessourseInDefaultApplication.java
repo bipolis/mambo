@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.JaxRSWhiteboardConstants;
 
-@Component(property = {
+@Component(service = RessourseInDefaultApplication.class, property = {
 		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name="
 				+ JaxRSWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")",
 		JaxRSWhiteboardConstants.JAX_RS_RESOURCE + "=true",

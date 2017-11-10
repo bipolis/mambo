@@ -9,7 +9,6 @@
 	</parent>
 	<artifactId>_distro</artifactId>
 	<packaging>pom</packaging>
-
 	<dependencies>
 		<!-- THIRD PARTY DEPENDENCIES Additional runtime dependencies may be added 
 			here. They (and their transitive dependencies) will be available both for 
@@ -145,5 +144,4 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-
 </project>

@@ -3,7 +3,7 @@ package org.bipolis.mambo.jaxrs.itest.example.basic.ressource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-//@Component
+//@Component(service = RessourseInDefaultApplicationA.class)
 //@JaxrsResource
 //@JaxrsApplicationSelect("(" + JaxRSWhiteboardConstants.JAX_RS_NAME + "="
 //		+ JaxRSWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")")
