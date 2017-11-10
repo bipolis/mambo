@@ -15,8 +15,6 @@ import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 
 import org.bipolis.mambo.jaxrs.openapi.swagger.SwaggerUi;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.jaxrs.whiteboard.JaxRSWhiteboardConstants;
 
 //@Component(property = {
 //		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=" + OpenApiApplication.APPLICATION_NAME
