@@ -4,7 +4,24 @@ Bundle-Version: ${project.version}
     
 Import-Package:\
     !com.google.errorprone.*,\
-    !com.google.gson.*\
+    !com.google.gson.*,\
+    !com.sun.jdi.*,\
+    !org.dom4j*,\
+    !sun.misc,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
+    !org,\
     *
 
 -includeresource:\

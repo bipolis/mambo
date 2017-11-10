@@ -28,8 +28,8 @@ import io.swagger.oas.integration.api.OpenApiContext;
 import io.swagger.oas.models.OpenAPI;
 
 @Component(property = {
-		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name="
-				+ JaxRSWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")",
+		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=" + OpenApiApplication.APPLICATION_NAME
+				+ ")",
 		JaxRSWhiteboardConstants.JAX_RS_RESOURCE + "=true",
 		JaxRSWhiteboardConstants.JAX_RS_NAME + "=OpenApi" }, service = OpenApiResource.class)
 
