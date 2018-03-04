@@ -5,8 +5,8 @@ import javax.ws.rs.Path;
 
 //@Component(service = RessourseInDefaultApplicationA.class)
 //@JaxrsResource
-//@JaxrsApplicationSelect("(" + JaxRSWhiteboardConstants.JAX_RS_NAME + "="
-//		+ JaxRSWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")")
+//@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
+//		+ JaxrsWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")")
 //@JaxrsName(RessourseInDefaultApplicationA.RESSOURCE_NAME)
 //@Path("/" + RessourseInDefaultApplicationA.RESSOURCE_NAME)
 public class RessourseInDefaultApplicationA {

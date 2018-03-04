@@ -9,5 +9,5 @@
         osgi.identity;filter:='(osgi.identity=org.bipolis.mambo.jaxrs.restconsole.itest)'
 
 -runbundles: \
-        org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)',\
-        org.bipolis.mambo.jaxrs.restconsole.itest;version='[1.0.0,1.0.1)'
+	org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)',\
+	org.bipolis.mambo.jaxrs.restconsole.itest;version='[0.0.1,0.0.2)'

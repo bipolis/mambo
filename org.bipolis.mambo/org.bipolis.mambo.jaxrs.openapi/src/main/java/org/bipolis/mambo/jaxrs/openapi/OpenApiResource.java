@@ -15,23 +15,23 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.jaxrs.whiteboard.JaxRSWhiteboardConstants;
+import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
-import io.swagger.jaxrs2.integration.JaxrsOpenApiContextBuilder;
-import io.swagger.jaxrs2.integration.ServletConfigContextUtils;
-import io.swagger.jaxrs2.integration.resources.BaseOpenApiResource;
-import io.swagger.oas.integration.api.OpenAPIConfiguration;
-import io.swagger.oas.integration.api.OpenApiContext;
-import io.swagger.oas.models.OpenAPI;
+import io.swagger.v3.jaxrs2.integration.JaxrsOpenApiContextBuilder;
+import io.swagger.v3.jaxrs2.integration.ServletConfigContextUtils;
+import io.swagger.v3.jaxrs2.integration.resources.BaseOpenApiResource;
+import io.swagger.v3.oas.integration.api.OpenAPIConfiguration;
+import io.swagger.v3.oas.integration.api.OpenApiContext;
+import io.swagger.v3.oas.models.OpenAPI;
 
 @Component(property = {
-		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=" + OpenApiApplication.APPLICATION_NAME
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=" + OpenApiApplication.APPLICATION_NAME
 				+ ")",
-		JaxRSWhiteboardConstants.JAX_RS_RESOURCE + "=true",
-		JaxRSWhiteboardConstants.JAX_RS_NAME + "=OpenApi" }, service = OpenApiResource.class)
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true",
+		JaxrsWhiteboardConstants.JAX_RS_NAME + "=OpenApi" }, service = OpenApiResource.class)
 
 @Path("/openapi")
 public class OpenApiResource extends BaseOpenApiResource {

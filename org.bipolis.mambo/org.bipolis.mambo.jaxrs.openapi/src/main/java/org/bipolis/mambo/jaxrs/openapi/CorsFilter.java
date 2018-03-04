@@ -17,10 +17,10 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import org.bipolis.mambo.jaxrs.openapi.swagger.SwaggerUi;
 
 //@Component(property = {
-//		JaxRSWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=" + OpenApiApplication.APPLICATION_NAME
+//		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=" + OpenApiApplication.APPLICATION_NAME
 //				+ ")",
-//		JaxRSWhiteboardConstants.JAX_RS_NAME + "=CorsFilter",
-//		JaxRSWhiteboardConstants.JAX_RS_EXTENSION + "=true" }, service = { ContainerResponseFilter.class })
+//		JaxrsWhiteboardConstants.JAX_RS_NAME + "=CorsFilter",
+//		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true" }, service = { ContainerResponseFilter.class })
 public class CorsFilter implements ContainerResponseFilter {
 
 	@Override
