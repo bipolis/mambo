@@ -22,7 +22,12 @@
 		<!-- TODO: reference your workspace projects to be indexed here -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.openapi</artifactId>
+			<artifactId>org.bipolis.mambo.jaxrs.annotation</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

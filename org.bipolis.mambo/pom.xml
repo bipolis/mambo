@@ -10,18 +10,25 @@
 		<module>_distro</module>
 		<module>_index</module>
 		<module>_assembly</module>
-		<module>org.bipolis.mambo.jaxrs.itest</module>
+<!-- 		<module>org.bipolis.mambo.jaxrs.itest</module> -->
 
-		<module>org.bipolis.mambo.jaxrs.openapi</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
-
+<!-- 		<module>org.bipolis.mambo.jaxrs.openapi.itest</module> -->
 		<module>org.bipolis.mambo.jaxrs.restconsole</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
-		
-		
-		
-		
+<!-- 		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module> -->
+		<module>org.bipolis.mambo.jaxrs.annotation</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
+		<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
+
+		<module>org.bipolis.mambo.jaxrs.ext.media.json</module>
+		<module>org.bipolis.mambo.jaxrs.ext.media.yaml</module>
+		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth</module>
+		<module>org.bipolis.mambo.jaxrs.ext.security</module>
+		<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
+
+		<module>org.bipolis.mambo.jaxrs.openapi.core</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->
@@ -37,9 +44,49 @@
 		<local.index.policy>REQUIRED</local.index.policy>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<bnd.maven.version>3.5.0</bnd.maven.version>
+		<bnd.maven.version>4.0.0-SNAPSHOT</bnd.maven.version>
+		<swagger.version>2.0.0-rc4</swagger.version>
+		<osgi.version>7.0.0-SNAPSHOT</osgi.version>
+
+
 	</properties>
+	<repositories>
+		<!-- These SNAPSHOT repositories are required for OSGi R7 usage in advance 
+			of the official release -->
+		<repository>
+			<id>OSSRH Snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>OSGi Snapshots</id>
+			<url>https://oss.sonatype.org/content/groups/osgi/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>Apache Snapshots</id>
+			<url>https://repository.apache.org/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<pluginRepositories>
+		<!-- The bnd SNAPSHOT repository is required for OSGi R7 usage in advance 
+			of the official release -->
 		<pluginRepository>
 			<id>bnd.master</id>
 			<snapshots>
@@ -47,104 +94,40 @@
 			</snapshots>
 			<url>https://bndtools.ci.cloudbees.com/job/bnd.master/lastSuccessfulBuild/artifact/dist/bundles</url>
 		</pluginRepository>
-		<pluginRepository>
-			<id>OSGi</id>
-			<name>OSGi with Snapshot</name>
-			<url>https://oss.sonatype.org/content/groups/osgi</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<!-- <updatePolicy>interval:60</updatePolicy> -->
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>Apache Snapshot</id>
-			<name>Apache Snapshot</name>
-			<url>https://repository.apache.org/content/groups/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<!-- <updatePolicy>interval:60</updatePolicy> -->
-			</snapshots>
-		</pluginRepository>
 	</pluginRepositories>
-	<repositories>
-		<repository>
-			<id>Apache Snapshot</id>
-			<name>Apache Snapshot</name>
-			<url>https://repository.apache.org/content/groups/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>interval:60</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>
 	<dependencyManagement>
 		<dependencies>
 			<!-- PROVIDED -->
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.core</artifactId>
-				<version>6.0.0</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.cmpn</artifactId>
-				<version>6.0.0</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.annotation</artifactId>
-				<version>6.0.1</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- Compile -->
 			<dependency>
-				<groupId>org.osgi</groupId>
-				<artifactId>org.osgi.service.jaxrs</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.aries.spec</groupId>
-				<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>org.apache.felix.http.servlet-api</artifactId>
-				<version>1.1.2</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.aries.spec</groupId>
-				<artifactId>org.apache.aries.javax.annotation-api</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.json</groupId>
-				<artifactId>javax.json-api</artifactId>
-				<version>1.1</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>io.swagger.core.v3</groupId>
-				<artifactId>swagger-annotations</artifactId>
-				<version>2.0.0-rc4</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.7.25</version>
-				<scope>provided</scope>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.16.16</version>
+				<scope>compile</scope>
 			</dependency>
 			<!-- TEST -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.12</version>
+				<version>4.10</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>

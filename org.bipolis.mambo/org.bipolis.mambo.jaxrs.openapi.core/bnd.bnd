@@ -1,0 +1,11 @@
+Bundle-SymbolicName: ${project.artifactId}
+Bundle-Version: ${project.version}
+
+
+    
+Private-Package: \
+	org.bipolis.mambo.jaxrs.openapi.rs,\
+	org.bipolis.mambo.jaxrs.openapi.internal
+Export-Package: \
+	org.bipolis.mambo.jaxrs.openapi.api,\
+	org.bipolis.mambo.jaxrs.openapi.api.fragments
