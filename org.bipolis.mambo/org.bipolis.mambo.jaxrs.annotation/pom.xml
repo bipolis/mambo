@@ -24,6 +24,18 @@
 			<artifactId>osgi.annotation</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.service.jaxrs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.service.component.annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.annotation.bundle</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.aries.spec</groupId>
 			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -46,19 +58,16 @@
 			<type>pom</type>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-indexer-maven-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-baseline-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

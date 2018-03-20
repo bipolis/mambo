@@ -1,6 +1,7 @@
 package org.bipolis.mambo.jaxrs.itest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -8,7 +9,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import org.bipolis.mambo.jaxrs.itest.example.basic.application.BasicApplication;
 import org.bipolis.mambo.jaxrs.itest.example.basic.application.RessourceInBasicApp;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.service.component.runtime.ServiceComponentRuntime;
+import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
+import org.osgi.util.tracker.ServiceTracker;
 
 
 public class ExampleTest {
@@ -51,10 +60,49 @@ public class ExampleTest {
   }
 
   @Test
+  public void setUp()
+          throws InterruptedException {
+    Thread.sleep(5000);
+
+    BundleContext bundleContext = FrameworkUtil.getBundle(ExampleTest.class)
+                                               .getBundleContext();
+
+    for (Bundle bundle : bundleContext.getBundles()) {
+      assertEquals("Bundle is not active: " + bundle.getSymbolicName(), bundle.getState(),
+              Bundle.ACTIVE);
+      assertFalse("Bundle must have a Name", bundle.getSymbolicName()
+                                                   .isEmpty());
+      assertFalse("Dont use Replacemarks in Bundlename", bundle.getSymbolicName()
+                                                               .contains("<"));
+    }
+
+    ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> tracker =
+            new ServiceTracker<>(bundleContext, ServiceComponentRuntime.class, null);
+    tracker.open();
+
+
+    final ServiceComponentRuntime serviceComponentRuntime = tracker.getService();
+
+
+
+    for (ComponentDescriptionDTO component : serviceComponentRuntime.getComponentDescriptionDTOs()) {
+
+      for (ComponentConfigurationDTO config : serviceComponentRuntime.getComponentConfigurationDTOs(
+              component)) {
+        System.out.println("?????????????ßß");
+        System.out.println(component.name + "-----------" + config.state);
+
+        assertEquals("Service is not active: " + component.name, config.state,
+                ComponentConfigurationDTO.ACTIVE);
+      }
+    }
+
+
+  }
+
+  @Test
   public void testExample()
           throws Throwable {
-
-    Thread.sleep(5000);
     assertEquals(RessourceInBasicApp.class.getName(), getResult(BasicApplication.APPLICATION_NAME,
             RessourceInBasicApp.RESSOURCE_NAME, "value"));
     // assertEquals(RessourceInBasicAppA.class.getName(),
@@ -62,5 +110,6 @@ public class ExampleTest {
     // RessourceInBasicAppA.RESSOURCE_NAME, "value"));
 
   }
+
 
 }

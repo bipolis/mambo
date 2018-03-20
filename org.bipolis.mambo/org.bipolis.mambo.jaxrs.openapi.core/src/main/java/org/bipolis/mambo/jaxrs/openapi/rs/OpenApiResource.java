@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.security.PermitAll;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -37,7 +36,7 @@ import io.swagger.v3.oas.models.servers.Server;
 @JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
         + OpenApiApplication.APPLICATION_NAME + ")")
 @Path(OpenApiResource.BASEPATH)
-@PermitAll
+// @PermitAll
 public class OpenApiResource {
   protected static final String BASEPATH = "/doc";
 
