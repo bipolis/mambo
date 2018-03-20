@@ -21,21 +21,10 @@ public class RessourseInDefaultApplication {
 
   public static final String RESSOURCE_NAME = "RessourseInDefaultApplication";
 
-  
-  @Activate
-  public void activate() {
-
-    System.out.println("ssssss");
-    logger.audit("ss");
-  }
-
-  @Reference
-  Logger logger;
 
   @GET
   @Path("/value")
   public String getValue() {
-    logger.audit("aa");
     return getClass().getName();
 
   }
