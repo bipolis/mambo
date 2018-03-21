@@ -37,8 +37,7 @@
 			<artifactId>org.apache.servicemix.bundles.junit</artifactId>
 			<version>4.12_1</version>
 		</dependency>
-	
-	<!-- Runtime dependencies -->
+		<!-- Runtime dependencies -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>_distro</artifactId>
