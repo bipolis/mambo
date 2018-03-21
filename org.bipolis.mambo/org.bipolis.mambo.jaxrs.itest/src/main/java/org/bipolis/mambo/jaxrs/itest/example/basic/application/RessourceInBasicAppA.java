@@ -9,7 +9,7 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
 @Component(service = RessourceInBasicAppA.class)
-@JaxrsApplicationSelect("=(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
+@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
         + BasicApplicationA.APPLICATION_NAME + ")")
 @JaxrsName(RessourceInBasicAppA.RESSOURCE_NAME)
 @JaxrsResource

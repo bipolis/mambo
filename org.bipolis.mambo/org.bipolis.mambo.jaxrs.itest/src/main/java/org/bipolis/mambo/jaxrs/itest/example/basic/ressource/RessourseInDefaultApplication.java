@@ -2,11 +2,8 @@ package org.bipolis.mambo.jaxrs.itest.example.basic.ressource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
-import org.osgi.service.log.Logger;
 
 @Component(
         service = RessourseInDefaultApplication.class,

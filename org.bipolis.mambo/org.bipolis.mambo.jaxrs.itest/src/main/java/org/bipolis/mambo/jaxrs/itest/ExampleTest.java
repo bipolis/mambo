@@ -9,7 +9,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import org.bipolis.mambo.jaxrs.itest.example.basic.application.BasicApplication;
 import org.bipolis.mambo.jaxrs.itest.example.basic.application.RessourceInBasicApp;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
