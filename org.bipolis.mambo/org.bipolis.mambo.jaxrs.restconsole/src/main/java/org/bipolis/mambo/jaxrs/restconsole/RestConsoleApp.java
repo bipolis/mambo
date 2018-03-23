@@ -1,18 +1,14 @@
 package org.bipolis.mambo.jaxrs.restconsole;
 
-import static org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE;
-import static org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants.JAX_RS_NAME;
 import javax.ws.rs.core.Application;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationBase;
+import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 
-@Component(
-        service = Application.class,
-        property = {JAX_RS_APPLICATION_BASE + "=/" + RestConsoleApp.APPLICATION_NAME,
-            JAX_RS_NAME + "=" + RestConsoleApp.APPLICATION_NAME})
-//
-// @JaxrsName(RestConsoleApplication.APPLICATION_NAME)
-// @JaxrsApplicationBase("/" + RestConsoleApplication.APPLICATION_NAME)
-// @JaxrsWhiteboardTarget(RestConsoleApplication.TARGET)
+@Component(service = Application.class)
+
+@JaxrsName(RestConsoleApp.APPLICATION_NAME)
+@JaxrsApplicationBase("/" + RestConsoleApp.APPLICATION_NAME)
 
 public class RestConsoleApp extends Application {
 
