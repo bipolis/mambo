@@ -37,4 +37,13 @@ public class TestRessourceJson {
     return new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
 
   }
+
+
+  @GET
+  @SimpleNameBinding
+  @Path("simpleNameBindingTest")
+  public ExampleDTO getNameBindingTest() {
+    return new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
+
+  }
 }
