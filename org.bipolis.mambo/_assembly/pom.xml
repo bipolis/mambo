@@ -24,8 +24,8 @@
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-export-maven-plugin</artifactId>
 				<configuration>
-					<!-- <exporter>bnd.runbundles</exporter> -->
-					<exporter>osgi.subsystem.application</exporter>
+					<exporter>bnd.runbundles</exporter>
+<!-- 					<exporter>osgi.subsystem.application</exporter> -->
 					<resolve>true</resolve>
 					<failOnChanges>true</failOnChanges>
 					<bndruns>
