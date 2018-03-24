@@ -27,6 +27,8 @@
 		<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.core</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
+		<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
+		<module>org.bipolis.mambo.jaxrs.ext.media.yaml.itest</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->

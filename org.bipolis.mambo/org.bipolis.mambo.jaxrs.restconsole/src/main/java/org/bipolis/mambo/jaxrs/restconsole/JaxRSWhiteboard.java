@@ -4,6 +4,7 @@ import static org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants.JAX_RS_
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import org.bipolis.mambo.jaxrs.annotation.mediatype.json.NameBindingJsonProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.json.RequiresJsonProvider;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -29,6 +30,7 @@ public class JaxRSWhiteboard {
   @Path("/runtime")
   @Produces("application/json")
   @RequiresJsonProvider
+  @NameBindingJsonProvider
   public RuntimeDTO getRuntime() {
     RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
     return runtimeDTO;

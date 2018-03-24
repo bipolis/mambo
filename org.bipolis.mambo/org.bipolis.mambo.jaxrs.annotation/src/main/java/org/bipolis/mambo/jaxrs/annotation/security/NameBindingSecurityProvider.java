@@ -1,4 +1,4 @@
-package org.bipolis.mambo.jaxrs.ext.media.json.itest;
+package org.bipolis.mambo.jaxrs.annotation.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,5 +9,5 @@ import javax.ws.rs.NameBinding;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @NameBinding
-public @interface SimpleNameBinding {
+public @interface NameBindingSecurityProvider {
 }

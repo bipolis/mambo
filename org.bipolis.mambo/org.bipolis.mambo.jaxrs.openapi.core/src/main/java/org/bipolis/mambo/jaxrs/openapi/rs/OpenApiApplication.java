@@ -1,7 +1,7 @@
 package org.bipolis.mambo.jaxrs.openapi.rs;
 
 import javax.ws.rs.core.Application;
-import org.bipolis.mambo.jaxrs.annotation.security.RequiresSecurityContext;
+import org.bipolis.mambo.jaxrs.annotation.security.RequiresSecurityContextProvider;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationBase;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.info.License;
 
 @JaxrsName(OpenApiApplication.APPLICATION_NAME)
 @JaxrsApplicationBase("/openapi")
-@RequiresSecurityContext
+@RequiresSecurityContextProvider
 
 @OpenAPIDefinition(
         info = @Info(

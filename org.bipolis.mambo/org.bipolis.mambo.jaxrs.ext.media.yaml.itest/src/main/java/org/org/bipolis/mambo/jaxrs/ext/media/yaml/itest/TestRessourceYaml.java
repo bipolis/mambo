@@ -1,43 +1,39 @@
-package org.bipolis.mambo.jaxrs.ext.media.json.itest;
+package org.org.bipolis.mambo.jaxrs.ext.media.yaml.itest;
 
 import java.util.Arrays;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import org.bipolis.mambo.jaxrs.annotation.mediatype.json.NameBindingJsonProvider;
-import org.bipolis.mambo.jaxrs.annotation.mediatype.json.RequiresJsonProvider;
+import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.NameBindingYamlProvider;
+import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.RequiresYamlProvider;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationSelect;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
-@Component(service = TestRessourceJson.class)
-@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppJsonNameBind.NAME
+@Component(service = TestRessourceYaml.class)
+@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppYamlNameBind.NAME
         + ")")
 @JaxrsName("r")
 @Path("r")
 @JaxrsResource
 
-@RequiresJsonProvider
-public class TestRessourceJson {
+@RequiresYamlProvider
+public class TestRessourceYaml {
   ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
 
-
-  @NameBindingJsonProvider
+  @NameBindingYamlProvider
   @GET
-  @Path("json")
-  @Produces(MediaType.APPLICATION_JSON)
-  public ExampleDTO getJSon() {
+  @Path("yaml")
+  @Produces("application/yaml")
+  public ExampleDTO getYaml() {
     return example;
-
   }
-
 
   @GET
   @Path("non")
-  @Produces(MediaType.APPLICATION_JSON)
+  @Produces("application/yaml")
   public ExampleDTO getNon() {
     return example;
 

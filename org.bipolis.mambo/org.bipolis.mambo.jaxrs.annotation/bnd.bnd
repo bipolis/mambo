@@ -1,0 +1,8 @@
+Export-Package: \
+	org.bipolis.mambo.jaxrs.annotation,\
+	org.bipolis.mambo.jaxrs.annotation.cors,\
+	org.bipolis.mambo.jaxrs.annotation.mediatype.binary,\
+	org.bipolis.mambo.jaxrs.annotation.mediatype.json,\
+	org.bipolis.mambo.jaxrs.annotation.mediatype.xml,\
+	org.bipolis.mambo.jaxrs.annotation.mediatype.yaml,\
+	org.bipolis.mambo.jaxrs.annotation.security

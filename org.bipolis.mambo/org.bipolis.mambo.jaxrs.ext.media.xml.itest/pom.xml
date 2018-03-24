@@ -9,7 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>org.bipolis</groupId>
-	<artifactId>org.bipolis.mambo.jaxrs.ext.media.json.itest</artifactId>
+	<artifactId>org.bipolis.mambo.jaxrs.ext.media.xml.itest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<!-- Compile dependencies -->
@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.ext.media.json</artifactId>
+			<artifactId>org.bipolis.mambo.jaxrs.ext.media.xml</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -56,7 +56,7 @@
 				<artifactId>bnd-testing-maven-plugin</artifactId>
 				<configuration>
 					<bndruns>
-						<bndrun>org.bipolis.mambo.jaxrs.ext.media.json.itest.bndrun</bndrun>
+						<bndrun>org.bipolis.mambo.jaxrs.ext.media.xml.itest.bndrun</bndrun>
 					</bndruns>
 				</configuration>
 			</plugin>

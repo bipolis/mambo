@@ -9,5 +9,6 @@ import javax.ws.rs.NameBinding;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @NameBinding
-public @interface JsonNameBinding {
+public @interface NameBindingJsonProvider {
+
 }

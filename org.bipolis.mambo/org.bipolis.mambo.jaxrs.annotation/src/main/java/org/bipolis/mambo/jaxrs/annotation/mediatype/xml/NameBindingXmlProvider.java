@@ -1,4 +1,4 @@
-package org.bipolis.mambo.jaxrs.annotation.mediatype.binary;
+package org.bipolis.mambo.jaxrs.annotation.mediatype.xml;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,5 +9,5 @@ import javax.ws.rs.NameBinding;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @NameBinding
-public @interface BinaryDataNameBinding {
+public @interface NameBindingXmlProvider {
 }
