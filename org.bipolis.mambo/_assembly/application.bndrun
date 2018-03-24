@@ -1,8 +1,6 @@
 -standalone: ../_index/target/index.xml
 
-#-plugin.subsystem=aQute.bnd.exporter.subsystem.SubsystemExporter;\
-#	path:=/home/bischofs/.m2/repository/biz/aQute/bnd/biz.aQute.bnd.exporters/4.0.0-SNAPSHOT/biz.aQute.bnd.exporters-4.0.0-SNAPSHOT.jar
-
+-plugin.subsystem=aQute.bnd.exporter.subsystem.SubsystemExporter
 
 -runfw: org.eclipse.osgi;version='[3.13.0.v20180110-2102,3.13.0.v20180110-2102]'
 -runee: JavaSE-1.8
