@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bipolis</groupId>
@@ -48,7 +49,7 @@
 		<swagger.version>2.0.0-rc4</swagger.version>
 		<osgi.version>6.0.0</osgi.version>
 		<jackson.version>2.9.4</jackson.version>
-<!-- 		<osgi.version>7.0.0-SNAPSHOT</osgi.version> -->
+		<!-- <osgi.version>7.0.0-SNAPSHOT</osgi.version> -->
 	</properties>
 	<repositories>
 		<!-- These SNAPSHOT repositories are required for OSGi R7 usage in advance 
@@ -126,7 +127,6 @@
 				<artifactId>org.osgi.service.component.annotations</artifactId>
 				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
-				
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.service.log</artifactId>
@@ -238,12 +238,30 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.6</version>
+					<version>3.0.1</version>
 					<configuration>
 						<archive>
 							<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 						</archive>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>biz.aQute.bnd</groupId>
+					<artifactId>bnd-baseline-maven-plugin</artifactId>
+					<version>${bnd.maven.version}</version>
+					<configuration>
+						<!-- Recommended to remove the following setting after the first release 
+							of your project -->
+						<failOnMissing>false</failOnMissing>
+					</configuration>
+					<executions>
+						<execution>
+							<id>baseline</id>
+							<goals>
+								<goal>baseline</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -251,10 +269,6 @@
 			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>biz.aQute.bnd</groupId>
-				<artifactId>bnd-indexer-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

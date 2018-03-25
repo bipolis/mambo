@@ -7,7 +7,6 @@
 		<groupId>org.bipolis</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>org.bipolis</groupId>
 	<artifactId>org.bipolis.mambo.jaxrs.ext.security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
