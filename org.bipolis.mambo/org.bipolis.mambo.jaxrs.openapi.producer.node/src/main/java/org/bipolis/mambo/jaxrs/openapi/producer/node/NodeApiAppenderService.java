@@ -1,7 +1,5 @@
 package org.bipolis.mambo.jaxrs.openapi.producer.node;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.osgi.service.component.annotations.Activate;
@@ -34,19 +32,18 @@ public class NodeApiAppenderService implements OpenApiFragmentsService {
 
 
   @Override
-  public List<OpenAPI> getFragmentOpenApis(URL server,
-                                           String apiName,
-                                           String version) {
+  public int getPriority() {
 
-    return new ArrayList<OpenAPI>();
+    return config.priotity();
   }
 
 
 
   @Override
-  public int getPriority() {
-
-    return config.priotity();
+  public List<OpenAPI> getFragmentOpenApis(String apiName,
+                                           String version) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 

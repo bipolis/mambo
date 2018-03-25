@@ -1,8 +1,8 @@
 package org.bipolis.mambo.jaxrs.openapi.internal;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import org.bipolis.mambo.jaxrs.openapi.api.OpenApiGroupType;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiService;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.osgi.service.component.annotations.Activate;
@@ -53,9 +53,9 @@ public class BaseOpenApiService implements OpenApiService {
   }
 
   @Override
-  public List<OpenAPI> getOpenApis(URL server,
-                                   String apiName,
-                                   String version) {
+  public List<OpenAPI> getOpenApis(List<String> apiNames,
+                                   String version,
+                                   List<OpenApiGroupType> groupType) {
 
     logger.debug(l -> l.debug("getOpenApi {} {}"));
 
@@ -65,19 +65,28 @@ public class BaseOpenApiService implements OpenApiService {
       return new ArrayList<>();
     }
 
-    for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
-      fragmentsService.getFragmentOpenApis(server, apiName, version);
+    for (String apiName : apiNames) {
+
+
+      for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
+        fragmentsService.getFragmentOpenApis(apiName, version);
+      }
+
+
     }
-
-
-    return mergeOpenApis(openAPIs);
+    return mergeOpenApis(openAPIs, groupType);
   }
 
 
 
-  private List<OpenAPI> mergeOpenApis(List<OpenAPI> openAPIs) {
+  private List<OpenAPI> mergeOpenApis(List<OpenAPI> openAPIs,
+                                      List<OpenApiGroupType> groupType) {
     // TODO Auto-generated method stub
-    return null;
+
+    // check count of different apis.
+    // (if >1)
+    // extra group type is Application
+    return openAPIs;
   }
 
   void unbindApiAppenderService(OpenApiFragmentsService apiAppenderService) {

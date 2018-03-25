@@ -1,6 +1,5 @@
 package org.bipolis.mambo.jaxrs.openapi.api.fragments;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +13,7 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
 
 
   @Override
-  public List<OpenAPI> getFragmentOpenApis(URL server,
-                                           String apiName,
+  public List<OpenAPI> getFragmentOpenApis(String apiName,
                                            String version) {
 
     List<OpenAPI> openAPIs = new ArrayList<>();

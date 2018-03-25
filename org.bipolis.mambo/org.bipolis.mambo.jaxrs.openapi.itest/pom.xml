@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -20,14 +21,19 @@
 			<artifactId>osgi.cmpn</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.aries.spec</groupId>
-			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.servicemix.bundles</groupId>
 			<artifactId>org.apache.servicemix.bundles.junit</artifactId>
 			<version>4.12_1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.0.0-rc4</version>
 		</dependency>
 		<!-- Runtime dependencies -->
 		<dependency>
@@ -40,6 +46,10 @@
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>biz.aQute.bnd</groupId>
+				<artifactId>bnd-indexer-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-testing-maven-plugin</artifactId>
