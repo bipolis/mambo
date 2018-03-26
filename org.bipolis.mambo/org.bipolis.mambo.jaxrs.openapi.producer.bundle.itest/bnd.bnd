@@ -1,0 +1,10 @@
+Test-Cases: ${classes;NAMED;*Test}
+Bundle-Name: Bundle-Name
+Bundle-Description: Bundle-Description
+Bundle-Category: Bundle-Category
+Bundle-Copyright: Bundle-Copyright
+Bundle-License: Bundle-License
+Bundle-Vendor: Bundle-Vendor
+Bundle-ContactAddress: Bundle-ContactAddress
+Bundle-DocURL: Bundle-DocURL
+Export-Package: org.org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest

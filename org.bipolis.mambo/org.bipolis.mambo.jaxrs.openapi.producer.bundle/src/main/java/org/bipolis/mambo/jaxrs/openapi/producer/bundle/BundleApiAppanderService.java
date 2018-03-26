@@ -1,7 +1,14 @@
 package org.bipolis.mambo.jaxrs.openapi.producer.bundle;
 
-import org.bipolis.mambo.jaxrs.openapi.api.OpenApiOverrideConfig;
+import javax.ws.rs.core.Application;
+import org.bipolis.mambo.jaxrs.openapi.api.fragments.AbstractJaxRsApiFragmentService;
+import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
+import org.osgi.service.jaxrs.runtime.dto.ResourceDTO;
+import org.osgi.service.jaxrs.runtime.dto.ResourceMethodInfoDTO;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -9,30 +16,22 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
 
-public class BundleApiAppanderService {
-  private static String doBundlePropOverride(boolean isOverride,
-                                             String value,
-                                             Bundle bundle,
-                                             String property) {
+@Component(service = {OpenApiFragmentsService.class, BundleApiAppanderService.class})
+public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
+  private static String getBundleProp(Bundle bundle,
+                                      String property) {
 
     String valueFromBundle = null;
     if (bundle != null) {
       valueFromBundle = bundle.getHeaders()
                               .get(property);
-
     }
-    if (bundle != null && (isOverride || value == null || value.trim()
-                                                               .isEmpty())
-            && valueFromBundle != null && !valueFromBundle.trim()
-                                                          .isEmpty()) {
-      value = valueFromBundle;
-    }
-    return value;
+    return valueFromBundle;
   }
 
-  public static OpenAPI enrichInfoWithOsgiBundleHeaders(OpenAPI openAPI,
-                                                        OpenApiOverrideConfig cfg,
-                                                        Bundle bundle) {
+
+  public static OpenAPI fillOSGiBundleHeaders(OpenAPI openAPI,
+                                              Bundle bundle) {
 
 
     if (bundle != null) {
@@ -41,33 +40,26 @@ public class BundleApiAppanderService {
       if (info == null) {
         info = new Info();
       }
-      info.setTitle(
-              doBundlePropOverride(cfg.overrideInfo(), info.getTitle(), bundle, "Bundle-Name"));
-      info.setDescription(doBundlePropOverride(cfg.overrideInfo(), info.getDescription(), bundle,
-              "Bundle-Description"));
-      info.setTermsOfService(doBundlePropOverride(cfg.overrideInfo(), info.getTermsOfService(),
-              bundle, "Bundle-Copyright"));
-      info.setVersion(doBundlePropOverride(cfg.overrideInfo(), info.getVersion(), bundle,
-              "Bundle-Version"));
+      info.setTitle(getBundleProp(bundle, "Bundle-Name"));
+      info.setDescription(getBundleProp(bundle, "Bundle-Description"));
+      info.setTermsOfService(getBundleProp(bundle, "Bundle-Copyright"));
+      info.setVersion(getBundleProp(bundle, "Bundle-Version"));
 
       License license = info.getLicense();
       if (license == null) {
         license = new License();
       }
-      license.setName(doBundlePropOverride(cfg.overrideLicense(), license.getName(), bundle, ""));
-      license.setUrl(doBundlePropOverride(cfg.overrideLicense(), license.getUrl(), bundle,
-              "Bundle-License"));
+      license.setName(getBundleProp(bundle, ""));
+      license.setUrl(getBundleProp(bundle, "Bundle-License"));
       info.setLicense(license);
 
       Contact contact = info.getContact();
       if (contact == null) {
         contact = new Contact();
       }
-      contact.setName(doBundlePropOverride(cfg.overrideContact(), contact.getName(), bundle,
-              "Bundle-Vendor"));
-      contact.setUrl(doBundlePropOverride(cfg.overrideContact(), contact.getUrl(), bundle, ""));
-      contact.setEmail(doBundlePropOverride(cfg.overrideContact(), contact.getEmail(), bundle,
-              "Bundle-ContactAddress"));
+      contact.setName(getBundleProp(bundle, "Bundle-Vendor"));
+      contact.setUrl(getBundleProp(bundle, ""));
+      contact.setEmail(getBundleProp(bundle, "Bundle-ContactAddress"));
       info.setContact(contact);
       openAPI.setInfo(info);
 
@@ -75,12 +67,59 @@ public class BundleApiAppanderService {
       if (externalDocs == null) {
         externalDocs = new ExternalDocumentation();
 
-        externalDocs.setUrl(
-                doBundlePropOverride(cfg.overrideExternalDocs(), null, bundle, "Bundle-DocURL"));
+        externalDocs.setUrl(getBundleProp(bundle, "Bundle-DocURL"));
       }
 
       openAPI.setExternalDocs(externalDocs);
     }
     return openAPI;
   }
+
+  @Override
+  public int getPriority() {
+
+    return 1;
+  }
+
+  @Override
+  protected OpenAPI handleOpenApiForRessource(OpenAPI applicationOpenAPI,
+                                              ApplicationDTO applicationDTO,
+                                              ResourceDTO resourceDTO) {
+
+    return applicationOpenAPI;
+  }
+
+
+  @Override
+  protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI applicationOpenAPI,
+                                                                      ApplicationDTO applicationDTO,
+                                                                      Application ressourceApplication,
+                                                                      ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
+
+    return applicationOpenAPI;
+  }
+
+  @Override
+  protected OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO,
+                                                Application application) {
+    OpenAPI openAPI = new OpenAPI();
+
+    Bundle bundle = FrameworkUtil.getBundle(application.getClass());
+    openAPI = fillOSGiBundleHeaders(openAPI, bundle);
+    return openAPI;
+  }
+
+
+  @Override
+  protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI applicationOpenAPI,
+                                                                    ApplicationDTO applicationDTO,
+                                                                    Application application,
+                                                                    ResourceDTO resourceDTO,
+                                                                    Object ressource,
+                                                                    ResourceMethodInfoDTO resourceMethodInfoDTO) {
+
+    return applicationOpenAPI;
+  }
+
+
 }

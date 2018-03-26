@@ -30,6 +30,9 @@
 		<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.yaml.itest</module>
+		<module>
+			org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest
+		</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->
@@ -46,7 +49,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<bnd.maven.version>4.0.0-SNAPSHOT</bnd.maven.version>
-		<swagger.version>2.0.0-rc4</swagger.version>
+		<swagger.version>2.0.0-SNAPSHOT</swagger.version>
 		<osgi.version>6.0.0</osgi.version>
 		<jackson.version>2.9.4</jackson.version>
 		<!-- <osgi.version>7.0.0-SNAPSHOT</osgi.version> -->
