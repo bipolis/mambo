@@ -14,9 +14,16 @@
         bnd.identity;id=org.bipolis.mambo.jaxrs.openapi.producer.swagger
 
 -runbundles: \
-        org.apache.felix.gogo.runtime,\
-        org.apache.felix.gogo.command,\
-        org.apache.felix.gogo.shell,\
-        org.apache.felix.log,\
-        org.apache.felix.scr,\
-        org.bipolis.mambo.jaxrs.openapi.producer.swagger
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.9.4,2.9.5)',\
+	io.swagger.core.v3.swagger-models;version='[2.0.0,2.0.1)',\
+	org.apache.aries.javax.jax.rs-api;version='[0.0.1,0.0.2)',\
+	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
+	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
+	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
+	org.apache.felix.log;version='[1.0.1,1.0.2)',\
+	org.apache.felix.scr;version='[2.0.8,2.0.9)',\
+	org.bipolis.mambo.jaxrs.openapi.core;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.producer.swagger;version='[0.0.1,0.0.2)',\
+	org.osgi.service.jaxrs;version='[1.0.0,1.0.1)',\
+	org.osgi.util.function;version='[1.1.0,1.1.1)',\
+	org.osgi.util.promise;version='[1.1.0,1.1.1)'

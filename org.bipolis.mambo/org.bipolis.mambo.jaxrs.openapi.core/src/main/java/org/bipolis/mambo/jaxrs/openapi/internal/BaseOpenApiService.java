@@ -11,7 +11,6 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
-import org.osgi.service.log.Logger;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import io.swagger.v3.oas.models.OpenAPI;
 
@@ -26,8 +25,8 @@ public class BaseOpenApiService implements OpenApiService {
 
   List<OpenApiFragmentsService> apiAppenderServices = new ArrayList<>();
 
-  @Reference
-  Logger logger;
+  // @Reference
+  // Logger logger;
 
   private Config config;
 
@@ -48,7 +47,7 @@ public class BaseOpenApiService implements OpenApiService {
           policy = ReferencePolicy.DYNAMIC)
   void bindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
 
-    logger.debug(l -> l.debug("Bind {}", apiAppenderService));
+    // logger.debug(l -> l.debug("Bind {}", apiAppenderService));
     apiAppenderServices.add(apiAppenderService);
   }
 
@@ -57,7 +56,7 @@ public class BaseOpenApiService implements OpenApiService {
                                    String version,
                                    List<OpenApiGroupType> groupType) {
 
-    logger.debug(l -> l.debug("getOpenApi {} {}"));
+    // logger.debug(l -> l.debug("getOpenApi {} {}"));
 
     final List<OpenAPI> openAPIs = new ArrayList<>();;
 
@@ -91,7 +90,7 @@ public class BaseOpenApiService implements OpenApiService {
 
   void unbindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
 
-    logger.debug(l -> l.debug("Unbind {}", apiAppenderService));
+    // logger.debug(l -> l.debug("Unbind {}", apiAppenderService));
     apiAppenderServices.remove(apiAppenderService);
   }
 

@@ -1,4 +1,4 @@
-package org.bipolis.mambo.jaxrs.openapi.rs;
+package org.org.bipolis.mambo.jaxrs.openapi.rs;
 
 import javax.ws.rs.core.Application;
 import org.osgi.service.component.annotations.Component;

@@ -1,4 +1,4 @@
-package org.bipolis.mambo.jaxrs.openapi.rs;
+package org.org.bipolis.mambo.jaxrs.openapi.rs;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -31,7 +31,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationSelect;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
-import org.osgi.service.log.Logger;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
 
@@ -49,8 +48,8 @@ public class OpenApiResource {
 
   @Context
   private UriInfo uri;
-  @Reference
-  private Logger logger;
+  // @Reference
+  // private Logger logger;
   @Reference
   private OpenApiService openApiService;
   @Reference

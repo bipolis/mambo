@@ -28,8 +28,9 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
                                                .getBundleContext();
 
     List<OpenAPI> openAPIs = new ArrayList<>();
-    List<ApplicationDTO> applicationDTOs =
-            Arrays.asList(getJaxrsServiceRuntime().getRuntimeDTO().applicationDTOs);
+    List<ApplicationDTO> applicationDTOs = new ArrayList<>();
+
+    applicationDTOs.addAll(Arrays.asList(getJaxrsServiceRuntime().getRuntimeDTO().applicationDTOs));
     applicationDTOs.add(getJaxrsServiceRuntime().getRuntimeDTO().defaultApplication);
 
 
@@ -85,8 +86,8 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
                                                          Application application,
                                                          ExtensionDTO extensionDTO,
                                                          Object extension) {
-    // TODO Auto-generated method stub
-    return null;
+
+    return applicationOpenAPI;
   }
 
   protected abstract OpenAPI handleOpenApiForRessource(OpenAPI applicationOpenAPI,

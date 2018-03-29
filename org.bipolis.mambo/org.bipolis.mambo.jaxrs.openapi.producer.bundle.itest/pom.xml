@@ -21,24 +21,14 @@
 			<artifactId>osgi.cmpn</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-models</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.ext.media.json</artifactId>
+			<groupId>org.apache.aries.spec</groupId>
+			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.ext.media.xml</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.ext.media.yaml</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.junit</artifactId>
+			<version>4.12_1</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -49,11 +39,6 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.servicemix.bundles</groupId>
-			<artifactId>org.apache.servicemix.bundles.junit</artifactId>
-			<version>4.12_1</version>
 		</dependency>
 		<!-- Runtime dependencies -->
 		<dependency>
@@ -75,8 +60,6 @@
 				<artifactId>bnd-testing-maven-plugin</artifactId>
 				<configuration>
 					<bndruns>
-						<bndrun>works.bndrun</bndrun>
-						<bndrun>worksNot.bndrun</bndrun>
 						<bndrun>org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest.bndrun</bndrun>
 					</bndruns>
 				</configuration>

@@ -8,7 +8,7 @@
 		<groupId>org.bipolis</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>org.bipolis.mambo.jaxrs.openapi.producer.swagger</artifactId>
+	<artifactId>org.bipolis.mambo.jaxrs.openapi.rs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
@@ -23,26 +23,31 @@
 			<groupId>org.osgi</groupId>
 			<artifactId>osgi.annotation</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.aries.spec</groupId> -->
-		<!-- <artifactId>org.apache.aries.javax.jax.rs-api</artifactId> -->
-		<!-- <version>0.0.1-SNAPSHOT</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.apache.aries.spec</groupId>
+			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>io.swagger.core.v3</groupId> -->
-<!-- 			<artifactId>swagger-jaxrs2</artifactId> -->
-<!-- 			<version>${swagger.version}</version> -->
-<!-- 			<scope>provided</scope> -->
-<!-- 		</dependency> -->
 		<dependency>
-			<groupId>org.bipolis</groupId>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.bipolis.mambo.jaxrs.annotation</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>_distro</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>runtime</scope>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 	<build>
