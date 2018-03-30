@@ -1,14 +1,26 @@
 # mambo
 Basic OSGi Bundles
 
-## Jax-RS Some Annotations, Requirements, Capabilitys and Filter
+## Jax-RS
 
-## OpenApi Generates a OpenApiDocumentation from OSGi-JaxRs-Whiteboard using. additional Tagging for better Grouping in SwaggerUi
+Some Annotations, Requirements, Capabilitys and Filter
 
-### Bundle-Header to create OpenApiInfo
+## OpenApi
 
-### Swagger-Class-Reader based on the JaxRs-Whiteboard ServiceRuntime
+Generates a OpenApiDocumentation from OSGi-JaxRs-Whiteboard using. additional Tagging for better Grouping in SwaggerUi
 
-### Nodes to add multiple Server in one OpenApi Socumentation
+### Bundle-Header
 
-### Swagger UI to show and test the OpenApiDoc
+to create OpenApiInfo
+
+### Swagger-Class-Reader
+
+based on the JaxRs-Whiteboard ServiceRuntime
+
+### Nodes
+
+to add multiple Server in one OpenApi Socumentation
+
+### Swagger UI
+
+to show and test the OpenApiDoc
