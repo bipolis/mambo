@@ -33,12 +33,12 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>io.swagger.core.v3</groupId> -->
-<!-- 			<artifactId>swagger-jaxrs2</artifactId> -->
-<!-- 			<version>${swagger.version}</version> -->
-<!-- 			<scope>provided</scope> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-jaxrs2</artifactId>
+			<version>${swagger.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.bipolis</groupId>
 			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>

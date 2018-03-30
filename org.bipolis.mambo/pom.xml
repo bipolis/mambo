@@ -34,6 +34,9 @@
 			org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest
 		</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.rs</module>
+		<module>
+			org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest
+		</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->

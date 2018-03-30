@@ -5,16 +5,14 @@ import org.bipolis.mambo.jaxrs.openapi.api.fragments.AbstractJaxRsApiFragmentSer
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceMethodInfoDTO;
-import org.osgi.service.log.Logger;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import io.swagger.v3.oas.models.OpenAPI;
 
 @Component(service = OpenApiFragmentsService.class)
-public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
+public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragmentService {
 
   @ObjectClassDefinition
   @interface Config {
@@ -26,8 +24,6 @@ public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
 
   }
 
-
-
   private Config config;
 
 
@@ -36,8 +32,8 @@ public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
     this.config = config;
   }
 
-  @Reference
-  Logger logger;
+  // @Reference
+  // Logger logger;
 
 
 
@@ -53,8 +49,8 @@ public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
   protected OpenAPI handleOpenApiForRessource(OpenAPI applicationOpenAPI,
                                               ApplicationDTO applicationDTO,
                                               ResourceDTO resourceDTO) {
-    // TODO Auto-generated method stub
-    return null;
+
+    return applicationOpenAPI;
   }
 
 
@@ -66,8 +62,7 @@ public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
                                                                     ResourceDTO resourceDTO,
                                                                     Object ressource,
                                                                     ResourceMethodInfoDTO resourceMethodInfoDTO) {
-    // TODO Auto-generated method stub
-    return null;
+    return applicationOpenAPI;
   }
 
 
@@ -77,8 +72,7 @@ public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
                                                                       ApplicationDTO applicationDTO,
                                                                       Application ressourceApplication,
                                                                       ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
-    // TODO Auto-generated method stub
-    return null;
+    return applicationOpenAPI;
   }
 
 
@@ -86,8 +80,11 @@ public class JaxrsApiAppenderService extends AbstractJaxRsApiFragmentService {
   @Override
   protected OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO,
                                                 Application application) {
-    // TODO Auto-generated method stub
-    return new OpenAPI();
+    JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
+    OpenAPI openAPI = reader.read(application.getClass());
+
+    System.out.println(openAPI);
+    return openAPI;
   }
 
 }

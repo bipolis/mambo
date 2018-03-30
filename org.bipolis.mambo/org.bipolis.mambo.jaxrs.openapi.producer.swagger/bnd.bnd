@@ -1,0 +1,20 @@
+Private-Package: org.bipolis.mambo.jaxrs.openapi.producer.swagger
+Import-Package:\
+	!com.google*,\
+	!com.sun*,\
+	!org.dom4j*,\
+	!sun.misc*,\
+	*
+    
+-includeresource:\
+	lib/swagger-annotations.jar=swagger-annotation*.jar;lib:=true,\
+	lib/swagger-jaxrs2.jar=swagger-jaxrs2*.jar;lib:=true,\
+	lib/swagger-annotations.jar=swagger-annotations*.jar;lib:=true,\
+	lib/swagger-model.jar=swagger-model*.jar;lib:=true,\
+	lib/swagger-integration.jar=swagger-integration*.jar;lib:=true,\
+	lib/swagger-core.jar=swagger-core*.jar;lib:=true,\
+    lib/reflections.jar=reflections*.jar;lib:=true,\
+    lib/guava.jar=guava*.jar;lib:=true,\
+    lib/javassist.jar=javassist*.jar;lib:=true,\
+    lib/commons-lang3.jar=commons-lang3*.jar;lib:=true,\
+    lib/validation.jar=validation*.jar;lib:=true

@@ -1,6 +1,5 @@
 package org.bipolis.mambo.jaxrs.openapi.producer.swagger;
 
-import javax.ws.rs.core.Application;
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
 import io.swagger.v3.jaxrs2.Reader;
 
@@ -9,14 +8,13 @@ public class JaxrsWhiteboardOpenApiReader extends Reader {
   private ApplicationDTO applicationDTO;
 
   private JaxrsWhiteboardOpenApiReader() {
-
+    setConfiguration(new JaxrsWhiteboardOpenAPIConfiguration());
   }
 
-  public JaxrsWhiteboardOpenApiReader(ApplicationDTO applicationDTO, Application application) {
+  public JaxrsWhiteboardOpenApiReader(ApplicationDTO applicationDTO) {
     this();
     this.applicationDTO = applicationDTO;
 
-    setApplication(application);
   }
 
   @Override
