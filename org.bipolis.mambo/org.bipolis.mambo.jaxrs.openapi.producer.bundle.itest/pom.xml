@@ -31,6 +31,17 @@
 			<version>4.12_1</version>
 		</dependency>
 		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<scope>provided</scope>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>org.bipolis.mambo.jaxrs.openapi.producer.bundle</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

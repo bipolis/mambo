@@ -24,6 +24,12 @@
 			<artifactId>osgi.annotation</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<scope>provided</scope>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.aries.spec</groupId>
 			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
