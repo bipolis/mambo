@@ -1,0 +1,6 @@
+Bundle-SymbolicName: ${project.artifactId}
+Bundle-Version: ${project.version}
+
+
+    
+Private-Package: org.org.bipolis.mambo.jaxrs.openapi.basic

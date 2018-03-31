@@ -10,7 +10,8 @@
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.swagger',\
 	bnd.identity;id='org.apache.felix.gogo.command',\
 	bnd.identity;id='org.apache.felix.gogo.runtime',\
-	bnd.identity;id='org.apache.felix.gogo.shell'
+	bnd.identity;id='org.apache.felix.gogo.shell',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.basic'
 
 -runbundles: \
 	ch.qos.logback.classic;version='[1.2.2,1.2.3)',\
@@ -30,7 +31,6 @@
 	org.apache.felix.http.servlet-api;version='[1.1.2,1.1.3)',\
 	org.apache.felix.scr;version='[2.0.8,2.0.9)',\
 	org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)',\
-	org.bipolis.mambo.jaxrs.openapi.core;version='[0.0.1,0.0.2)',\
 	org.bipolis.mambo.jaxrs.openapi.producer.swagger;version='[0.0.1,0.0.2)',\
 	org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest;version='[0.0.1,0.0.2)',\
 	org.osgi.service.jaxrs;version='[1.0.0,1.0.1)',\
@@ -40,4 +40,6 @@
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
 	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
-	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)'
+	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
+	org.bipolis.mambo.jaxrs.openapi.api;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.basic;version='[0.0.1,0.0.2)'

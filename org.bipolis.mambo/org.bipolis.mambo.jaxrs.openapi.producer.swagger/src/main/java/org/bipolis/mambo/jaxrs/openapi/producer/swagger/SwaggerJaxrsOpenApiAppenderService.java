@@ -1,11 +1,15 @@
 package org.bipolis.mambo.jaxrs.openapi.producer.swagger;
 
 import javax.ws.rs.core.Application;
+import org.bipolis.mambo.jaxrs.openapi.api.MergeException;
+import org.bipolis.mambo.jaxrs.openapi.api.MergerService;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.AbstractJaxRsApiFragmentService;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
+import org.osgi.service.jaxrs.runtime.dto.ExtensionDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceMethodInfoDTO;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
@@ -26,11 +30,13 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
 
   private Config config;
 
-
   @Activate
   private void activate(Config config) {
     this.config = config;
   }
+
+  @Reference
+  MergerService mergerService;
 
   // @Reference
   // Logger logger;
@@ -46,33 +52,33 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
 
 
   @Override
-  protected OpenAPI handleOpenApiForRessource(OpenAPI applicationOpenAPI,
+  protected OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
                                               ApplicationDTO applicationDTO,
                                               ResourceDTO resourceDTO) {
 
-    return applicationOpenAPI;
+    return baseOpenAPI;
   }
 
 
 
   @Override
-  protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI applicationOpenAPI,
+  protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
                                                                     ApplicationDTO applicationDTO,
                                                                     Application application,
                                                                     ResourceDTO resourceDTO,
                                                                     Object ressource,
                                                                     ResourceMethodInfoDTO resourceMethodInfoDTO) {
-    return applicationOpenAPI;
+    return baseOpenAPI;
   }
 
 
 
   @Override
-  protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI applicationOpenAPI,
+  protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
                                                                       ApplicationDTO applicationDTO,
                                                                       Application ressourceApplication,
                                                                       ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
-    return applicationOpenAPI;
+    return baseOpenAPI;
   }
 
 
@@ -82,9 +88,30 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
                                                 Application application) {
     JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
     OpenAPI openAPI = reader.read(application.getClass());
-
     System.out.println(openAPI);
     return openAPI;
   }
+
+  @Override
+  protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,
+                                                           ApplicationDTO applicationDTO,
+                                                           Application application,
+                                                           ExtensionDTO extensionDTO,
+                                                           Object extension) {
+
+
+    JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
+    OpenAPI extensionsOpenApi = reader.read(extension.getClass());
+
+    try {
+      baseOpenAPI = mergerService.merge(baseOpenAPI, extensionsOpenApi);
+    } catch (MergeException e) {
+
+      e.printStackTrace();
+    }
+
+    return baseOpenAPI;
+  }
+
 
 }

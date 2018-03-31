@@ -53,7 +53,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.bipolis</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

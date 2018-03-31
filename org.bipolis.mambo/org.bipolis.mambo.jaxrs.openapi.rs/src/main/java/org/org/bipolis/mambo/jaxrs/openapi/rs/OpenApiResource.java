@@ -20,8 +20,8 @@ import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.NameBindingXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.RequiresXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.NameBindingYamlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.RequiresYamlProvider;
-import org.bipolis.mambo.jaxrs.openapi.api.OpenApiGroupType;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiService;
+import org.bipolis.mambo.jaxrs.openapi.api.OpenApiTagType;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
@@ -92,11 +92,15 @@ public class OpenApiResource {
   public Response getOpenApi(@Context final HttpHeaders headers,
                              @Context final UriInfo uriInfo,
                              @PathParam("type") final String type,
-                             @PathParam("application") final String application)
+                             @PathParam("application") final String application,
+                             @QueryParam("tagfilter") List<OpenApiTagType> tagFilters)
           throws Exception {
 
-    final OpenAPI openAPI =
-            getOpenApi(uriInfo, Arrays.asList(application), Arrays.asList(OpenApiGroupType.TAG));
+    if (tagFilters == null || tagFilters.isEmpty()) {
+      tagFilters = Arrays.asList(OpenApiTagType.DEFAULT);
+    }
+
+    final OpenAPI openAPI = getOpenApi(uriInfo, Arrays.asList(application), tagFilters);
 
     if (openAPI == null) {
       return Response.status(404)
@@ -132,7 +136,7 @@ public class OpenApiResource {
   @NameBindingXmlProvider
   public Response getOpenApi(@Context final HttpHeaders headers,
                              @Context final UriInfo uriInfo,
-                             @QueryParam("groupType") final List<OpenApiGroupType> groupTypes,
+                             @QueryParam("groupType") final List<OpenApiTagType> groupTypes,
                              @QueryParam("mediaType") final OpenApiResponseType mediaType,
                              @QueryParam("application") final List<String> applications)
           throws Exception {
@@ -166,7 +170,7 @@ public class OpenApiResource {
 
   private OpenAPI getOpenApi(final UriInfo uriInfo,
                              final List<String> applications,
-                             List<OpenApiGroupType> groupTypes) {
+                             List<OpenApiTagType> groupTypes) {
     final List<OpenAPI> oas = openApiService.getOpenApis(applications, null, groupTypes);
 
     if (oas == null || oas.isEmpty()) {

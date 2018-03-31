@@ -12,31 +12,32 @@
 		<module>_index</module>
 		<module>_assembly</module>
 		<module>org.bipolis.mambo.jaxrs.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
 		<module>org.bipolis.mambo.jaxrs.annotation</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.json</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.yaml</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.core</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.yaml.itest</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.api</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.rs</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.basic</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
 		<module>
 			org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest
 		</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.rs</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
 		<module>
 			org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest
 		</module>
+		<module>org.bipolis.mambo.jaxrs.restconsole</module>
+		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->
@@ -163,7 +164,6 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!-- dependencys into Target/Lib -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -276,6 +276,34 @@
 			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<configuration>
+							<configLocation>checkstyle.xml</configLocation>
+							<encoding>UTF-8</encoding>
+							<consoleOutput>true</consoleOutput>
+							<failsOnError>true</failsOnError>
+							<linkXRef>false</linkXRef>
+						</configuration>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>8.8</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

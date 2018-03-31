@@ -60,12 +60,17 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.openapi.producer.swagger</artifactId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.openapi.core</artifactId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.basic</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.producer.swagger</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- Runtime dependencies -->

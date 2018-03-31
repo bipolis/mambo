@@ -66,7 +66,7 @@ public class JaxrsWhiteboardOpenAPIConfiguration implements OpenAPIConfiguration
   @Override
   public Boolean isReadAllResources() {
 
-    return true;
+    return false;
   }
 
 }

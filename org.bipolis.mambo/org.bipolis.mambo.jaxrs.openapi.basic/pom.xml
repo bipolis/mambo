@@ -8,7 +8,7 @@
 		<groupId>org.bipolis</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>org.bipolis.mambo.jaxrs.openapi.rs</artifactId>
+	<artifactId>org.bipolis.mambo.jaxrs.openapi.basic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
@@ -24,15 +24,8 @@
 			<artifactId>osgi.annotation</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-models</artifactId>
-			<scope>provided</scope>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.spec</groupId>
-			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.service.jaxrs</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -40,13 +33,33 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>org.bipolis.mambo.jaxrs.annotation</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>org.bipolis.mambo.jaxrs.openapi.api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<scope>provided</scope>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>

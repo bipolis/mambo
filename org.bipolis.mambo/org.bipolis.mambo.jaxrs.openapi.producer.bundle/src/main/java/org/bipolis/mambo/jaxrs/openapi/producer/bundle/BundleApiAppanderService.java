@@ -7,6 +7,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
+import org.osgi.service.jaxrs.runtime.dto.ExtensionDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceMethodInfoDTO;
 import io.swagger.v3.oas.models.ExternalDocumentation;
@@ -117,6 +118,17 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
                                                                     ResourceDTO resourceDTO,
                                                                     Object ressource,
                                                                     ResourceMethodInfoDTO resourceMethodInfoDTO) {
+
+    return applicationOpenAPI;
+  }
+
+
+  @Override
+  protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI applicationOpenAPI,
+                                                           ApplicationDTO applicationDTO,
+                                                           Application application,
+                                                           ExtensionDTO extensionDTO,
+                                                           Object extension) {
 
     return applicationOpenAPI;
   }
