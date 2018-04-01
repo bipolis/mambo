@@ -60,7 +60,7 @@ validate:jdk8:
 # Validate merge requests using JDK9
 validate:jdk9:
   <<: *validate
-  image: maven:3-jdk-9
+  image: maven:3.5.1-jdk-9
 
 # Validate merge requests using JDK10
 validate:jdk10:
@@ -75,7 +75,7 @@ verify:jdk8:
 # Verify merge requests using JDK9
 verify:jdk9:
   <<: *verify
-  image: maven:3-jdk-9
+  image: maven:3.5.1-jdk-9
 
 # Verify merge requests using JDK10
 verify:jdk10:
