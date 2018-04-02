@@ -1,6 +1,6 @@
 -standalone: target/index.xml
 
--runfw: org.eclipse.osgi
+-runfw: org.apache.felix.framework
 -runee: JavaSE-1.8
 
 -resolve.effective: active; skip:='osgi.service'
