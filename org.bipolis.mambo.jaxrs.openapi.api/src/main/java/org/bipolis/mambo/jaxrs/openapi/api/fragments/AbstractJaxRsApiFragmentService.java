@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.ws.rs.core.Application;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.InvalidSyntaxException;
@@ -16,13 +18,14 @@ import org.osgi.service.jaxrs.runtime.dto.ExtensionDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceMethodInfoDTO;
 import org.osgi.util.tracker.ServiceTracker;
+
 import io.swagger.v3.oas.models.OpenAPI;
 
 public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragmentsService {
 
 
   @Override
-  public List<OpenAPI> getFragmentOpenApis(String apiName,
+  public List<OpenAPI> getFragmentOpenApis(String apiBase,
                                            String version) {
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                                .getBundleContext();
@@ -35,7 +38,9 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
 
 
     for (ApplicationDTO applicationDTO : applicationDTOs) {
-
+      if (apiBase != null && !apiBase.equals(applicationDTO.base.replaceAll("/", ""))) {
+        continue;
+      }
       try {
         Application application = ServiceIdUtil.getServiceByServiceID(bundleContext,
                 Application.class, applicationDTO.serviceId);
@@ -57,12 +62,15 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
         }
 
         for (ResourceDTO resourceDTO : applicationDTO.resourceDTOs) {
+          Object ressource =
+                  ServiceIdUtil.getServiceByServiceID(bundleContext, null, resourceDTO.serviceId);
 
-          baseOpenAPI = handleOpenApiForRessource(baseOpenAPI, applicationDTO, resourceDTO);
+
+          baseOpenAPI = handleOpenApiForRessource(baseOpenAPI, applicationDTO, application,
+                  resourceDTO, ressource);
           for (ResourceMethodInfoDTO resourceMethodInfoDTO : resourceDTO.resourceMethods) {
 
-            Object ressource =
-                    ServiceIdUtil.getServiceByServiceID(bundleContext, null, resourceDTO.serviceId);
+
             baseOpenAPI = handleOpenApiForRessourceMethofInforInRessource(baseOpenAPI,
                     applicationDTO, application, resourceDTO, ressource, resourceMethodInfoDTO);
 
@@ -90,7 +98,11 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
 
   protected abstract OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
                                                        ApplicationDTO applicationDTO,
-                                                       ResourceDTO resourceDTO);
+                                                       Application application,
+                                                       ResourceDTO resourceDTO,
+                                                       Object ressource);
+
+
 
   protected abstract OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
                                                                              ApplicationDTO applicationDTO,

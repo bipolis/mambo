@@ -1,9 +1,11 @@
 package org.bipolis.mambo.jaxrs.restconsole;
 
 import static org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants.JAX_RS_NAME;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
 import org.bipolis.mambo.jaxrs.annotation.mediatype.json.NameBindingJsonProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.json.RequiresJsonProvider;
 import org.osgi.service.component.annotations.Component;

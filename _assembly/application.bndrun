@@ -2,7 +2,7 @@
 
 #-plugin.subsystem=aQute.bnd.exporter.subsystem.SubsystemExporter
 
--runfw: org.eclipse.osgi;version='[3.13.0.v20180110-2102,3.13.0.v20180110-2102]'
+-runfw: org.apache.felix.framework
 -runee: JavaSE-1.8
 -runprovidedcapabilities: ${native_capability}
 

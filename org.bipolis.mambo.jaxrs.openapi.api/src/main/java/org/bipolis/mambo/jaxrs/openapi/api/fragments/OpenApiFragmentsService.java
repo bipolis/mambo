@@ -2,6 +2,7 @@ package org.bipolis.mambo.jaxrs.openapi.api.fragments;
 
 import java.util.Comparator;
 import java.util.List;
+
 import io.swagger.v3.oas.models.OpenAPI;
 
 public interface OpenApiFragmentsService extends Comparator<OpenApiFragmentsService> {
@@ -13,7 +14,7 @@ public interface OpenApiFragmentsService extends Comparator<OpenApiFragmentsServ
     return o1.getPriority() - o2.getPriority();
   }
 
-  List<OpenAPI> getFragmentOpenApis(String apiName,
+  List<OpenAPI> getFragmentOpenApis(String apiBase,
                                     String version);
 
 
