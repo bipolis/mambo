@@ -99,7 +99,7 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
                                                 Application application) {
     JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
     OpenAPI openAPI = reader.read(application.getClass());
-    System.out.println(openAPI);
+
     return openAPI;
   }
 

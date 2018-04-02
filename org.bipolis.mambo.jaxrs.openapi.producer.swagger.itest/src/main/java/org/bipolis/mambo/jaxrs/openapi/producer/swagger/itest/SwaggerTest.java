@@ -111,7 +111,6 @@ public class SwaggerTest {
                                                               + "/lowerAndFilter");
     assertNotNull(pathItemRessourceLowerAndFilter);
 
-    System.out.println(openAPI);
 
 
   }

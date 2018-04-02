@@ -90,8 +90,7 @@ public class ExampleTest {
 
       for (ComponentConfigurationDTO config : serviceComponentRuntime.getComponentConfigurationDTOs(
               component)) {
-        System.out.println("?????????????ßß");
-        System.out.println(component.name + "-----------" + config.state);
+
 
         assertEquals("Service is not active: " + component.name, config.state,
                 ComponentConfigurationDTO.ACTIVE);

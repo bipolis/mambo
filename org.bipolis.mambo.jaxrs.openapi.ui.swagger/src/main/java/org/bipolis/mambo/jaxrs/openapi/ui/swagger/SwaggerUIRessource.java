@@ -38,7 +38,7 @@ public class SwaggerUIRessource {
     if (sPath == null || sPath.isEmpty()) {
       sPath = "index.html";
     }
-    System.out.println(sPath);
+
     try {
       InputStream is = SwaggerUIRessource.class.getResourceAsStream("res/" + sPath);
       BufferedInputStream bis = new BufferedInputStream(is);
@@ -95,7 +95,7 @@ public class SwaggerUIRessource {
 
         targetArray = css.getBytes();
       }
-//      is = new ByteArrayInputStream(targetArray);
+      // is = new ByteArrayInputStream(targetArray);
 
       return Response.ok(targetArray, mediaType)
                      .build();
