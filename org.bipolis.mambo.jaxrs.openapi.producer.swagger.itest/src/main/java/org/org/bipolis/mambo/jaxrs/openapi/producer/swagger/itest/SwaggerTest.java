@@ -2,7 +2,6 @@ package org.org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -53,72 +52,68 @@ public class SwaggerTest {
             "org.bipolis.mambo.jaxrs.openapi.producer.swagger.SwaggerJaxrsOpenApiAppenderService");
 
     List<OpenAPI> openApis =
-            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
+            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);//
 
     // this test application, default app.
     assertEquals("expected Applications", 1, openApis.size());
 
-    boolean relevantApiFound = false;
-    for (OpenAPI openAPI : openApis) {
 
-      Info info = openAPI.getInfo();
-      if (openAPI != null && info != null && info.getTitle()
-                                                 .equals("Annotation-title")) {
-        relevantApiFound = true;
+    OpenAPI openAPI = openApis.get(0);
 
-        Contact contact = info.getContact();
-        License license = info.getLicense();
-        ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
-
-        assertEquals(info.getTitle(), "Annotation-title");
-        assertEquals(info.getVersion(), "Annotation-version");
-        assertEquals(info.getTermsOfService(), "Annotation-termsOfService");
-        assertEquals(info.getDescription(), "Annotation-description");
-        assertEquals(license.getUrl(), "Annotation-License-url");
-        assertEquals(license.getName(), "Annotation-License-name");
-
-        assertEquals(contact.getName(), "Annotation-Contact-name");
-        assertEquals(contact.getEmail(), "Annotation-Contact-email");
-        assertEquals(contact.getUrl(), "Annotation-Contact-url");
-
-        assertEquals(externalDocumentation.getUrl(), "Annotation-ExternalDocumentation-url");
-        assertEquals(externalDocumentation.getDescription(),
-                "Annotation-ExternalDocumentation-description");
-
-        // Test Extension
-        assertNotNull(openAPI.getComponents());
-        assertNotNull(openAPI.getComponents()
-                             .getSecuritySchemes());
-        assertNotNull(openAPI.getComponents()
-                             .getSecuritySchemes()
-                             .get("BasicAuth"));
-
-        // Test Ressources
-        assertNotNull(openAPI.getPaths());
-        assertEquals(3, openAPI.getPaths()
-                               .size());
-
-        PathItem pathItemApplicationEcho = openAPI.getPaths()
-                                                  .get("/" + ExampleApplication.APP_NAME + "/echo");
-        assertNotNull(pathItemApplicationEcho);
-
-        PathItem pathItemRessourceUpper = openAPI.getPaths()
-                                                 .get("/" + ExampleApplication.APP_NAME + "/"
-                                                         + ExampleRessource.NAME + "/upper");
-        assertNotNull(pathItemRessourceUpper);
+    Info info = openAPI.getInfo();
 
 
-        PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
-                                                          .get("/" + ExampleApplication.APP_NAME
-                                                                  + "/" + ExampleRessource.NAME
-                                                                  + "/lowerAndFilter");
-        assertNotNull(pathItemRessourceLowerAndFilter);
+    Contact contact = info.getContact();
+    License license = info.getLicense();
+    ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
 
-        System.out.println(openAPI);
-      }
+    assertEquals(info.getTitle(), "Annotation-title");
+    assertEquals(info.getVersion(), "Annotation-version");
+    assertEquals(info.getTermsOfService(), "Annotation-termsOfService");
+    assertEquals(info.getDescription(), "Annotation-description");
+    assertEquals(license.getUrl(), "Annotation-License-url");
+    assertEquals(license.getName(), "Annotation-License-name");
 
-    }
-    assertTrue("the relevant api was tested", relevantApiFound);
+    assertEquals(contact.getName(), "Annotation-Contact-name");
+    assertEquals(contact.getEmail(), "Annotation-Contact-email");
+    assertEquals(contact.getUrl(), "Annotation-Contact-url");
+
+    assertEquals(externalDocumentation.getUrl(), "Annotation-ExternalDocumentation-url");
+    assertEquals(externalDocumentation.getDescription(),
+            "Annotation-ExternalDocumentation-description");
+
+    // Test Extension
+    assertNotNull(openAPI.getComponents());
+    assertNotNull(openAPI.getComponents()
+                         .getSecuritySchemes());
+    assertNotNull(openAPI.getComponents()
+                         .getSecuritySchemes()
+                         .get("BasicAuth"));
+
+    // Test Ressources
+    assertNotNull(openAPI.getPaths());
+    assertEquals(3, openAPI.getPaths()
+                           .size());
+
+    PathItem pathItemApplicationEcho = openAPI.getPaths()
+                                              .get("/" + ExampleApplication.APP_NAME + "/echo");
+    assertNotNull(pathItemApplicationEcho);
+
+    PathItem pathItemRessourceUpper = openAPI.getPaths()
+                                             .get("/" + ExampleApplication.APP_NAME + "/"
+                                                     + ExampleRessource.NAME + "/upper");
+    assertNotNull(pathItemRessourceUpper);
+
+
+    PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
+                                                      .get("/" + ExampleApplication.APP_NAME + "/"
+                                                              + ExampleRessource.NAME
+                                                              + "/lowerAndFilter");
+    assertNotNull(pathItemRessourceLowerAndFilter);
+
+    System.out.println(openAPI);
+
+
   }
 
 

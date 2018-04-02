@@ -2,7 +2,6 @@ package org.org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -53,38 +52,31 @@ public class ExampleTest {
                                                                  .getName(),
             "org.bipolis.mambo.jaxrs.openapi.producer.bundle.BundleApiAppanderService");
 
-    List<OpenAPI> openApis = openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
+    List<OpenAPI> openApis =
+            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
 
     // this test application, default app.
     assertEquals("expected Applications", openApis.size(), 1);
 
     Bundle bundle = FrameworkUtil.getBundle(ExampleApplication.class);
 
-    boolean relevantApiFound = false;
-    for (OpenAPI openAPI : openApis) {
+    OpenAPI openAPI = openApis.get(0);
+    Info info = openAPI.getInfo();
 
-      Info info = openAPI.getInfo();
-      if (openAPI != null && info != null && info.getTitle()
-                                                 .equals(getBundleProp(bundle, "Bundle-Name"))) {
-        relevantApiFound = true;
+    Contact contact = info.getContact();
+    License license = info.getLicense();
+    ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
 
-        Contact contact = info.getContact();
-        License license = info.getLicense();
-        ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
+    assertEquals(info.getTitle(), getBundleProp(bundle, "Bundle-Name"));
+    assertEquals(info.getDescription(), getBundleProp(bundle, "Bundle-Description"));
+    assertEquals(info.getTermsOfService(), getBundleProp(bundle, "Bundle-Copyright"));
+    assertEquals(license.getUrl(), getBundleProp(bundle, "Bundle-License"));
+    assertEquals(contact.getName(), getBundleProp(bundle, "Bundle-Vendor"));
+    assertEquals(contact.getEmail(), getBundleProp(bundle, "Bundle-ContactAddress"));
+    assertEquals(externalDocumentation.getUrl(), getBundleProp(bundle, "Bundle-DocURL"));
+    assertEquals(info.getVersion(), bundle.getVersion()
+                                          .toString());
 
-        assertEquals(info.getTitle(), getBundleProp(bundle, "Bundle-Name"));
-        assertEquals(info.getDescription(), getBundleProp(bundle, "Bundle-Description"));
-        assertEquals(info.getTermsOfService(), getBundleProp(bundle, "Bundle-Copyright"));
-        assertEquals(license.getUrl(), getBundleProp(bundle, "Bundle-License"));
-        assertEquals(contact.getName(), getBundleProp(bundle, "Bundle-Vendor"));
-        assertEquals(contact.getEmail(), getBundleProp(bundle, "Bundle-ContactAddress"));
-        assertEquals(externalDocumentation.getUrl(), getBundleProp(bundle, "Bundle-DocURL"));
-        assertEquals(info.getVersion(), bundle.getVersion()
-                                              .toString());
-      }
-
-    }
-    assertTrue("the relevant api was tested", relevantApiFound);
   }
 
   private static String getBundleProp(Bundle bundle,

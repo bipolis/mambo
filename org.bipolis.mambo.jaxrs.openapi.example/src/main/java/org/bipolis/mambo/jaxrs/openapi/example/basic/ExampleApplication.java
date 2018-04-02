@@ -7,7 +7,6 @@ import javax.ws.rs.core.Application;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationBase;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
-import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -17,7 +16,6 @@ import io.swagger.v3.oas.annotations.info.License;
 
 @JaxrsApplicationBase("/" + ExampleApplication.APP_NAME)
 @Component(service = Application.class)
-@JaxrsResource
 @JaxrsName(ExampleApplication.APP_NAME)
 @OpenAPIDefinition(
         info = @Info(
@@ -40,9 +38,12 @@ public class ExampleApplication extends Application {
 
   public final static String APP_NAME = "ExampleApplication";
 
+
   @Path("echo")
   @GET
   public String getEcho(String echo) {
     return echo;
   }
+
+
 }
