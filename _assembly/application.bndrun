@@ -1,6 +1,6 @@
 -standalone: ../_index/target/index.xml
 
--plugin.subsystem=aQute.bnd.exporter.subsystem.SubsystemExporter
+#-plugin.subsystem=aQute.bnd.exporter.subsystem.SubsystemExporter
 
 -runfw: org.eclipse.osgi;version='[3.13.0.v20180110-2102,3.13.0.v20180110-2102]'
 -runee: JavaSE-1.8
