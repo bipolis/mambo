@@ -1,6 +1,7 @@
 package org.bipolis.mambo.jaxrs.openapi.producer.bundle;
 
 import javax.ws.rs.core.Application;
+
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.AbstractJaxRsApiFragmentService;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.osgi.framework.Bundle;
@@ -10,6 +11,7 @@ import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
 import org.osgi.service.jaxrs.runtime.dto.ExtensionDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceDTO;
 import org.osgi.service.jaxrs.runtime.dto.ResourceMethodInfoDTO;
+
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -82,22 +84,15 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
     return 1;
   }
 
-  @Override
-  protected OpenAPI handleOpenApiForRessource(OpenAPI applicationOpenAPI,
-                                              ApplicationDTO applicationDTO,
-                                              ResourceDTO resourceDTO) {
-
-    return applicationOpenAPI;
-  }
 
 
   @Override
-  protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI applicationOpenAPI,
+  protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
                                                                       ApplicationDTO applicationDTO,
                                                                       Application ressourceApplication,
                                                                       ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
 
-    return applicationOpenAPI;
+    return baseOpenAPI;
   }
 
   @Override
@@ -112,25 +107,36 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
 
 
   @Override
-  protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI applicationOpenAPI,
+  protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
                                                                     ApplicationDTO applicationDTO,
                                                                     Application application,
                                                                     ResourceDTO resourceDTO,
                                                                     Object ressource,
                                                                     ResourceMethodInfoDTO resourceMethodInfoDTO) {
 
-    return applicationOpenAPI;
+    return baseOpenAPI;
   }
 
 
   @Override
-  protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI applicationOpenAPI,
+  protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,
                                                            ApplicationDTO applicationDTO,
                                                            Application application,
                                                            ExtensionDTO extensionDTO,
                                                            Object extension) {
 
-    return applicationOpenAPI;
+    return baseOpenAPI;
+  }
+
+
+  @Override
+  protected OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
+                                              ApplicationDTO applicationDTO,
+                                              Application application,
+                                              ResourceDTO resourceDTO,
+                                              Object ressource) {
+
+    return baseOpenAPI;
   }
 
 

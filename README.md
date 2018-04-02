@@ -1,4 +1,6 @@
 # mambo
+[![pipeline status](https://gitlab.com/bipolis/mambo/badges/master/pipeline.svg)](https://gitlab.com/bipolis/mambo/commits/master)
+
 Basic OSGi Bundles
 
 ## Jax-RS

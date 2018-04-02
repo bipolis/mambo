@@ -11,7 +11,8 @@
 	bnd.identity;id='org.apache.felix.gogo.runtime',\
 	bnd.identity;id='org.apache.felix.gogo.shell',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.bundle',\
-	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.api'
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.api',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.example'
 
 -runbundles: \
 	ch.qos.logback.classic;version='[1.2.2,1.2.3)',\
@@ -36,4 +37,6 @@
 	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
 	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
 	org.bipolis.mambo.jaxrs.openapi.producer.bundle;version='[0.0.1,0.0.2)',\
-	org.bipolis.mambo.jaxrs.openapi.api;version='[0.0.1,0.0.2)'
+	org.bipolis.mambo.jaxrs.openapi.api;version='[0.0.1,0.0.2)',\
+	io.swagger.core.v3.swagger-annotations;version='[2.0.0,2.0.1)',\
+	org.bipolis.mambo.jaxrs.openapi.example;version='[0.0.1,0.0.2)'

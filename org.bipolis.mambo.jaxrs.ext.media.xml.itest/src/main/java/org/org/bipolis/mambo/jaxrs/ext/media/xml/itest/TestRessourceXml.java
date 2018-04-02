@@ -1,10 +1,12 @@
 package org.org.bipolis.mambo.jaxrs.ext.media.xml.itest;
 
 import java.util.Arrays;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.NameBindingXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.RequiresXmlProvider;
 import org.osgi.service.component.annotations.Component;

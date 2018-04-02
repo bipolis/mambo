@@ -3,6 +3,7 @@ package org.bipolis.mambo.jaxrs.ext.media.binary;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
+
 import org.bipolis.mambo.jaxrs.annotation.mediatype.binary.CapabilityBinaryDataProvider;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsExtension;

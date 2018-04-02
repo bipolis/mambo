@@ -3,6 +3,7 @@ package org.bipolis.mambo.jaxrs.openapi.producer.swagger;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+
 import io.swagger.v3.oas.integration.api.OpenAPIConfiguration;
 import io.swagger.v3.oas.models.OpenAPI;
 
@@ -66,7 +67,7 @@ public class JaxrsWhiteboardOpenAPIConfiguration implements OpenAPIConfiguration
   @Override
   public Boolean isReadAllResources() {
 
-    return false;
+    return true;
   }
 
 }

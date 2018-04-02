@@ -3,14 +3,18 @@ package org.org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
+import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleApplication;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
+
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -49,12 +53,12 @@ public class ExampleTest {
                                                                  .getName(),
             "org.bipolis.mambo.jaxrs.openapi.producer.bundle.BundleApiAppanderService");
 
-    List<OpenAPI> openApis = openApiFragmentsService.getFragmentOpenApis(null, null);
+    List<OpenAPI> openApis = openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
 
     // this test application, default app.
-    assertEquals("expected Applications", openApis.size(), 2);
+    assertEquals("expected Applications", openApis.size(), 1);
 
-    Bundle bundle = context.getBundle();
+    Bundle bundle = FrameworkUtil.getBundle(ExampleApplication.class);
 
     boolean relevantApiFound = false;
     for (OpenAPI openAPI : openApis) {

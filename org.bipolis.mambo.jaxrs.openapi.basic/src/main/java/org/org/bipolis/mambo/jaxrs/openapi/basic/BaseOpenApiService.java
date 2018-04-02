@@ -2,6 +2,7 @@ package org.org.bipolis.mambo.jaxrs.openapi.basic;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiService;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiTagType;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
@@ -12,6 +13,7 @@ import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
+
 import io.swagger.v3.oas.models.OpenAPI;
 
 @Component(service = OpenApiService.class)

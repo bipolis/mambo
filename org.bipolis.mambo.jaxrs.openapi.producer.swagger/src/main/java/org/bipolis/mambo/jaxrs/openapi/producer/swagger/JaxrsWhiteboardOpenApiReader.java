@@ -1,6 +1,7 @@
 package org.bipolis.mambo.jaxrs.openapi.producer.swagger;
 
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
+
 import io.swagger.v3.jaxrs2.Reader;
 
 public class JaxrsWhiteboardOpenApiReader extends Reader {

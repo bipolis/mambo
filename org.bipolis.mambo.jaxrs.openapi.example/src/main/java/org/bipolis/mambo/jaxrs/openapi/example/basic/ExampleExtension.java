@@ -1,12 +1,15 @@
-package org.org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest;
+package org.bipolis.mambo.jaxrs.openapi.example.basic;
 
 import java.io.IOException;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.ext.ReaderInterceptor;
 import javax.ws.rs.ext.ReaderInterceptorContext;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsExtension;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
+
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.security.SecuritySchemes;

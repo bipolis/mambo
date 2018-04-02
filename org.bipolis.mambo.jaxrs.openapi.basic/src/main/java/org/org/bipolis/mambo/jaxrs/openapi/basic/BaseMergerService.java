@@ -2,10 +2,12 @@ package org.org.bipolis.mambo.jaxrs.openapi.basic;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.bipolis.mambo.jaxrs.openapi.api.MergeException;
 import org.bipolis.mambo.jaxrs.openapi.api.MergerService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

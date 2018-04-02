@@ -3,16 +3,21 @@ package org.org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
+import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleApplication;
+import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleRessource;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
+
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -41,20 +46,17 @@ public class SwaggerTest {
     tracker.open();
     OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
 
-
-
     assertNotNull("Service not null", openApiFragmentsService);
 
     assertEquals("fetch correct Service", openApiFragmentsService.getClass()
                                                                  .getName(),
             "org.bipolis.mambo.jaxrs.openapi.producer.swagger.SwaggerJaxrsOpenApiAppenderService");
 
-    List<OpenAPI> openApis = openApiFragmentsService.getFragmentOpenApis(null, null);
+    List<OpenAPI> openApis =
+            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
 
     // this test application, default app.
-    assertEquals("expected Applications", openApis.size(), 2);
-
-    Bundle bundle = context.getBundle();
+    assertEquals("expected Applications", 1, openApis.size());
 
     boolean relevantApiFound = false;
     for (OpenAPI openAPI : openApis) {
@@ -83,28 +85,41 @@ public class SwaggerTest {
         assertEquals(externalDocumentation.getDescription(),
                 "Annotation-ExternalDocumentation-description");
 
-
-        System.out.println(openAPI);
+        // Test Extension
         assertNotNull(openAPI.getComponents());
         assertNotNull(openAPI.getComponents()
                              .getSecuritySchemes());
         assertNotNull(openAPI.getComponents()
                              .getSecuritySchemes()
                              .get("BasicAuth"));
+
+        // Test Ressources
+        assertNotNull(openAPI.getPaths());
+        assertEquals(3, openAPI.getPaths()
+                               .size());
+
+        PathItem pathItemApplicationEcho = openAPI.getPaths()
+                                                  .get("/" + ExampleApplication.APP_NAME + "/echo");
+        assertNotNull(pathItemApplicationEcho);
+
+        PathItem pathItemRessourceUpper = openAPI.getPaths()
+                                                 .get("/" + ExampleApplication.APP_NAME + "/"
+                                                         + ExampleRessource.NAME + "/upper");
+        assertNotNull(pathItemRessourceUpper);
+
+
+        PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
+                                                          .get("/" + ExampleApplication.APP_NAME
+                                                                  + "/" + ExampleRessource.NAME
+                                                                  + "/lowerAndFilter");
+        assertNotNull(pathItemRessourceLowerAndFilter);
+
+        System.out.println(openAPI);
       }
 
     }
     assertTrue("the relevant api was tested", relevantApiFound);
   }
 
-  private static String getBundleProp(Bundle bundle,
-                                      String property) {
 
-    String valueFromBundle = null;
-    if (bundle != null) {
-      valueFromBundle = bundle.getHeaders()
-                              .get(property);
-    }
-    return valueFromBundle;
-  }
 }

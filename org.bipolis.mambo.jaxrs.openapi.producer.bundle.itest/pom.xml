@@ -51,6 +51,11 @@
 			<artifactId>org.bipolis.mambo.jaxrs.openapi.api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.bipolis.mambo.jaxrs.openapi.example</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- Runtime dependencies -->
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>

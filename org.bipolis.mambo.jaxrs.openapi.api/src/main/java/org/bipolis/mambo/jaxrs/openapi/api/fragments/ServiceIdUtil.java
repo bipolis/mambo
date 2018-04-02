@@ -2,6 +2,7 @@ package org.bipolis.mambo.jaxrs.openapi.api.fragments;
 
 import java.util.Arrays;
 import java.util.Collection;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
