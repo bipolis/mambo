@@ -42,7 +42,7 @@ variables:
 .verify: &verify
   stage: test
   script:
-    - 'mvn $MAVEN_CLI_OPTS verify -U'
+    - 'mvn verify'
   except:
     - master
 
