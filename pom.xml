@@ -241,7 +241,7 @@
 					<version>${bnd.maven.version}</version>
 					<configuration>
 						<resolve>true</resolve>
-						<failOnChanges>true</failOnChanges>
+						<failOnChanges>false</failOnChanges>
 					</configuration>
 					<executions>
 						<execution>
