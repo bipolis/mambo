@@ -1,0 +1,21 @@
+-standalone: target/index.xml
+
+-runfw: org.eclipse.osgi;version='[3.13.0.v20180110-2102,3.13.0.v20180110-2102]'
+-runee: JavaSE-1.8
+
+-runprovidedcapabilities: ${native_capability}
+
+-resolve.effective: active; skip:="osgi.service"
+
+-runrequires: \
+        bnd.identity;id=org.apache.felix.gogo.command,\
+        bnd.identity;id=org.apache.felix.gogo.shell,\
+        bnd.identity;id=org.apache.felix.log,\
+        bnd.identity;id=org.bipolis.mambo.repo
+
+-runbundles: \
+        org.apache.felix.gogo.runtime,\
+        org.apache.felix.gogo.command,\
+        org.apache.felix.gogo.shell,\
+        org.apache.felix.log,\
+        org.bipolis.mambo.repo

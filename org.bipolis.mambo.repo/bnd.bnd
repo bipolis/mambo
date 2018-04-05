@@ -1,0 +1,4 @@
+Test-Cases: ${classes;NAMED;*Test}
+Private-Package: \
+	org.bipolis.mambo.repo,\
+	org.bipolis.mambo.repo.rsw

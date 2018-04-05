@@ -1,6 +1,6 @@
 -standalone: target/index.xml
 
--runfw: org.apache.felix.framework;version=5.6
+-runfw: org.apache.felix.framework
 -runee: JavaSE-1.8
 #-runvm: "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=7001"
 -runprovidedcapabilities: ${native_capability}
