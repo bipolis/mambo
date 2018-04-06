@@ -44,6 +44,7 @@
 		</module>
 		<module>org.bipolis.mambo.repo</module>
 		<module>org.bipolis.mambo.repo.itest</module>
+		<module>org.bipolis.mambo.jgit.itest</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->
@@ -116,19 +117,19 @@
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.core</artifactId>
-				<version>6.0.0</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.cmpn</artifactId>
-				<version>6.0.0</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.annotation</artifactId>
-				<version>6.0.1</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -318,4 +319,11 @@
 			<!-- </plugin> -->
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>My Internal Repository</name>
+			<url>http://localhost:8080/repo/mvn/</url>
+		</repository>
+	</distributionManagement>
 </project>

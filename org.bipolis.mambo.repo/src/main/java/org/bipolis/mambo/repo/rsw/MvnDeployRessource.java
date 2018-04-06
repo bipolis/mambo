@@ -8,10 +8,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.Response.StatusType;
 
 import org.bipolis.mambo.jaxrs.annotation.mediatype.binary.RequiresBinaryDataProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.json.RequiresJsonProvider;
@@ -62,28 +65,49 @@ public class MvnDeployRessource {
   }
 
   @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-  @POST
+  @PUT
   @javax.ws.rs.Path("/{subResources:.*}")
   public Response addFile(@javax.ws.rs.PathParam("subResources") final String path,
                           final InputStream inputStream) {
-    logger.debug("POST " + path);
+    logger.debug("PUT " + path);
 
     try {
 
-      final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
 
-      return Response.created(new URI(result.location()))
+      if (path.endsWith(".jar") || path.endsWith(".eas")) {
+        final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
+        System.out.println(result);
+
+      }
+      return Response.status(Status.OK)
                      .build();
+
 
     } catch (final BundleRepositoryException bre) {
       logger.debug(bre.getMessage(), bre);
       return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
                      .entity(bre.getMessage())
                      .build();
-    } catch (final URISyntaxException e) {
-      logger.debug(e.getMessage(), e);
+    }
+  }
+
+  @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+  @GET
+  @javax.ws.rs.Path("/{subResources:.*}")
+  public Response addFile(@javax.ws.rs.PathParam("subResources") final String path) {
+    logger.debug("GET " + path);
+
+    try {
+
+
+
+      return Response.status(Status.OK)
+                     .build();
+
+    } catch (final BundleRepositoryException bre) {
+      logger.debug(bre.getMessage(), bre);
       return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(e.getMessage())
+                     .entity(bre.getMessage())
                      .build();
     }
   }
