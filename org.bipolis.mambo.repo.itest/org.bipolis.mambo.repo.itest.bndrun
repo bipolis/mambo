@@ -1,4 +1,8 @@
+-runtrace: true 
 -standalone: target/index.xml
+-runproperties: \
+	felix.cm.dir=cfg,\
+	felix.fileinstall.dir=cfg
 
 -runfw: org.apache.felix.framework;version='[5.9.0.SNAPSHOT,5.9.0.SNAPSHOT]'
 -runee: JavaSE-1.8
@@ -10,7 +14,13 @@
 	bnd.identity;id='org.bipolis.mambo.repo',\
 	bnd.identity;id='org.apache.felix.gogo.command',\
 	bnd.identity;id='org.apache.felix.gogo.runtime',\
-	bnd.identity;id='org.apache.felix.gogo.shell'
+	bnd.identity;id='org.apache.felix.gogo.shell',\
+	bnd.identity;id='ch.qos.logback.classic',\
+	bnd.identity;id='org.slf4j.osgi-over-slf4j',\
+	bnd.identity;id='org.apache.felix.configurator',\
+	bnd.identity;id='org.apache.felix.configadmin',\
+	bnd.identity;id='org.apache.felix.fileinstall',\
+	bnd.identity;id='com.effectiveosgi.rt.config'
 
 -runbundles: \
 	org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)',\
@@ -46,4 +56,8 @@
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
 	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
-	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)'
+	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
+	org.slf4j.osgi-over-slf4j;version='[1.7.25,1.7.26)',\
+	org.apache.felix.configurator;version='[0.0.1,0.0.2)',\
+	org.apache.felix.fileinstall;version='[3.6.0,3.6.1)',\
+	com.effectiveosgi.rt.config;version='[1.0.1,1.0.2)'

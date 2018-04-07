@@ -1,4 +1,4 @@
-package org.bipolis.mambo.jaxrs.openapi.example.basic;
+package org.bipolis.mambo.jaxrs.openapi.example;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,14 +9,14 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationSelect;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
-@Component(service = ExampleRessource.class)
+@Component(service = ExampleResource.class)
 @JaxrsName("ExampleRessource")
 @JaxrsResource
 @JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
         + ExampleApplication.APP_NAME + ")")
-@Path("/" + ExampleRessource.NAME)
-public class ExampleRessource {
-  public final static String NAME = "TestRessource";
+@Path("/" + ExampleResource.NAME)
+public class ExampleResource {
+  public final static String NAME = "ExampleResource";
 
   @GET
   @Path("/upper")

@@ -41,6 +41,7 @@
 			<artifactId>org.bipolis.mambo.repo</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 		<!-- Runtime dependencies -->
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>

@@ -17,7 +17,7 @@
 		<module>org.bipolis.mambo.jaxrs.ext.media.json</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.yaml</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security</module>
+		<module>org.bipolis.mambo.jaxrs.ext.security.core</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
@@ -28,25 +28,22 @@
 		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
-		<module>
-			org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest
-		</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
-		<module>
-			org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest
-		</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest</module>
 		<module>org.bipolis.mambo.jaxrs.restconsole</module>
 		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger</module>
-		<module>
-			org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest
-		</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest</module>
 		<module>org.bipolis.mambo.repo</module>
 		<module>org.bipolis.mambo.repo.itest</module>
+		<module>org.bipolis.mambo.jgit.itest</module>
+		<module>org.bipolis.mambo.jaxrs.ext.security.oauth</module>
+		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth.itest</module>
+		<module>org.bipolis.mambo.jaxrs.ext.security.oauth.itest</module>
 	</modules>
-	<!-- Declare a profile for CI builds, where indexes are not permitted to 
-		contain local file: URLs. -->
+	<!-- Declare a profile for CI builds, where indexes are not permitted to contain local file: URLs. -->
 	<profiles>
 		<profile>
 			<id>CI_Build</id>
@@ -66,8 +63,7 @@
 		<!-- <osgi.version>7.0.0-SNAPSHOT</osgi.version> -->
 	</properties>
 	<repositories>
-		<!-- These SNAPSHOT repositories are required for OSGi R7 usage in advance 
-			of the official release -->
+		<!-- These SNAPSHOT repositories are required for OSGi R7 usage in advance of the official release -->
 		<repository>
 			<id>OSSRH Snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
@@ -100,8 +96,7 @@
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		<!-- The bnd SNAPSHOT repository is required for OSGi R7 usage in advance 
-			of the official release -->
+		<!-- The bnd SNAPSHOT repository is required for OSGi R7 usage in advance of the official release -->
 		<pluginRepository>
 			<id>bnd.master</id>
 			<snapshots>
@@ -116,19 +111,19 @@
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.core</artifactId>
-				<version>6.0.0</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.cmpn</artifactId>
-				<version>6.0.0</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.annotation</artifactId>
-				<version>6.0.1</version>
+				<version>${osgi.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -155,6 +150,11 @@
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.annotation.bundle</artifactId>
 				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.25</version>
 			</dependency>
 			<!-- Compile -->
 			<dependency>
@@ -268,8 +268,7 @@
 					<artifactId>bnd-baseline-maven-plugin</artifactId>
 					<version>${bnd.maven.version}</version>
 					<configuration>
-						<!-- Recommended to remove the following setting after the first release 
-							of your project -->
+						<!-- Recommended to remove the following setting after the first release of your project -->
 						<failOnMissing>false</failOnMissing>
 					</configuration>
 					<executions>
@@ -318,4 +317,11 @@
 			<!-- </plugin> -->
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>My Internal Repository</name>
+			<url>http://localhost:8080/repo/mvn/</url>
+		</repository>
+	</distributionManagement>
 </project>
