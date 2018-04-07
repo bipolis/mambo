@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
-import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleApplication;
+import org.bipolis.mambo.jaxrs.openapi.example.ExampleApplication;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
@@ -28,7 +28,7 @@ public class ExampleTest {
   @BeforeClass
   public static void beforeAll() {
     try {
-      Thread.sleep(1000);
+      Thread.sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -77,6 +77,7 @@ public class ExampleTest {
     assertEquals(info.getVersion(), bundle.getVersion()
                                           .toString());
 
+    tracker.close();
   }
 
   private static String getBundleProp(Bundle bundle,

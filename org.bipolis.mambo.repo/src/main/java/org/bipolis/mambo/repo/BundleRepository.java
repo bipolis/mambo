@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
  * </p>
  *
  */
-@Designate(ocd = org.bipolis.mambo.repo.BundleRepository.Config.class,factory=true)
+@Designate(ocd = org.bipolis.mambo.repo.BundleRepository.Config.class, factory = true)
 @Component(immediate = true, service = BundleRepository.class, configurationPolicy = REQUIRE)
 public class BundleRepository {
 
@@ -84,27 +84,27 @@ public class BundleRepository {
             name = "Repository Directory",
             description = "Absolute path to the repository in the server's local file system")
     String dir();
-//
-//
-//    @AttributeDefinition(name = "override", description = "")
-//    boolean override();
-//
-//
-//    @AttributeDefinition(name = "subDirs", description = "")
-//    String[] subDirs();
-//
-//    @AttributeDefinition(name = "bundlesOnly", description = "")
-//    boolean bundlesOnly();
-//
-//    @AttributeDefinition(name = "snapshots", description = "")
-//    boolean snapshots();
-//
-//    @AttributeDefinition(name = "externalDeploy", description = "")
-//    boolean externalDeploy();
-//
-//
-//    @AttributeDefinition(name = "deployOverRepositorys", description = "")
-//    String[] deployOverRepositorys();
+
+
+    @AttributeDefinition(name = "override", description = "")
+    boolean override();
+
+
+    @AttributeDefinition(name = "subDirs", description = "")
+    String[] subDirs();
+
+    @AttributeDefinition(name = "bundlesOnly", description = "")
+    boolean bundlesOnly();
+
+    @AttributeDefinition(name = "snapshots", description = "")
+    boolean snapshots();
+
+    @AttributeDefinition(name = "externalDeploy", description = "")
+    boolean externalDeploy();
+
+
+    @AttributeDefinition(name = "deployOverRepositorys", description = "")
+    String[] deployOverRepositorys();
 
 
   }

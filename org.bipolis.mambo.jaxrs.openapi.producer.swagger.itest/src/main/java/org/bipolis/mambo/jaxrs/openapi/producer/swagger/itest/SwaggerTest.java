@@ -6,8 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
-import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleApplication;
-import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleRessource;
+import org.bipolis.mambo.jaxrs.openapi.example.ExampleApplication;
+import org.bipolis.mambo.jaxrs.openapi.example.ExampleResource;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
@@ -101,13 +101,13 @@ public class SwaggerTest {
 
     PathItem pathItemRessourceUpper = openAPI.getPaths()
                                              .get("/" + ExampleApplication.APP_NAME + "/"
-                                                     + ExampleRessource.NAME + "/upper");
+                                                     + ExampleResource.NAME + "/upper");
     assertNotNull(pathItemRessourceUpper);
 
 
     PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
                                                       .get("/" + ExampleApplication.APP_NAME + "/"
-                                                              + ExampleRessource.NAME
+                                                              + ExampleResource.NAME
                                                               + "/lowerAndFilter");
     assertNotNull(pathItemRessourceLowerAndFilter);
 

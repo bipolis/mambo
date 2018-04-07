@@ -1,0 +1,14 @@
+-standalone: target/index.xml
+
+-runfw: org.apache.felix.framework
+-runee: JavaSE-1.8
+
+
+-resolve.effective: active; skip:='osgi.service'
+
+-runrequires: \
+        bnd.identity;id=org.bipolis.mambo.jaxrs.ext.security.oauth.itest
+
+-runbundles: \
+	org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)',\
+	org.bipolis.mambo.jaxrs.ext.security.oauth.itest;version='[0.0.1,0.0.2)'

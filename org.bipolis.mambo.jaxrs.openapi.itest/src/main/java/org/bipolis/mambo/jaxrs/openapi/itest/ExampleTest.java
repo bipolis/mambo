@@ -3,7 +3,7 @@ package org.bipolis.mambo.jaxrs.openapi.itest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.bipolis.mambo.jaxrs.openapi.example.basic.ExampleApplication;
+import org.bipolis.mambo.jaxrs.openapi.example.ExampleApplication;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;

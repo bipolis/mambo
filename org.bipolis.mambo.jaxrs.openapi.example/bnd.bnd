@@ -13,4 +13,4 @@ Bundle-License: License from Bundle Header
 Bundle-Vendor: Vendor from Bundle Header
 Bundle-ContactAddress: Contact Address from Bundle Header
 Bundle-DocURL: Documentation URL from Bundle Header
-Export-Package: org.bipolis.mambo.jaxrs.openapi.example.basic
+Export-Package: org.bipolis.mambo.jaxrs.openapi.example

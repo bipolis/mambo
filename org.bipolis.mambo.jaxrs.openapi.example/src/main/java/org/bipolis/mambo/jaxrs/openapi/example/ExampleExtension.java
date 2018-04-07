@@ -1,4 +1,4 @@
-package org.bipolis.mambo.jaxrs.openapi.example.basic;
+package org.bipolis.mambo.jaxrs.openapi.example;
 
 import java.io.IOException;
 
