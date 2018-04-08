@@ -12,7 +12,8 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 @Consumes("*/*")
 @Produces("*/*")
 @Component(
-        service = {CxfBinaryDataProvider.class, javax.ws.rs.ext.MessageBodyReader.class,
+        service = {CxfBinaryDataProvider.class,
+            javax.ws.rs.ext.MessageBodyReader.class,
             javax.ws.rs.ext.MessageBodyWriter.class})
 @JaxrsExtension
 @CapabilityBinaryDataProvider

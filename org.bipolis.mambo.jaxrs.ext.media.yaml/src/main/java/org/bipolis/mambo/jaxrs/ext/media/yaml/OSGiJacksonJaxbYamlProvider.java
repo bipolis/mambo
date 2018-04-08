@@ -16,7 +16,8 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 @Consumes("*/*")
 @Produces("*/")
 @Component(
-        service = {OSGiJacksonJaxbYamlProvider.class, javax.ws.rs.ext.MessageBodyReader.class,
+        service = {OSGiJacksonJaxbYamlProvider.class,
+            javax.ws.rs.ext.MessageBodyReader.class,
             javax.ws.rs.ext.MessageBodyWriter.class})
 @JaxrsExtension
 @RequiresYamlProvider
