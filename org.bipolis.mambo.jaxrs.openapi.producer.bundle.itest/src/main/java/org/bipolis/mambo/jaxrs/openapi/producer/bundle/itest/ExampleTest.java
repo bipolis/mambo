@@ -38,46 +38,46 @@ public class ExampleTest {
   public void testExample()
           throws InterruptedException {
 
-//    ServiceTracker<OpenApiFragmentsService, ? extends OpenApiFragmentsService> tracker =
-//            new ServiceTracker<>(context, OpenApiFragmentsService.class.getName(), null);
-//
-//    tracker.open();
-//    OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
-//
-//
-//
-//    assertNotNull("Service not null", openApiFragmentsService);
-//
-//    assertEquals("fetch correct Service", openApiFragmentsService.getClass()
-//                                                                 .getName(),
-//            "org.bipolis.mambo.jaxrs.openapi.producer.bundle.BundleApiAppanderService");
-//
-//    List<OpenAPI> openApis =
-//            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
-//
-//    // this test application, default app.
-//    assertEquals("expected Applications", openApis.size(), 1);
-//
-//    Bundle bundle = FrameworkUtil.getBundle(ExampleApplication.class);
-//
-//    OpenAPI openAPI = openApis.get(0);
-//    Info info = openAPI.getInfo();
-//
-//    Contact contact = info.getContact();
-//    License license = info.getLicense();
-//    ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
-//
-//    assertEquals(info.getTitle(), getBundleProp(bundle, "Bundle-Name"));
-//    assertEquals(info.getDescription(), getBundleProp(bundle, "Bundle-Description"));
-//    assertEquals(info.getTermsOfService(), getBundleProp(bundle, "Bundle-Copyright"));
-//    assertEquals(license.getUrl(), getBundleProp(bundle, "Bundle-License"));
-//    assertEquals(contact.getName(), getBundleProp(bundle, "Bundle-Vendor"));
-//    assertEquals(contact.getEmail(), getBundleProp(bundle, "Bundle-ContactAddress"));
-//    assertEquals(externalDocumentation.getUrl(), getBundleProp(bundle, "Bundle-DocURL"));
-//    assertEquals(info.getVersion(), bundle.getVersion()
-//                                          .toString());
-//
-//    tracker.close();
+    ServiceTracker<OpenApiFragmentsService, ? extends OpenApiFragmentsService> tracker =
+            new ServiceTracker<>(context, OpenApiFragmentsService.class.getName(), null);
+
+    tracker.open();
+    OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
+
+
+
+    assertNotNull("Service not null", openApiFragmentsService);
+
+    assertEquals("fetch correct Service", openApiFragmentsService.getClass()
+                                                                 .getName(),
+            "org.bipolis.mambo.jaxrs.openapi.producer.bundle.BundleApiAppanderService");
+
+    List<OpenAPI> openApis =
+            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
+
+    // this test application, default app.
+    assertEquals("expected Applications", openApis.size(), 1);
+
+    Bundle bundle = FrameworkUtil.getBundle(ExampleApplication.class);
+
+    OpenAPI openAPI = openApis.get(0);
+    Info info = openAPI.getInfo();
+
+    Contact contact = info.getContact();
+    License license = info.getLicense();
+    ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
+
+    assertEquals(info.getTitle(), getBundleProp(bundle, "Bundle-Name"));
+    assertEquals(info.getDescription(), getBundleProp(bundle, "Bundle-Description"));
+    assertEquals(info.getTermsOfService(), getBundleProp(bundle, "Bundle-Copyright"));
+    assertEquals(license.getUrl(), getBundleProp(bundle, "Bundle-License"));
+    assertEquals(contact.getName(), getBundleProp(bundle, "Bundle-Vendor"));
+    assertEquals(contact.getEmail(), getBundleProp(bundle, "Bundle-ContactAddress"));
+    assertEquals(externalDocumentation.getUrl(), getBundleProp(bundle, "Bundle-DocURL"));
+    assertEquals(info.getVersion(), bundle.getVersion()
+                                          .toString());
+
+    tracker.close();
   }
 
   private static String getBundleProp(Bundle bundle,

@@ -10,7 +10,6 @@
 	<modules>
 		<module>_distro</module>
 		<module>_index</module>
-		<module>_assembly</module>
 		<module>org.bipolis.mambo.jaxrs.itest</module>
 		<module>org.bipolis.mambo.jaxrs.annotation</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
