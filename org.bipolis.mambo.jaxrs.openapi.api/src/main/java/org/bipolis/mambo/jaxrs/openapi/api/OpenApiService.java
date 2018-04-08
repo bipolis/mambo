@@ -12,7 +12,6 @@ public interface OpenApiService {
     return getOpenApis(null, null, Arrays.asList(OpenApiTagType.DEFAULT));
   }
 
-
   List<OpenAPI> getOpenApis(List<String> applications,
                             String version,
                             List<OpenApiTagType> tagTypes);

@@ -20,7 +20,6 @@ import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.util.tracker.ServiceTracker;
 
-
 public class ExampleTest {
 
   // private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class)
@@ -81,22 +80,17 @@ public class ExampleTest {
             new ServiceTracker<>(bundleContext, ServiceComponentRuntime.class, null);
     tracker.open();
 
-
     final ServiceComponentRuntime serviceComponentRuntime = tracker.getService();
-
-
 
     for (ComponentDescriptionDTO component : serviceComponentRuntime.getComponentDescriptionDTOs()) {
 
       for (ComponentConfigurationDTO config : serviceComponentRuntime.getComponentConfigurationDTOs(
               component)) {
 
-
         assertEquals("Service is not active: " + component.name, config.state,
                 ComponentConfigurationDTO.ACTIVE);
       }
     }
-
 
   }
 
@@ -110,6 +104,5 @@ public class ExampleTest {
     // RessourceInBasicAppA.RESSOURCE_NAME, "value"));
 
   }
-
 
 }

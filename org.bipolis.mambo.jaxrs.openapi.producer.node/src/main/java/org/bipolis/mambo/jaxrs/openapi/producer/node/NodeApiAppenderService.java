@@ -20,7 +20,6 @@ public class NodeApiAppenderService implements OpenApiFragmentsService {
     public int priotity() default 0;
   }
 
-
   @Activate
   private void activate(Config config) {
     this.config = config;
@@ -31,15 +30,11 @@ public class NodeApiAppenderService implements OpenApiFragmentsService {
   @Reference
   private Logger logger;
 
-
-
   @Override
   public int getPriority() {
 
     return config.priotity();
   }
-
-
 
   @Override
   public List<OpenAPI> getFragmentOpenApis(String apiName,
@@ -47,7 +42,5 @@ public class NodeApiAppenderService implements OpenApiFragmentsService {
     // TODO Auto-generated method stub
     return null;
   }
-
-
 
 }

@@ -23,7 +23,6 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragmentsService {
 
-
   @Override
   public List<OpenAPI> getFragmentOpenApis(String apiBase,
                                            String version) {
@@ -35,7 +34,6 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
 
     applicationDTOs.addAll(Arrays.asList(getJaxrsServiceRuntime().getRuntimeDTO().applicationDTOs));
     applicationDTOs.add(getJaxrsServiceRuntime().getRuntimeDTO().defaultApplication);
-
 
     for (ApplicationDTO applicationDTO : applicationDTOs) {
       if (apiBase != null && !apiBase.equals(applicationDTO.base.replaceAll("/", ""))) {
@@ -65,17 +63,14 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
           Object ressource =
                   ServiceIdUtil.getServiceByServiceID(bundleContext, null, resourceDTO.serviceId);
 
-
           baseOpenAPI = handleOpenApiForRessource(baseOpenAPI, applicationDTO, application,
                   resourceDTO, ressource);
           for (ResourceMethodInfoDTO resourceMethodInfoDTO : resourceDTO.resourceMethods) {
-
 
             baseOpenAPI = handleOpenApiForRessourceMethofInforInRessource(baseOpenAPI,
                     applicationDTO, application, resourceDTO, ressource, resourceMethodInfoDTO);
 
           }
-
 
         }
         openAPIs.add(baseOpenAPI);
@@ -94,15 +89,11 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
                                                                     ExtensionDTO extensionDTO,
                                                                     Object extension);
 
-
-
   protected abstract OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
                                                        ApplicationDTO applicationDTO,
                                                        Application application,
                                                        ResourceDTO resourceDTO,
                                                        Object ressource);
-
-
 
   protected abstract OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
                                                                              ApplicationDTO applicationDTO,
@@ -123,8 +114,6 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
 
     return service(JaxrsServiceRuntime.class);
   }
-
-
 
   protected Map<Class<?>, ServiceTracker<?, ?>> serviceTrackers =
           Collections.synchronizedMap(new IdentityHashMap<>());

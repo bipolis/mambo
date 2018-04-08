@@ -25,5 +25,4 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 public class OSGiJacksonJaxbXmlProvider extends JacksonJaxbXMLProvider {
   JaxbAnnotationIntrospector catchDependency;// needed as resolvinghelper
 
-
 }

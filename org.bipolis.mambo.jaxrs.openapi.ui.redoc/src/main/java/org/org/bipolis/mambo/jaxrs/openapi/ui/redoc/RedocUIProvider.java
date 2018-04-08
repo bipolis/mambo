@@ -16,7 +16,6 @@ public class RedocUIProvider implements UiProvider {
     return "Redoc-UI";
   }
 
-
   @Override
   public String getResponseTypes() {
 
@@ -26,8 +25,6 @@ public class RedocUIProvider implements UiProvider {
   @Override
   public String getUrl(URI baseUrl,
                        String openapiPath) {
-
-
 
     final String uri = "https://rebilly.github.io/ReDoc/?url=" + openapiPath;
 

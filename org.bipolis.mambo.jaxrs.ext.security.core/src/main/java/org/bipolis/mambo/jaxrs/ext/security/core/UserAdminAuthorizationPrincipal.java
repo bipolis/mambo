@@ -4,7 +4,7 @@ import java.security.Principal;
 
 import org.osgi.service.useradmin.Authorization;
 
-public class UserAdminAuthorizationPrincipal implements Principal ,Authorization{
+public class UserAdminAuthorizationPrincipal implements Principal, Authorization {
 
   @Override
   public boolean hasRole(String name) {
@@ -23,6 +23,5 @@ public class UserAdminAuthorizationPrincipal implements Principal ,Authorization
     // TODO Auto-generated method stub
     return null;
   }
-
 
 }

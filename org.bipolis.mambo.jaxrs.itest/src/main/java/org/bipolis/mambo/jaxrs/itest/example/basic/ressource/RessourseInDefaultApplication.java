@@ -19,7 +19,6 @@ public class RessourseInDefaultApplication {
 
   public static final String RESSOURCE_NAME = "RessourseInDefaultApplication";
 
-
   @GET
   @Path("/value")
   public String getValue() {

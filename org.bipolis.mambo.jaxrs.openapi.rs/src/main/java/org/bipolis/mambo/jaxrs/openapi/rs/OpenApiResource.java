@@ -52,8 +52,6 @@ import io.swagger.v3.oas.models.servers.Server;
 public class OpenApiResource {
   public static final String BASEPATH = "/doc";
 
-
-
   @Context
   private UriInfo uri;
   // @Reference
@@ -136,8 +134,6 @@ public class OpenApiResource {
                    .build();
   }
 
-
-
   @GET
   @Produces({MediaType.APPLICATION_JSON, "application/yaml", MediaType.APPLICATION_XML})
   @Path("/group/")
@@ -207,13 +203,10 @@ public class OpenApiResource {
   @Produces("text/html")
   public String getApplicationsListHtml(@Context final UriInfo uriInfo) {
 
-
     if (uiProviders == null) {
       return "a";
     }
     final URI baseUrl = uriInfo.getBaseUri();
-
-
 
     final StringBuilder htmlBuilder = new StringBuilder();
 
@@ -231,7 +224,6 @@ public class OpenApiResource {
     }
     htmlBuilder.append("</tr>");
     for (final ApplicationBaseDTO app : getApplication()) {
-
 
       htmlBuilder.append("<tr>");
       for (UiProvider uiProvider : uiProviders) {

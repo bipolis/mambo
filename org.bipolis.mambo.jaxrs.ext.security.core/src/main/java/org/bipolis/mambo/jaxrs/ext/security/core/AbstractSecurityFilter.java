@@ -66,7 +66,6 @@ public abstract class AbstractSecurityFilter
                           RolesAllowed methodRolesAllowedRoles) {
     try {
 
-
       SecurityContext securityContext = authenticate(requestContext);
       requestContext.setSecurityContext(securityContext);
       boolean annotatedRoleOk = false;
@@ -86,7 +85,6 @@ public abstract class AbstractSecurityFilter
 
       // TODO: Roles over Path
 
-
     } catch (Exception e) {
       requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
                                        .entity(e.getMessage())
@@ -97,7 +95,5 @@ public abstract class AbstractSecurityFilter
 
   protected abstract SecurityContext authenticate(ContainerRequestContext requestContext)
           throws AuthenticationException;
-
-
 
 }

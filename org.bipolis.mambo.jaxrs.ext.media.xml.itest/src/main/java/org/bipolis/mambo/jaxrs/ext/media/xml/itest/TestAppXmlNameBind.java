@@ -14,5 +14,4 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 public class TestAppXmlNameBind extends Application {
   public static final String NAME = "TestAppXmlNameBind";
 
-
 }

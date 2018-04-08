@@ -5,7 +5,6 @@ import java.util.List;
 
 public interface MergerService {
 
-
   default <S> S merge(List<S> merges)
           throws MergeException {
     return merge(merges.get(0), merges.subList(1, merges.size()));

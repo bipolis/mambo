@@ -27,5 +27,4 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 public class OSGiJacksonJaxbJsonProvider extends JacksonJaxbJsonProvider {
   JaxbAnnotationIntrospector catchDependency;// needed as resolvinghelper
 
-
 }

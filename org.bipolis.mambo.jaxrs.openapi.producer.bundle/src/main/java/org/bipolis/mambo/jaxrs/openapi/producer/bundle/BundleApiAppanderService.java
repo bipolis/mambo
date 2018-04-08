@@ -18,7 +18,6 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
-
 @Component(service = {OpenApiFragmentsService.class, BundleApiAppanderService.class})
 public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
   private static String getBundleProp(Bundle bundle,
@@ -32,10 +31,8 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
     return valueFromBundle;
   }
 
-
   public static OpenAPI fillOSGiBundleHeaders(OpenAPI openAPI,
                                               Bundle bundle) {
-
 
     if (bundle != null) {
 
@@ -84,8 +81,6 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
     return 1;
   }
 
-
-
   @Override
   protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
                                                                       ApplicationDTO applicationDTO,
@@ -105,7 +100,6 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
     return openAPI;
   }
 
-
   @Override
   protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
                                                                     ApplicationDTO applicationDTO,
@@ -117,7 +111,6 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
     return baseOpenAPI;
   }
 
-
   @Override
   protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,
                                                            ApplicationDTO applicationDTO,
@@ -128,7 +121,6 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
     return baseOpenAPI;
   }
 
-
   @Override
   protected OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
                                               ApplicationDTO applicationDTO,
@@ -138,6 +130,5 @@ public class BundleApiAppanderService extends AbstractJaxRsApiFragmentService {
 
     return baseOpenAPI;
   }
-
 
 }

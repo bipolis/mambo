@@ -38,8 +38,6 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
 @Designate(ocd = org.bipolis.mambo.repo.rsw.ObrRepositoryRessource.Config.class)
 @Component(service = ObrRepositoryRessource.class)
 
@@ -55,7 +53,6 @@ public class ObrRepositoryRessource {
           name = "Bundle Repository",
           description = "Configuration of the Bundle Repository")
   public @interface Config {
-
 
   }
 
@@ -170,7 +167,6 @@ public class ObrRepositoryRessource {
     }
   }
 
-
   @DELETE
   @javax.ws.rs.Path("/{subResources:.*}")
   public Response removeFile(@javax.ws.rs.PathParam("subResources") final String path) {
@@ -187,8 +183,6 @@ public class ObrRepositoryRessource {
                      .build();
     }
   }
-
-
 
   @Reference
   public void bindRepo(final BundleRepository repo) {

@@ -17,7 +17,6 @@ public interface OpenApiFragmentsService extends Comparator<OpenApiFragmentsServ
   List<OpenAPI> getFragmentOpenApis(String apiBase,
                                     String version);
 
-
   int getPriority();
 
 }

@@ -44,8 +44,6 @@ public class ExampleTest {
     tracker.open();
     OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
 
-
-
     assertNotNull("Service not null", openApiFragmentsService);
 
     assertEquals("fetch correct Service", openApiFragmentsService.getClass()

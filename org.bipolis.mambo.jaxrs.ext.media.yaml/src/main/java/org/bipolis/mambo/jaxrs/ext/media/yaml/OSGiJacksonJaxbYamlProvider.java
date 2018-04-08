@@ -26,6 +26,4 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 public class OSGiJacksonJaxbYamlProvider extends JacksonJaxbYAMLProvider {
   JaxbAnnotationIntrospector catchDependency;
 
-
-
 }

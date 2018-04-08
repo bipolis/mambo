@@ -28,8 +28,6 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
 @Designate(ocd = org.bipolis.mambo.repo.rsw.MvnDeployRessource.Config.class)
 @Component(service = MvnDeployRessource.class)
 
@@ -45,7 +43,6 @@ public class MvnDeployRessource {
           name = "Bundle Repository",
           description = "Configuration of the Bundle Repository")
   public @interface Config {
-
 
   }
 
@@ -69,7 +66,6 @@ public class MvnDeployRessource {
 
     try {
 
-
       if (path.endsWith(".jar") || path.endsWith(".eas")) {
         final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
         System.out.println(result);
@@ -77,7 +73,6 @@ public class MvnDeployRessource {
       }
       return Response.status(Status.OK)
                      .build();
-
 
     } catch (final BundleRepositoryException bre) {
       logger.debug(bre.getMessage(), bre);
@@ -94,8 +89,6 @@ public class MvnDeployRessource {
     logger.debug("GET " + path);
 
     try {
-
-
 
       return Response.status(Status.OK)
                      .build();

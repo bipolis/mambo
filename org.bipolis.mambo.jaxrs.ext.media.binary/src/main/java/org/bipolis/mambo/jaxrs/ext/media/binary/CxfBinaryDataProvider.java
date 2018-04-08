@@ -9,8 +9,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsExtension;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 
-
-
 @Consumes("*/*")
 @Produces("*/*")
 @Component(

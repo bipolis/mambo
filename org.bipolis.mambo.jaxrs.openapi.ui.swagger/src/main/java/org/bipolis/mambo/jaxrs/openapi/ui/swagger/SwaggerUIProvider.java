@@ -16,7 +16,6 @@ public class SwaggerUIProvider implements UiProvider {
     return "Swagger-UI";
   }
 
-
   @Override
   public String getResponseTypes() {
 

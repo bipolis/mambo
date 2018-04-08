@@ -48,7 +48,6 @@ public class BasicAuthAuthenticator extends AbstractSecurityFilter {
   protected BaseSecurityContext authenticate(ContainerRequestContext filterContext)
           throws AuthenticationException {
 
-
     // Extract authentication credentials
     String authentication = filterContext.getHeaderString(HttpHeaders.AUTHORIZATION);
     if (authentication == null) {

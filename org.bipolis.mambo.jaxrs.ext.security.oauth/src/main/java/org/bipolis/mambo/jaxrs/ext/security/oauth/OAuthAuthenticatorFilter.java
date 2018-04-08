@@ -31,9 +31,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @JaxrsName("OAuthAuthenticatorFilter")
 public class OAuthAuthenticatorFilter extends AbstractSecurityFilter {
 
-
   OAuthRequestFilter oAuthRequestFilter = new OAuthRequestFilter();
-
 
   @Override
   public SecurityScheme getSecurityScheme() {
@@ -57,12 +55,9 @@ public class OAuthAuthenticatorFilter extends AbstractSecurityFilter {
   protected SecurityContext authenticate(ContainerRequestContext requestContext)
           throws AuthenticationException {
 
-
     oAuthRequestFilter.filter(requestContext);
 
     return requestContext.getSecurityContext();
   }
-
-
 
 }

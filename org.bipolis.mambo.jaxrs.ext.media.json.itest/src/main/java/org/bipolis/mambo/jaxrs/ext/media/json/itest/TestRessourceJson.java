@@ -26,7 +26,6 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 public class TestRessourceJson {
   ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
 
-
   @NameBindingJsonProvider
   @GET
   @Path("json")
@@ -35,7 +34,6 @@ public class TestRessourceJson {
     return example;
 
   }
-
 
   @GET
   @Path("non")

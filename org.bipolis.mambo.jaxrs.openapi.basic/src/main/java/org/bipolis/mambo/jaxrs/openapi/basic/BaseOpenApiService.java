@@ -41,8 +41,6 @@ public class BaseOpenApiService implements OpenApiService {
   @Reference
   private JaxrsServiceRuntime jaxrsServiceRuntime;
 
-
-
   @Reference(
           service = OpenApiFragmentsService.class,
           cardinality = ReferenceCardinality.MULTIPLE,
@@ -68,19 +66,15 @@ public class BaseOpenApiService implements OpenApiService {
 
     for (String apiName : apiNames) {
 
-
       for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
 
         openAPIs.addAll(fragmentsService.getFragmentOpenApis(apiName, version));
       }
 
-
     }
     System.out.println(openAPIs);
     return mergeOpenApis(openAPIs, groupType);
   }
-
-
 
   private List<OpenAPI> mergeOpenApis(List<OpenAPI> openAPIs,
                                       List<OpenApiTagType> groupType) {
@@ -97,7 +91,5 @@ public class BaseOpenApiService implements OpenApiService {
     // logger.debug(l -> l.debug("Unbind {}", apiAppenderService));
     apiAppenderServices.remove(apiAppenderService);
   }
-
-
 
 }

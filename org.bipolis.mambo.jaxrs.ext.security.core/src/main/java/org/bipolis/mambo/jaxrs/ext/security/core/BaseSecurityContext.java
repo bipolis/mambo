@@ -21,7 +21,6 @@ public class BaseSecurityContext implements SecurityContext {
     this.filterContext = filterContext;
   }
 
-
   @Override
   public Principal getUserPrincipal() {
     return new Principal() {
@@ -39,14 +38,12 @@ public class BaseSecurityContext implements SecurityContext {
     return authorization.hasRole(role);
   }
 
-
   @Override
   public boolean isSecure() {
     return "https".equals(filterContext.getUriInfo()
                                        .getRequestUri()
                                        .getScheme());
   }
-
 
   @Override
   public String getAuthenticationScheme() {

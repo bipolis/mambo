@@ -56,7 +56,6 @@ public class SwaggerUIRessource {
         mediaType = "application/javascript";
       }
 
-
       if ("swagger-ui.css".equals(sPath)) {
 
         // config can later replace swaggeruicolor
@@ -64,34 +63,26 @@ public class SwaggerUIRessource {
         css = css.replaceAll("#89bf04", "#00bf04");// head
         css = css.replaceAll("#547f00", "#007f00");// head
 
-
         css = css.replaceAll("#49cc90", "#00bf04");// post border
         css = css.replaceAll("73,204,144,.1", "0,204,144,.1");// post bg
 
         css = css.replaceAll("#fca130", "#00a130");// put border
         css = css.replaceAll("252,161,48,.1", "252,161,48,.1");// post bg
 
-
         css = css.replaceAll("#f93e3e", "#003e3e");// delete border
         css = css.replaceAll("249,62,62,.1", "249,62,62,.1");// delete bg
-
 
         css = css.replaceAll("#61affe", "#00affe");// get border
         css = css.replaceAll("97,175,254,.1", "0,175,254,.1");// get bg
 
-
         css = css.replaceAll("#50e3c2", "#00e3c2");// patch border
         css = css.replaceAll("80,227,194,.1", "80,227,194,.1");// get bg
-
 
         css = css.replaceAll("#9012fe", "#0012fe");// head border
         css = css.replaceAll("144,18,254,.1", "144,18,254,.1");// head bg
 
-
         css = css.replaceAll("#0d5aa7", "#005aa7");// options border
         css = css.replaceAll("13,90,167,.1", "13,90,167,.1");// options bg
-
-
 
         targetArray = css.getBytes();
       }
@@ -105,8 +96,6 @@ public class SwaggerUIRessource {
                      .build();
 
     }
-
-
 
   }
 }
