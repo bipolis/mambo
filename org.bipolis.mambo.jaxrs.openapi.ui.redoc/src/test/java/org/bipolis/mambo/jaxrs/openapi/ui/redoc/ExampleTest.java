@@ -1,4 +1,4 @@
-package org.org.bipolis.mambo.jaxrs.openapi.ui.redoc;
+package org.bipolis.mambo.jaxrs.openapi.ui.redoc;
 
 import static org.junit.Assert.*;
 
