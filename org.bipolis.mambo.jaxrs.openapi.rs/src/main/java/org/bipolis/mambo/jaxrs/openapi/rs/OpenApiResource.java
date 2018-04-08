@@ -22,11 +22,15 @@ import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.NameBindingXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.RequiresXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.NameBindingYamlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.RequiresYamlProvider;
+import org.bipolis.mambo.jaxrs.openapi.api.ApplicationBaseDTO;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiApplication;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiService;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiTagType;
+import org.bipolis.mambo.jaxrs.openapi.api.UiProvider;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
 import org.osgi.service.jaxrs.runtime.dto.RuntimeDTO;
@@ -46,9 +50,9 @@ import io.swagger.v3.oas.models.servers.Server;
 @Path(OpenApiResource.BASEPATH)
 // @PermitAll
 public class OpenApiResource {
-  protected static final String BASEPATH = "/doc";
+  public static final String BASEPATH = "/doc";
 
-  private static final String SWAGGER_UI_PATH = "/static/swaggerui";
+
 
   @Context
   private UriInfo uri;
@@ -59,6 +63,8 @@ public class OpenApiResource {
   @Reference
   private JaxrsServiceRuntime jaxrsServiceRuntime;
 
+  @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
+  private volatile List<UiProvider> uiProviders;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -69,19 +75,22 @@ public class OpenApiResource {
   @NameBindingYamlProvider
   @NameBindingJsonProvider
   @NameBindingXmlProvider
-  public String[] getApplication() {
+  public ApplicationBaseDTO[] getApplication() {
 
-    final List<String> applications = new ArrayList<>();
+    final List<ApplicationBaseDTO> applications = new ArrayList<>();
 
     final RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
 
     if (runtimeDTO.applicationDTOs != null) {
       for (final ApplicationDTO applicationDTO : runtimeDTO.applicationDTOs) {
-        applications.add(applicationDTO.name);
+        applications.add(ApplicationBaseDTO.builder()
+                                           .name(applicationDTO.name)
+                                           .base(applicationDTO.base)
+                                           .build());
       }
     }
 
-    return applications.toArray(new String[] {});
+    return applications.toArray(new ApplicationBaseDTO[] {});
   }
 
   @GET
@@ -198,22 +207,47 @@ public class OpenApiResource {
   @Produces("text/html")
   public String getApplicationsListHtml(@Context final UriInfo uriInfo) {
 
-    final URI baseurl = uriInfo.getBaseUri();
 
-    final String swaggeruri =
-            baseurl.getScheme() + "://" + baseurl.getAuthority() + SWAGGER_UI_PATH;
+    if (uiProviders == null) {
+      return "a";
+    }
+    final URI baseUrl = uriInfo.getBaseUri();
+
+
 
     final StringBuilder htmlBuilder = new StringBuilder();
 
     htmlBuilder.append("<html>");
+    htmlBuilder.append("Api-Doc");
+    htmlBuilder.append("<table style=\"width:100%\">");
+    htmlBuilder.append("<tr>");
+    for (UiProvider uiProvider : uiProviders) {
 
-    for (final String app : getApplication()) {
+      htmlBuilder.append("<th>");
 
-      htmlBuilder.append("<a href=" + swaggeruri + "/index.html?url=" + uri.getBaseUri()
-              + OpenApiResource.BASEPATH.replace("/", "") + "/application/" + app + "/yaml>" + app
-              + "</a>");
-      htmlBuilder.append("<br>");
+      htmlBuilder.append(uiProvider.getName());
+
+      htmlBuilder.append("</th>");
     }
+    htmlBuilder.append("</tr>");
+    for (final ApplicationBaseDTO app : getApplication()) {
+
+
+      htmlBuilder.append("<tr>");
+      for (UiProvider uiProvider : uiProviders) {
+        String openApiUrl = uri.getBaseUri() + OpenApiResource.BASEPATH.replace("/", "")
+                + "/application" + app.getBase() + "/" + uiProvider.getResponseTypes();
+        htmlBuilder.append("<td>");
+
+        String uiUrl = uiProvider.getUrl(baseUrl, openApiUrl);
+        htmlBuilder.append("<a href=" + uiUrl + ">" + app.getName() + "</a>");
+
+        htmlBuilder.append("</td>");
+      }
+
+      htmlBuilder.append("</tr>");
+    }
+    htmlBuilder.append("</table>");
 
     htmlBuilder.append("</html>");
     return htmlBuilder.toString();

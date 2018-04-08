@@ -70,11 +70,13 @@ public class BaseOpenApiService implements OpenApiService {
 
 
       for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
-        fragmentsService.getFragmentOpenApis(apiName, version);
+
+        openAPIs.addAll(fragmentsService.getFragmentOpenApis(apiName, version));
       }
 
 
     }
+    System.out.println(openAPIs);
     return mergeOpenApis(openAPIs, groupType);
   }
 

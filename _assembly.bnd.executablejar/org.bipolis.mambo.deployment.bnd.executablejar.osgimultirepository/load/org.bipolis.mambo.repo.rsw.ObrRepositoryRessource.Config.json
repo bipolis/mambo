@@ -1,0 +1,91 @@
+{
+	"org.apache.felix.http~primary": {
+		"org.osgi.service.http.port:Integer": 8080
+	},
+	"org.bipolis.mambo.repo.BundleRepository~Release": {
+		"name:String": "Release",
+		"dir:String": "data/repo/release",
+		"subDirs:String[]": [
+			"*"
+		],
+		"override:boolean": false,
+		"bundlesOnly:boolean": true,
+		"snapshots:boolean": false,
+		"externalDeploy:boolean": false,
+		"deployOverRepository:String[]": [
+			"Stage"
+		]
+	},
+	"org.bipolis.mambo.repo.BundleRepository~Snapshot": {
+		"name:String": "Snapshot",
+		"dir:String": "data/repo/snapshot",
+		"subDirs:String[]": [
+			"*"
+		],
+		"override:boolean": true,
+		"bundlesOnly:boolean": true,
+		"snapshots:boolean": true,
+		"externalDeploy:boolean": true,
+		"deployOverRepository:String[]": []
+	},
+	"org.bipolis.mambo.repo.BundleRepository~Stage": {
+		"name:String": "Stage",
+		"dir:String": "data/repo/stage",
+		"override:boolean": false,
+		"subDirs:String[]": [
+			"*"
+		],
+		"bundlesOnly:boolean": true,
+		"snapshots:boolean": false,
+		"externalDeploy:boolean": true,
+		"deployOverRepository:String[]": []
+	},
+	"org.bipolis.mambo.repo.BundleRepository~Baseline": {
+		"name:String": "Baseline",
+		"dir:String": "data/repo/baseline",
+		"override:boolean": false,
+		"subDirs:String[]": [
+			"*"
+		],
+		"bundlesOnly:boolean": true,
+		"snapshots:boolean": true,
+		"externalDeploy:boolean": true,
+		"deployOverRepository:String[]": []
+	},
+	"org.bipolis.mambo.repo.BundleRepository~Dependencys": {
+		"name:String": "Dependencys",
+		"dir:String": "data/repo/dependencys",
+		"override:boolean": false,
+		"subDirs:String[]": [
+			"*"
+		],
+		"bundlesOnly:boolean": true,
+		"snapshots:boolean": true,
+		"externalDeploy:boolean": true,
+		"deployOverRepository:String[]": []
+	},
+	"org.bipolis.mambo.repo.BundleRepository~NonBundle": {
+		"name:String": "NonBundle",
+		"dir:String": "data/repo/nonbundle",
+		"override:boolean": true,
+		"subDirs:String[]": [
+			"*"
+		],
+		"bundlesOnly:boolean": false,
+		"snapshots:boolean": true,
+		"externalDeploy:boolean": true,
+		"deployOverRepository:String[]": []
+	},
+	"org.bipolis.mambo.repo.BundleRepository~Test": {
+		"name:String": "Test",
+		"dir:String": "data/repo/test",
+		"override:boolean": true,
+		"subDirs:String[]": [
+			"*"
+		],
+		"bundlesOnly:boolean": true,
+		"snapshots:boolean": true,
+		"externalDeploy:boolean": true,
+		"deployOverRepository:String[]": []
+	}
+}
