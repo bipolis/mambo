@@ -34,7 +34,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.bipolis.mambo.repo.rsw.ObrRepositoryRessource;
+import org.bipolis.mambo.repo.rsw.R5RepositoryRessource;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
  * </p>
  * <p>
  * The Bundle-Entries of the Index-Files are build with the configured {@link Config#repoUrl()}. The
- * Repository is published by a jaxrs ressource {@link ObrRepositoryRessource} under this URL.
+ * Repository is published by a jaxrs ressource {@link R5RepositoryRessource} under this URL.
  * </p>
  *
  */
@@ -128,6 +128,8 @@ public class BundleRepository {
   private LogService log;
   private ScheduledFuture<?> indexerExecutor;
   private DirWatcher dirWatcher;
+
+  private Config config;
 
   /**
    * Add a Bundle to a Repository.
@@ -499,6 +501,7 @@ public class BundleRepository {
   public void activate(final Config config) {
     logger.info("config:" + "\n\trepoDir = " + config.dir() + "\n\trepoName = " + config.name());
 
+    this.config = config;
     final String root = config.dir();
 
     if (root == null || root.trim()
@@ -594,5 +597,10 @@ public class BundleRepository {
                           .toString();
 
     return Files.isDirectory(Paths.get(dir));
+  }
+
+  public String getName() {
+
+    return config.name();
   }
 }

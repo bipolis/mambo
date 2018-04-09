@@ -11,6 +11,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -38,16 +40,16 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Designate(ocd = org.bipolis.mambo.repo.rsw.ObrRepositoryRessource.Config.class)
-@Component(service = ObrRepositoryRessource.class)
+@Designate(ocd = org.bipolis.mambo.repo.rsw.R5RepositoryRessource.Config.class)
+@Component(service = R5RepositoryRessource.class)
 
 @JaxrsApplicationSelect("(" + JAX_RS_NAME + "=" + APP_NAME + ")")
 @RequiresBinaryDataProvider
 @RequiresJsonProvider
 @JaxrsResource
-@JaxrsName("ObrRepositoryRessource")
-@javax.ws.rs.Path("/obr")
-public class ObrRepositoryRessource {
+@JaxrsName(R5RepositoryRessource.NAME)
+@javax.ws.rs.Path("/r5")
+public class R5RepositoryRessource {
 
   @ObjectClassDefinition(
           name = "Bundle Repository",
@@ -56,8 +58,8 @@ public class ObrRepositoryRessource {
 
   }
 
-  private static final Logger logger = LoggerFactory.getLogger(ObrRepositoryRessource.class);
-  public static final String NAME = "RepositoryRessource";
+  private static final Logger logger = LoggerFactory.getLogger(R5RepositoryRessource.class);
+  public static final String NAME = "R5RepositoryRessource";
 
   private BundleRepository bundleRepository;
   private Config config;
@@ -184,15 +186,16 @@ public class ObrRepositoryRessource {
     }
   }
 
+  Map<String,BundleRepository> bundleRepositorys = new HashMap<>();
+
   @Reference
   public void bindRepo(final BundleRepository repo) {
     logger.debug("repository service bound: " + repo);
-    bundleRepository = repo;
+    bundleRepositorys.put(repo.getName(),repo);
   }
 
   public void unbindRepo(BundleRepository repo) {
     logger.debug("repository service unbound: " + repo);
-    repo = null;
+    bundleRepositorys.remove(repo.getName());
   }
-
 }
