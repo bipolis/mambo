@@ -7,13 +7,14 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 public interface OpenApiService {
 
-  default List<OpenAPI> getOpenApis() {
+  default OpenAPI getOpenApis()
+          throws Exception {
 
-    return getOpenApis(null, null, Arrays.asList(OpenApiTagType.DEFAULT));
+    return getOpenApis(null, Arrays.asList(OpenApiTagType.DEFAULT));
   }
 
-  List<OpenAPI> getOpenApis(List<String> applications,
-                            String version,
-                            List<OpenApiTagType> tagTypes);
+  OpenAPI getOpenApis(List<String> basePaths,
+                      List<OpenApiTagType> filterTagTypes)
+          throws Exception;
 
 }

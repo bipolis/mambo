@@ -3,8 +3,6 @@ package org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
-
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
 import org.bipolis.mambo.jaxrs.openapi.example.ExampleApplication;
 import org.junit.BeforeClass;
@@ -50,15 +48,13 @@ public class ExampleTest {
                                                                  .getName(),
             "org.bipolis.mambo.jaxrs.openapi.producer.bundle.BundleApiAppanderService");
 
-    List<OpenAPI> openApis =
-            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);
+    OpenAPI openAPI = openApiFragmentsService.getFragmentOpenApi(ExampleApplication.APP_NAME);
 
     // this test application, default app.
-    assertEquals("expected Applications", openApis.size(), 1);
+    assertNotNull("expected Applications", openAPI);
 
     Bundle bundle = FrameworkUtil.getBundle(ExampleApplication.class);
 
-    OpenAPI openAPI = openApis.get(0);
     Info info = openAPI.getInfo();
 
     Contact contact = info.getContact();

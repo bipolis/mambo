@@ -24,8 +24,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragmentsService {
 
   @Override
-  public List<OpenAPI> getFragmentOpenApis(String apiBase,
-                                           String version) {
+  public OpenAPI getFragmentOpenApi(String apiBase) {
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                                .getBundleContext();
 
@@ -73,14 +72,14 @@ public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragment
           }
 
         }
-        openAPIs.add(baseOpenAPI);
+        return baseOpenAPI;
       } catch (InvalidSyntaxException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }
 
-    return openAPIs;
+    return null;
   }
 
   protected abstract OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,

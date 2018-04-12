@@ -104,25 +104,28 @@ public class OpenApiResource {
                              @Context final UriInfo uriInfo,
                              @PathParam("type") final String type,
                              @PathParam("application") final String application,
-                             @QueryParam("tagfilter") List<OpenApiTagType> tagFilters)
-          throws Exception {
+                             @QueryParam("tagfilter") List<OpenApiTagType> tagFilters) {
 
     if (tagFilters == null || tagFilters.isEmpty()) {
       tagFilters = Arrays.asList(OpenApiTagType.DEFAULT);
     }
 
-    final OpenAPI openAPI = getOpenApi(uriInfo, Arrays.asList(application), tagFilters);
-
-    if (openAPI == null) {
-      return Response.status(404)
+    OpenAPI openAPI;
+    try {
+      openAPI = getOpenApi(uriInfo, Arrays.asList(application), tagFilters);
+      if (openAPI == null) {
+        return Response.status(404)
+                       .build();
+      }
+    } catch (Exception e) {
+      return Response.status(500)
                      .build();
     }
 
     String responseType;
     if ("yaml".equalsIgnoreCase(type)) {
       responseType = "application/yaml";
-    }
-    if ("xml".equalsIgnoreCase(type)) {
+    } else if ("xml".equalsIgnoreCase(type)) {
       responseType = MediaType.APPLICATION_XML;
     } else {
       responseType = MediaType.APPLICATION_JSON;
@@ -147,13 +150,17 @@ public class OpenApiResource {
                              @Context final UriInfo uriInfo,
                              @QueryParam("groupType") final List<OpenApiTagType> groupTypes,
                              @QueryParam("mediaType") final OpenApiResponseType mediaType,
-                             @QueryParam("application") final List<String> applications)
-          throws Exception {
+                             @QueryParam("application") final List<String> applications) {
 
-    final OpenAPI openAPI = getOpenApi(uriInfo, applications, groupTypes);
-
-    if (openAPI == null) {
-      return Response.status(404)
+    OpenAPI openAPI;
+    try {
+      openAPI = getOpenApi(uriInfo, applications, groupTypes);
+      if (openAPI == null) {
+        return Response.status(404)
+                       .build();
+      }
+    } catch (Exception e) {
+      return Response.status(500)
                      .build();
     }
 
@@ -179,14 +186,17 @@ public class OpenApiResource {
 
   private OpenAPI getOpenApi(final UriInfo uriInfo,
                              final List<String> applications,
-                             List<OpenApiTagType> groupTypes) {
-    final List<OpenAPI> oas = openApiService.getOpenApis(applications, null, groupTypes);
+                             List<OpenApiTagType> groupTypes)
+          throws Exception {
+    OpenAPI openAPI;
 
-    if (oas == null || oas.isEmpty()) {
+    openAPI = openApiService.getOpenApis(applications, groupTypes);
+
+    if (openAPI == null) {
       return null;
 
     }
-    OpenAPI openAPI = oas.get(0);
+
     List<Server> servers = openAPI.getServers();
     if (servers == null) {
       servers = new ArrayList<>();

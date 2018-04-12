@@ -37,8 +37,7 @@ public class NodeApiAppenderService implements OpenApiFragmentsService {
   }
 
   @Override
-  public List<OpenAPI> getFragmentOpenApis(String apiName,
-                                           String version) {
+  public OpenAPI getFragmentOpenApi(String apiName) {
     // TODO Auto-generated method stub
     return null;
   }
