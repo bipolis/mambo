@@ -12,7 +12,6 @@ import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
 import org.osgi.service.jaxrs.runtime.dto.RuntimeDTO;
 import org.osgi.util.tracker.ServiceTracker;
 
-
 public class ExampleTest {
 
   private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class)
@@ -44,7 +43,6 @@ public class ExampleTest {
     assertEquals(1, runtimeDTO.applicationDTOs.length);
 
     assertEquals(ExampleApplication.APP_NAME, runtimeDTO.applicationDTOs[0].name);
-
 
   }
 

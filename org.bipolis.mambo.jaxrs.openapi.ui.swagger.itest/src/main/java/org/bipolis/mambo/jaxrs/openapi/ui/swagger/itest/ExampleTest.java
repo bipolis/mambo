@@ -19,11 +19,10 @@ public class ExampleTest {
   private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class)
                                                      .getBundleContext();
 
-
   @BeforeClass
   public static void beforeAll() {
     try {
-      Thread.sleep(1000*1);
+      Thread.sleep(1000 * 1);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -31,7 +30,8 @@ public class ExampleTest {
 
   @Test
   public void testExample()
-          throws IOException, InterruptedException {
+          throws IOException,
+          InterruptedException {
     ServiceTracker<JaxrsServiceRuntime, ? extends JaxrsServiceRuntime> tracker =
             new ServiceTracker<>(context, JaxrsServiceRuntime.class.getName(), null);
 
@@ -46,12 +46,10 @@ public class ExampleTest {
 
     assertEquals(OpenApiApplication.APPLICATION_NAME, runtimeDTO.applicationDTOs[0].name);
 
-    
-//    URL url = new URL("http://localhost:8080/openapi/ui/swagger/index.html");
-//    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//    con.setRequestMethod("GET");
-//    assertEquals(200, con.getResponseCode());
-   
+    // URL url = new URL("http://localhost:8080/openapi/ui/swagger/index.html");
+    // HttpURLConnection con = (HttpURLConnection) url.openConnection();
+    // con.setRequestMethod("GET");
+    // assertEquals(200, con.getResponseCode());
 
   }
 

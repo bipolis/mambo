@@ -22,11 +22,15 @@ import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.NameBindingXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.xml.RequiresXmlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.NameBindingYamlProvider;
 import org.bipolis.mambo.jaxrs.annotation.mediatype.yaml.RequiresYamlProvider;
+import org.bipolis.mambo.jaxrs.openapi.api.ApplicationBaseDTO;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiApplication;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiService;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiTagType;
+import org.bipolis.mambo.jaxrs.openapi.api.UiProvider;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
 import org.osgi.service.jaxrs.runtime.dto.ApplicationDTO;
 import org.osgi.service.jaxrs.runtime.dto.RuntimeDTO;
@@ -46,9 +50,7 @@ import io.swagger.v3.oas.models.servers.Server;
 @Path(OpenApiResource.BASEPATH)
 // @PermitAll
 public class OpenApiResource {
-  protected static final String BASEPATH = "/doc";
-
-  private static final String SWAGGER_UI_PATH = "/static/swaggerui";
+  public static final String BASEPATH = "/doc";
 
   @Context
   private UriInfo uri;
@@ -59,6 +61,8 @@ public class OpenApiResource {
   @Reference
   private JaxrsServiceRuntime jaxrsServiceRuntime;
 
+  @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
+  private volatile List<UiProvider> uiProviders;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -69,19 +73,22 @@ public class OpenApiResource {
   @NameBindingYamlProvider
   @NameBindingJsonProvider
   @NameBindingXmlProvider
-  public String[] getApplication() {
+  public ApplicationBaseDTO[] getApplication() {
 
-    final List<String> applications = new ArrayList<>();
+    final List<ApplicationBaseDTO> applications = new ArrayList<>();
 
     final RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
 
     if (runtimeDTO.applicationDTOs != null) {
       for (final ApplicationDTO applicationDTO : runtimeDTO.applicationDTOs) {
-        applications.add(applicationDTO.name);
+        applications.add(ApplicationBaseDTO.builder()
+                                           .name(applicationDTO.name)
+                                           .base(applicationDTO.base)
+                                           .build());
       }
     }
 
-    return applications.toArray(new String[] {});
+    return applications.toArray(new ApplicationBaseDTO[] {});
   }
 
   @GET
@@ -97,25 +104,28 @@ public class OpenApiResource {
                              @Context final UriInfo uriInfo,
                              @PathParam("type") final String type,
                              @PathParam("application") final String application,
-                             @QueryParam("tagfilter") List<OpenApiTagType> tagFilters)
-          throws Exception {
+                             @QueryParam("tagfilter") List<OpenApiTagType> tagFilters) {
 
     if (tagFilters == null || tagFilters.isEmpty()) {
       tagFilters = Arrays.asList(OpenApiTagType.DEFAULT);
     }
 
-    final OpenAPI openAPI = getOpenApi(uriInfo, Arrays.asList(application), tagFilters);
-
-    if (openAPI == null) {
-      return Response.status(404)
+    OpenAPI openAPI;
+    try {
+      openAPI = getOpenApi(uriInfo, Arrays.asList(application), tagFilters);
+      if (openAPI == null) {
+        return Response.status(404)
+                       .build();
+      }
+    } catch (Exception e) {
+      return Response.status(500)
                      .build();
     }
 
     String responseType;
     if ("yaml".equalsIgnoreCase(type)) {
       responseType = "application/yaml";
-    }
-    if ("xml".equalsIgnoreCase(type)) {
+    } else if ("xml".equalsIgnoreCase(type)) {
       responseType = MediaType.APPLICATION_XML;
     } else {
       responseType = MediaType.APPLICATION_JSON;
@@ -126,8 +136,6 @@ public class OpenApiResource {
                    .type(responseType)
                    .build();
   }
-
-
 
   @GET
   @Produces({MediaType.APPLICATION_JSON, "application/yaml", MediaType.APPLICATION_XML})
@@ -142,13 +150,17 @@ public class OpenApiResource {
                              @Context final UriInfo uriInfo,
                              @QueryParam("groupType") final List<OpenApiTagType> groupTypes,
                              @QueryParam("mediaType") final OpenApiResponseType mediaType,
-                             @QueryParam("application") final List<String> applications)
-          throws Exception {
+                             @QueryParam("application") final List<String> applications) {
 
-    final OpenAPI openAPI = getOpenApi(uriInfo, applications, groupTypes);
-
-    if (openAPI == null) {
-      return Response.status(404)
+    OpenAPI openAPI;
+    try {
+      openAPI = getOpenApi(uriInfo, applications, groupTypes);
+      if (openAPI == null) {
+        return Response.status(404)
+                       .build();
+      }
+    } catch (Exception e) {
+      return Response.status(500)
                      .build();
     }
 
@@ -174,14 +186,17 @@ public class OpenApiResource {
 
   private OpenAPI getOpenApi(final UriInfo uriInfo,
                              final List<String> applications,
-                             List<OpenApiTagType> groupTypes) {
-    final List<OpenAPI> oas = openApiService.getOpenApis(applications, null, groupTypes);
+                             List<OpenApiTagType> groupTypes)
+          throws Exception {
+    OpenAPI openAPI;
 
-    if (oas == null || oas.isEmpty()) {
+    openAPI = openApiService.getOpenApis(applications, groupTypes);
+
+    if (openAPI == null) {
       return null;
 
     }
-    OpenAPI openAPI = oas.get(0);
+
     List<Server> servers = openAPI.getServers();
     if (servers == null) {
       servers = new ArrayList<>();
@@ -198,22 +213,43 @@ public class OpenApiResource {
   @Produces("text/html")
   public String getApplicationsListHtml(@Context final UriInfo uriInfo) {
 
-    final URI baseurl = uriInfo.getBaseUri();
-
-    final String swaggeruri =
-            baseurl.getScheme() + "://" + baseurl.getAuthority() + SWAGGER_UI_PATH;
+    if (uiProviders == null) {
+      return "a";
+    }
+    final URI baseUrl = uriInfo.getBaseUri();
 
     final StringBuilder htmlBuilder = new StringBuilder();
 
     htmlBuilder.append("<html>");
+    htmlBuilder.append("Api-Doc");
+    htmlBuilder.append("<table style=\"width:100%\">");
+    htmlBuilder.append("<tr>");
+    for (UiProvider uiProvider : uiProviders) {
 
-    for (final String app : getApplication()) {
+      htmlBuilder.append("<th>");
 
-      htmlBuilder.append("<a href=" + swaggeruri + "/index.html?url=" + uri.getBaseUri()
-              + OpenApiResource.BASEPATH.replace("/", "") + "/application/" + app + "/yaml>" + app
-              + "</a>");
-      htmlBuilder.append("<br>");
+      htmlBuilder.append(uiProvider.getName());
+
+      htmlBuilder.append("</th>");
     }
+    htmlBuilder.append("</tr>");
+    for (final ApplicationBaseDTO app : getApplication()) {
+
+      htmlBuilder.append("<tr>");
+      for (UiProvider uiProvider : uiProviders) {
+        String openApiUrl = uri.getBaseUri() + OpenApiResource.BASEPATH.replace("/", "")
+                + "/application" + app.getBase() + "/" + uiProvider.getResponseTypes();
+        htmlBuilder.append("<td>");
+
+        String uiUrl = uiProvider.getUrl(baseUrl, openApiUrl);
+        htmlBuilder.append("<a href=" + uiUrl + ">" + app.getName() + "</a>");
+
+        htmlBuilder.append("</td>");
+      }
+
+      htmlBuilder.append("</tr>");
+    }
+    htmlBuilder.append("</table>");
 
     htmlBuilder.append("</html>");
     return htmlBuilder.toString();

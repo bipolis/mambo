@@ -10,7 +10,6 @@
 	<modules>
 		<module>_distro</module>
 		<module>_index</module>
-		<module>_assembly</module>
 		<module>org.bipolis.mambo.jaxrs.itest</module>
 		<module>org.bipolis.mambo.jaxrs.annotation</module>
 		<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
@@ -34,6 +33,7 @@
 		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest</module>
 		<module>org.bipolis.mambo.jaxrs.restconsole</module>
 		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
+		<module>org.bipolis.mambo.jaxrs.openapi.ui.redoc</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest</module>
 		<module>org.bipolis.mambo.repo</module>
@@ -42,6 +42,12 @@
 		<module>org.bipolis.mambo.jaxrs.ext.security.oauth</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security.oauth.itest</module>
+		<module>_assembly.bnd.executablejar</module>
+		<module>_assembly.bnd.runbundles</module>
+		<module>_assembly.docker.osgimultirepository</module>
+		<module>_assembly.osgi.subsystem.application</module>
+		<module>_assembly.osgi.subsystem.composit</module>
+		<module>_assembly.osgi.subsystem.feature</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to contain local file: URLs. -->
 	<profiles>

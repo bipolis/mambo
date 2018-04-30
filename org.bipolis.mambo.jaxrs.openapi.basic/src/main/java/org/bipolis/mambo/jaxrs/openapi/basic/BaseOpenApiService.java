@@ -3,6 +3,8 @@ package org.bipolis.mambo.jaxrs.openapi.basic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bipolis.mambo.jaxrs.openapi.api.MergeException;
+import org.bipolis.mambo.jaxrs.openapi.api.MergerService;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiService;
 import org.bipolis.mambo.jaxrs.openapi.api.OpenApiTagType;
 import org.bipolis.mambo.jaxrs.openapi.api.fragments.OpenApiFragmentsService;
@@ -15,6 +17,7 @@ import org.osgi.service.jaxrs.runtime.JaxrsServiceRuntime;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 
 @Component(service = OpenApiService.class)
 public class BaseOpenApiService implements OpenApiService {
@@ -25,6 +28,8 @@ public class BaseOpenApiService implements OpenApiService {
     public boolean someProperty() default false;
   };
 
+  @Reference
+  MergerService mergerService;
   List<OpenApiFragmentsService> apiAppenderServices = new ArrayList<>();
 
   // @Reference
@@ -41,8 +46,6 @@ public class BaseOpenApiService implements OpenApiService {
   @Reference
   private JaxrsServiceRuntime jaxrsServiceRuntime;
 
-
-
   @Reference(
           service = OpenApiFragmentsService.class,
           cardinality = ReferenceCardinality.MULTIPLE,
@@ -54,40 +57,44 @@ public class BaseOpenApiService implements OpenApiService {
   }
 
   @Override
-  public List<OpenAPI> getOpenApis(List<String> apiNames,
-                                   String version,
-                                   List<OpenApiTagType> groupType) {
+  public OpenAPI getOpenApis(List<String> basePaths,
+                             List<OpenApiTagType> filterTagTypes)
+          throws Exception {
 
     // logger.debug(l -> l.debug("getOpenApi {} {}"));
 
     final List<OpenAPI> openAPIs = new ArrayList<>();;
 
     if (apiAppenderServices == null) {
-      return new ArrayList<>();
+      throw new Exception("Apis Api Found");
     }
 
-    for (String apiName : apiNames) {
+    for (String basePath : basePaths) {
 
-
+      final List<OpenAPI> basePathApiList = new ArrayList<>();;
       for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
-        fragmentsService.getFragmentOpenApis(apiName, version);
+
+        basePathApiList.add(fragmentsService.getFragmentOpenApi(basePath));
       }
 
+      OpenAPI      pathOpenAPI = mergerService.merge(basePathApiList);
 
+      openAPIs.add(pathOpenAPI);
     }
-    return mergeOpenApis(openAPIs, groupType);
+
+    return mergeOpenApis(openAPIs, filterTagTypes);
   }
 
-
-
-  private List<OpenAPI> mergeOpenApis(List<OpenAPI> openAPIs,
-                                      List<OpenApiTagType> groupType) {
+  private OpenAPI mergeOpenApis(List<OpenAPI> openAPIs,
+                                List<OpenApiTagType> filterTagTypes)
+          throws MergeException {
     // TODO Auto-generated method stub
 
     // check count of different apis.
     // (if >1)
     // extra group type is Application
-    return openAPIs;
+
+    return mergerService.merge(openAPIs);
   }
 
   void unbindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
@@ -95,7 +102,5 @@ public class BaseOpenApiService implements OpenApiService {
     // logger.debug(l -> l.debug("Unbind {}", apiAppenderService));
     apiAppenderServices.remove(apiAppenderService);
   }
-
-
 
 }

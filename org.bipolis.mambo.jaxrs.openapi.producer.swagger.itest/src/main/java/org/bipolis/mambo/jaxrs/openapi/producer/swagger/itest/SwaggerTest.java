@@ -51,17 +51,12 @@ public class SwaggerTest {
                                                                  .getName(),
             "org.bipolis.mambo.jaxrs.openapi.producer.swagger.SwaggerJaxrsOpenApiAppenderService");
 
-    List<OpenAPI> openApis =
-            openApiFragmentsService.getFragmentOpenApis(ExampleApplication.APP_NAME, null);//
+    OpenAPI openAPI = openApiFragmentsService.getFragmentOpenApi(ExampleApplication.APP_NAME);//
 
     // this test application, default app.
-    assertEquals("expected Applications", 1, openApis.size());
-
-
-    OpenAPI openAPI = openApis.get(0);
+    assertNotNull("expected Applications", openAPI);
 
     Info info = openAPI.getInfo();
-
 
     Contact contact = info.getContact();
     License license = info.getLicense();
@@ -104,16 +99,12 @@ public class SwaggerTest {
                                                      + ExampleResource.NAME + "/upper");
     assertNotNull(pathItemRessourceUpper);
 
-
     PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
                                                       .get("/" + ExampleApplication.APP_NAME + "/"
                                                               + ExampleResource.NAME
                                                               + "/lowerAndFilter");
     assertNotNull(pathItemRessourceLowerAndFilter);
 
-
-
   }
-
 
 }

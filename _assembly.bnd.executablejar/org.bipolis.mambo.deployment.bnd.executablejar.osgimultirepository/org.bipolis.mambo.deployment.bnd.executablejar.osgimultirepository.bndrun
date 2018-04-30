@@ -1,0 +1,82 @@
+-standalone: ../../_index/target/index.xml
+
+#-plugin.subsystem=aQute.bnd.exporter.subsystem.SubsystemExporter
+
+-runfw: org.apache.felix.framework
+-runee: JavaSE-1.8
+-runprovidedcapabilities: ${native_capability}
+
+-resolve.effective: active; skip:="osgi.service"
+
+-runrequires: \
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.log)',\
+	bnd.identity;id='org.bipolis.mambo.repo',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.ui.swagger',\
+	bnd.identity;id='com.effectiveosgi.rt.config',\
+	bnd.identity;id='org.apache.felix.gogo.command',\
+	bnd.identity;id='org.apache.felix.gogo.runtime',\
+	bnd.identity;id='org.apache.felix.fileinstall',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.rs',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.swagger',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.bundle',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.basic',\
+	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.ui.redoc'
+
+-runbundles: \
+	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
+	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
+	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
+	org.apache.felix.log;version='[1.0.1,1.0.2)',\
+	ch.qos.logback.classic;version='[1.2.2,1.2.3)',\
+	ch.qos.logback.core;version='[1.2.2,1.2.3)',\
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.core.jackson-core;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.core.jackson-databind;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.jaxrs.jackson-jaxrs-base;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.module.jackson-module-jaxb-annotations;version='[2.9.4,2.9.5)',\
+	javax.json-api;version='[1.1.0,1.1.1)',\
+	org.apache.aries.javax.annotation-api;version='[0.0.1,0.0.2)',\
+	org.apache.aries.javax.jax.rs-api;version='[0.0.1,0.0.2)',\
+	org.apache.aries.jax.rs.whiteboard;version='[0.0.1,0.0.2)',\
+	org.apache.cxf.cxf-core;version='[3.2.2,3.2.3)',\
+	org.apache.cxf.cxf-rt-frontend-jaxrs;version='[3.2.2,3.2.3)',\
+	org.apache.cxf.cxf-rt-transports-http;version='[3.2.2,3.2.3)',\
+	org.apache.felix.configadmin;version='[1.9.0,1.9.1)',\
+	org.apache.felix.http.jetty;version='[3.4.7,3.4.8)',\
+	org.apache.felix.http.servlet-api;version='[1.1.2,1.1.3)',\
+	org.apache.felix.scr;version='[2.1.0,2.1.1)',\
+	org.apache.ws.xmlschema.core;version='[2.2.2,2.2.3)',\
+	org.bipolis.mambo.jaxrs.annotation;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.ext.media.binary;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.ext.media.json;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.repo;version='[0.0.1,0.0.2)',\
+	org.osgi.impl.bundle.repoindex.lib;version='[3.5.0,3.5.1)',\
+	org.osgi.service.jaxrs;version='[1.0.0,1.0.1)',\
+	org.osgi.util.function;version='[1.1.0,1.1.1)',\
+	org.osgi.util.promise;version='[1.1.0,1.1.1)',\
+	slf4j.api;version='[1.7.25,1.7.26)',\
+	org.bipolis.mambo.jaxrs.openapi.ui.swagger;version='[0.0.1,0.0.2)',\
+	com.effectiveosgi.rt.config;version='[1.0.1,1.0.2)',\
+	org.apache.felix.fileinstall;version='[3.6.0,3.6.1)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-xml;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.jaxrs.jackson-jaxrs-xml-provider;version='[2.9.4,2.9.5)',\
+	com.fasterxml.jackson.jaxrs.jackson-jaxrs-yaml-provider;version='[2.9.4,2.9.5)',\
+	io.swagger.core.v3.swagger-annotations;version='[2.0.0,2.0.1)',\
+	io.swagger.core.v3.swagger-models;version='[2.0.0,2.0.1)',\
+	javax.annotation-api;version='[1.3.2,1.3.3)',\
+	org.bipolis.mambo.jaxrs.ext.media.xml;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.ext.media.yaml;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.api;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.basic;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.producer.bundle;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.producer.swagger;version='[0.0.1,0.0.2)',\
+	org.bipolis.mambo.jaxrs.openapi.rs;version='[0.0.1,0.0.2)',\
+	org.osgi.impl.bundle.repoindex.api;version='[3.5.0,3.5.1)',\
+	org.osgi.service.http.whiteboard;version='[1.1.0,1.1.1)',\
+	org.yaml.snakeyaml;version='[1.18.0,1.18.1)',\
+	stax2-api;version='[3.1.4,3.1.5)',\
+	org.bipolis.mambo.jaxrs.openapi.ui.redoc;version='[0.0.1,0.0.2)'

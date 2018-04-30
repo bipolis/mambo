@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component(service = {MergerService.class})
 public class BaseMergerService implements MergerService {
 
-
   ObjectMapper mapper;
 
   @Activate
@@ -27,15 +26,12 @@ public class BaseMergerService implements MergerService {
 
   }
 
-
   @Override
   public <S> S merge(S base,
                      List<S> merges)
           throws MergeException {
 
     JsonNode nodeBase = mapper.convertValue(base, JsonNode.class);
-
-
 
     for (S merge : merges) {
       try {
@@ -46,8 +42,6 @@ public class BaseMergerService implements MergerService {
         throw new MergeException(base, merge, e);
       }
     }
-
-
 
     return base;
   }

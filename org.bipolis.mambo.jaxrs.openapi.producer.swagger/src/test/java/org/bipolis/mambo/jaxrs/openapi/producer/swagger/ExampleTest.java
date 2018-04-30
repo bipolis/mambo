@@ -10,7 +10,6 @@ public class ExampleTest {
   public void test()
           throws IOException {
 
-
   }
 
 }

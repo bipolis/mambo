@@ -42,15 +42,11 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
   // @Reference
   // Logger logger;
 
-
-
   @Override
   public int getPriority() {
 
     return config.priority();
   }
-
-
 
   @Override
   protected OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
@@ -70,8 +66,6 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
     return baseOpenAPI;
   }
 
-
-
   @Override
   protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
                                                                     ApplicationDTO applicationDTO,
@@ -82,8 +76,6 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
     return baseOpenAPI;
   }
 
-
-
   @Override
   protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
                                                                       ApplicationDTO applicationDTO,
@@ -91,8 +83,6 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
                                                                       ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
     return baseOpenAPI;
   }
-
-
 
   @Override
   protected OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO,
@@ -110,7 +100,6 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
                                                            ExtensionDTO extensionDTO,
                                                            Object extension) {
 
-
     JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
     OpenAPI extensionsOpenApi = reader.read(extension.getClass());
 
@@ -123,6 +112,5 @@ public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragment
 
     return baseOpenAPI;
   }
-
 
 }

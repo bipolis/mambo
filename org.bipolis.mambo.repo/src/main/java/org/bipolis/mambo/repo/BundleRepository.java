@@ -34,7 +34,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.bipolis.mambo.repo.rsw.ObrRepositoryRessource;
+import org.bipolis.mambo.repo.rsw.R5RepositoryRessource;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -61,14 +61,13 @@ import org.slf4j.LoggerFactory;
  * </p>
  * <p>
  * The Bundle-Entries of the Index-Files are build with the configured {@link Config#repoUrl()}. The
- * Repository is published by a jaxrs ressource {@link ObrRepositoryRessource} under this URL.
+ * Repository is published by a jaxrs ressource {@link R5RepositoryRessource} under this URL.
  * </p>
  *
  */
 @Designate(ocd = org.bipolis.mambo.repo.BundleRepository.Config.class, factory = true)
 @Component(immediate = true, service = BundleRepository.class, configurationPolicy = REQUIRE)
 public class BundleRepository {
-
 
   @ObjectClassDefinition(
           name = "Bundle Repository",
@@ -85,10 +84,8 @@ public class BundleRepository {
             description = "Absolute path to the repository in the server's local file system")
     String dir();
 
-
     @AttributeDefinition(name = "override", description = "")
     boolean override();
-
 
     @AttributeDefinition(name = "subDirs", description = "")
     String[] subDirs();
@@ -102,10 +99,8 @@ public class BundleRepository {
     @AttributeDefinition(name = "externalDeploy", description = "")
     boolean externalDeploy();
 
-
     @AttributeDefinition(name = "deployOverRepositorys", description = "")
     String[] deployOverRepositorys();
-
 
   }
 
@@ -134,6 +129,7 @@ public class BundleRepository {
   private ScheduledFuture<?> indexerExecutor;
   private DirWatcher dirWatcher;
 
+  private Config config;
 
   /**
    * Add a Bundle to a Repository.
@@ -200,7 +196,6 @@ public class BundleRepository {
         }
       }
 
-
       if (logger.isDebugEnabled()) {
         final StringBuilder sb = new StringBuilder("analyzed bundle capabilities:");
         capabilities.forEach(c -> {
@@ -215,7 +210,6 @@ public class BundleRepository {
         });
         logger.debug(sb.toString());
       }
-
 
       if (bundleId == null) {
         throw new IllegalStateException("Bundle contains no ID");
@@ -271,7 +265,6 @@ public class BundleRepository {
     }
   }
 
-
   /**
    * gives access to Index-File.
    *
@@ -303,7 +296,6 @@ public class BundleRepository {
     }
   }
 
-
   /**
    * gives access to a Bundle-File specified by the relative path from the root of the Repositories.
    *
@@ -321,7 +313,6 @@ public class BundleRepository {
 
     return null;
   }
-
 
   /**
    * Triggers a re-indexing of the repository
@@ -347,7 +338,6 @@ public class BundleRepository {
     }
   }
 
-
   private void updateIndex(final Path root) {
     final Path indexFile = root.resolve(INDEX_FILE);
 
@@ -368,7 +358,6 @@ public class BundleRepository {
 
     logger.info("index updated: " + indexFile);
   }
-
 
   private void registerDirs(final Path root)
           throws IOException {
@@ -402,7 +391,6 @@ public class BundleRepository {
     });
   }
 
-
   private Set<File> repoFiles(final Path root)
           throws IOException {
     final Set<File> jars = new HashSet<>();
@@ -426,11 +414,9 @@ public class BundleRepository {
     return jars;
   }
 
-
   private class DirWatcher implements Runnable {
 
     private boolean stop = false;
-
 
     @Override
     public void run() {
@@ -506,7 +492,6 @@ public class BundleRepository {
     }
   }
 
-
   /**
    * Activates the Repository. OSGi Declarative Service Methode annotated with {@link Activate}.
    *
@@ -516,14 +501,13 @@ public class BundleRepository {
   public void activate(final Config config) {
     logger.info("config:" + "\n\trepoDir = " + config.dir() + "\n\trepoName = " + config.name());
 
+    this.config = config;
     final String root = config.dir();
 
     if (root == null || root.trim()
                             .isEmpty()) {
       throw new IllegalStateException("config: Repository directory (repoDir) is not configured.");
     }
-
-
 
     repoRoot = Paths.get(root);
 
@@ -562,7 +546,6 @@ public class BundleRepository {
     }
   }
 
-
   /**
    * Deactivates the Repository. OSGi Declarative Service Method annotated with {@link Deactivate}.
    */
@@ -578,7 +561,6 @@ public class BundleRepository {
       logger.debug("dir watcher thread stopped");
     }
   }
-
 
   /**
    * Removes a Bundle from Repository.
@@ -604,18 +586,21 @@ public class BundleRepository {
     return deleted;
   }
 
-
   @Reference
   public void bindLogService(final LogService log) {
     this.log = log;
     logger.debug("OSGi log service bound: " + log);
   }
 
-
   private boolean validate(final WatchKey key) {
     final String dir = key.watchable()
                           .toString();
 
     return Files.isDirectory(Paths.get(dir));
+  }
+
+  public String getName() {
+
+    return config.name();
   }
 }

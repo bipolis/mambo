@@ -10,7 +10,6 @@ public class RepositoryAdditionResult {
 
   private final byte[] digest;
 
-
   public RepositoryAdditionResult(final boolean success,
           final String location,
           final byte[] digest) {
@@ -19,7 +18,6 @@ public class RepositoryAdditionResult {
     this.location = location;
   }
 
-
   public boolean isSuccess() {
     return sucess;
   }
@@ -27,7 +25,6 @@ public class RepositoryAdditionResult {
   public String location() {
     return location;
   }
-
 
   public byte[] digest() {
     return digest;

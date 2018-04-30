@@ -12,9 +12,7 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 @JaxrsApplicationBase(RepoApplication.BASE)
 public class RepoApplication extends Application {
 
-	public static final String	BASE		= "/repo";
-	public static final String	APP_NAME	= "OSGiRepositoryApplication";
-
-
+  public static final String BASE = "/repo";
+  public static final String APP_NAME = "OSGiRepositoryApplication";
 
 }

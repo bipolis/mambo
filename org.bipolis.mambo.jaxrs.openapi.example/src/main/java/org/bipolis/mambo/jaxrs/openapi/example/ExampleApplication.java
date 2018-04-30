@@ -35,15 +35,12 @@ import io.swagger.v3.oas.annotations.info.License;
                 description = "Annotation-ExternalDocumentation-description"))
 public class ExampleApplication extends Application {
 
-
   public final static String APP_NAME = "ExampleApplication";
-
 
   @Path("echo")
   @GET
   public String getEcho(String echo) {
     return echo;
   }
-
 
 }
