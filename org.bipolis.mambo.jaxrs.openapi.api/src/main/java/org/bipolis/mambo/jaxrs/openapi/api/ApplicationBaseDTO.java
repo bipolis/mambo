@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 public class ApplicationBaseDTO {
 
-  private String name;
-  private String base;
+	private String name;
+
+	private String base;
 }
