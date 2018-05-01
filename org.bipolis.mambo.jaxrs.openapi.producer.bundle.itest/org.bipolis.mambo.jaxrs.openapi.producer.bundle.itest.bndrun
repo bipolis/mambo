@@ -27,9 +27,6 @@
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)',\
 	org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest;version='[0.0.1,0.0.2)',\
-	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
-	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
-	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
 	org.bipolis.mambo.jaxrs.openapi.producer.bundle;version='[0.0.1,0.0.2)',\
 	org.bipolis.mambo.jaxrs.openapi.api;version='[0.0.1,0.0.2)',\
 	org.bipolis.mambo.jaxrs.openapi.example;version='[0.0.1,0.0.2)',\
