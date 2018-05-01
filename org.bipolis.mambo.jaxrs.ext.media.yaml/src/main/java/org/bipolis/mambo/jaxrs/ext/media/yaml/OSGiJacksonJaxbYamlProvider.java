@@ -15,35 +15,32 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.fasterxml.jackson.jaxrs.yaml.JacksonJaxbYAMLProvider;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 @Consumes("*/*")
 @Produces("*/")
-@Component(
-        service = {OSGiJacksonJaxbYamlProvider.class,
-            javax.ws.rs.ext.MessageBodyReader.class,
-            javax.ws.rs.ext.MessageBodyWriter.class})
+@Component(service = { OSGiJacksonJaxbYamlProvider.class, javax.ws.rs.ext.MessageBodyReader.class,
+		javax.ws.rs.ext.MessageBodyWriter.class })
 @JaxrsExtension
 @RequiresYamlProvider
 @Provider
-@JaxrsName("JacksonJaxbJsonProvider")
+@JaxrsName("OSGiJacksonJaxbYamlProvider")
 @CapabilityYamlProvider
 public class OSGiJacksonJaxbYamlProvider extends JacksonJaxbYAMLProvider {
-  JaxbAnnotationIntrospector catchDependency;
+	JaxbAnnotationIntrospector catchDependency;
 
-  private static YAMLMapper mapper = new YAMLMapper();
+	private static YAMLMapper mapper = new YAMLMapper();
 
-  static {
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    mapper.setSerializationInclusion(Include.NON_NULL);
-    mapper.setSerializationInclusion(Include.NON_EMPTY);
-    mapper.enable(SerializationFeature.INDENT_OUTPUT);
-  }
+	static {
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		mapper.setSerializationInclusion(Include.NON_EMPTY);
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+	}
 
-  public OSGiJacksonJaxbYamlProvider() {
-    super(mapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS);
-  }
+	public OSGiJacksonJaxbYamlProvider() {
+		super(mapper, JacksonJaxbYAMLProvider.DEFAULT_ANNOTATIONS);
+	}
 
 }
