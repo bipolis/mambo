@@ -36,7 +36,7 @@
 		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger</module>
 		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest</module>
 		<module>org.bipolis.mambo.repo</module>
-		<module>org.bipolis.mambo.repo.itest</module>
+<!-- 		<module>org.bipolis.mambo.repo.itest</module> -->
 		<module>org.bipolis.mambo.jgit.itest</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security.oauth</module>
 		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth.itest</module>
