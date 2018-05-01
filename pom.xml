@@ -9,38 +9,39 @@
 	<modules>
 		<module>_distro</module>
 
-		<module>org.bipolis.mambo.jaxrs.itest</module>
-		<module>org.bipolis.mambo.jaxrs.annotation</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.json</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.yaml</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.core</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.yaml.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.api</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.rs</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.basic</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.ui.redoc</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest</module>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<module>org.bipolis.mambo.repo</module>
 <!-- 		<module>org.bipolis.mambo.repo.itest</module> -->
 		<module>org.bipolis.mambo.jgit.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.oauth</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.oauth.itest</module>
+		
+		
+		
+		<module>org.bipolis.mambo.jaxrs</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 
 		contain local file: URLs. -->
