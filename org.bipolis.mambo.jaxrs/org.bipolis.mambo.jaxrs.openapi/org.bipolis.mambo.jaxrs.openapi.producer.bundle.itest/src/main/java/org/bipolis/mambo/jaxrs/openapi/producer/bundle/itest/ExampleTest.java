@@ -25,7 +25,6 @@ public class ExampleTest {
 	@BeforeClass
 	public static void beforeAll() {
 
-		System.out.println("TEST PRE");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -36,42 +35,25 @@ public class ExampleTest {
 	@Test
 	public void testExample() throws InterruptedException {
 
-		System.out.println("TEST1");
 		ServiceTracker<OpenApiFragmentsService, ? extends OpenApiFragmentsService> tracker = new ServiceTracker<>(
 				context, OpenApiFragmentsService.class.getName(), null);
 
-		System.out.println("TEST2");
 		tracker.open();
 
-		System.out.println("TEST3");
 		OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
 
-
-		System.out.println("TEST4");
 		assertNotNull("Service should not be null", openApiFragmentsService);
 
-
-		System.out.println("TEST5");
 		assertEquals("fetch correct Service", openApiFragmentsService.getClass().getName(),
 				"org.bipolis.mambo.jaxrs.openapi.producer.bundle.BundleApiAppanderService");
 
-		System.out.println("TEST6");
 		OpenAPI openAPI = openApiFragmentsService.getFragmentOpenApi(ExampleApplication.APP_NAME);
 
-		
-
-		System.out.println("TEST7");
 		// this test application, default app.
 		assertNotNull("expected Applications", openAPI);
 
-		
-
-		System.out.println("TEST8");
-		
 		Bundle bundle = FrameworkUtil.getBundle(ExampleApplication.class);
 
-
-		System.out.println("TEST0");
 		Info info = openAPI.getInfo();
 
 		Contact contact = info.getContact();
@@ -87,9 +69,7 @@ public class ExampleTest {
 		assertEquals(externalDocumentation.getUrl(), getBundleProp(bundle, "Bundle-DocURL"));
 		assertEquals(info.getVersion(), bundle.getVersion().toString());
 
-		System.out.println("TESTEND");
 		tracker.close();
-		System.out.println("TESTEND2");
 	}
 
 	private static String getBundleProp(Bundle bundle, String property) {

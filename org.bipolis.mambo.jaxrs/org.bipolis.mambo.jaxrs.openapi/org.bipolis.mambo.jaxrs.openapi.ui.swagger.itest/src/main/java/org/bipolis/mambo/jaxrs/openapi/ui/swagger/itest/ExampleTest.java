@@ -22,7 +22,7 @@ public class ExampleTest {
   @BeforeClass
   public static void beforeAll() {
     try {
-      Thread.sleep(1000 * 1);
+      Thread.sleep(1000 * 5);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
