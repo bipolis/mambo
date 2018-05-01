@@ -1,5 +1,7 @@
 -standalone: target/index.xml
 
+-runtrace: true
+
 -runfw: org.apache.felix.framework
 -runee: JavaSE-1.8
 
@@ -7,9 +9,6 @@
 
 -runrequires: \
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest',\
-	bnd.identity;id='org.apache.felix.gogo.command',\
-	bnd.identity;id='org.apache.felix.gogo.runtime',\
-	bnd.identity;id='org.apache.felix.gogo.shell',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.bundle',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.api',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.example'
