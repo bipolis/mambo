@@ -13,6 +13,6 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 
 public class StandAloneApplicationA extends Application {
 
-  public static final String APPLICATION_NAME = "StandAloneApplicationA";
+	public static final String APPLICATION_NAME = "StandAloneApplicationA";
 
 }

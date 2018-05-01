@@ -12,38 +12,35 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Component(service = {MergerService.class})
+@Component(service = { MergerService.class })
 public class BaseMergerService implements MergerService {
 
-  ObjectMapper mapper;
+	ObjectMapper mapper;
 
-  @Activate
-  public void activate() {
+	@Activate
+	public void activate() {
 
-    mapper = new ObjectMapper();
-    mapper.setSerializationInclusion(Include.NON_NULL);
-    mapper.setDefaultMergeable(true);
+		mapper = new ObjectMapper();
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		mapper.setDefaultMergeable(true);
 
-  }
+	}
 
-  @Override
-  public <S> S merge(S base,
-                     List<S> merges)
-          throws MergeException {
+	@Override
+	public <S> S merge(S base, List<S> merges) throws MergeException {
 
-    JsonNode nodeBase = mapper.convertValue(base, JsonNode.class);
+		JsonNode nodeBase = mapper.convertValue(base, JsonNode.class);
 
-    for (S merge : merges) {
-      try {
-        base = mapper.readerForUpdating(merge)
-                     .readValue(nodeBase);
-      } catch (IOException e) {
-        e.printStackTrace();
-        throw new MergeException(base, merge, e);
-      }
-    }
+		for (S merge : merges) {
+			try {
+				base = mapper.readerForUpdating(merge).readValue(nodeBase);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new MergeException(base, merge, e);
+			}
+		}
 
-    return base;
-  }
+		return base;
+	}
 
 }

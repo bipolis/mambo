@@ -12,45 +12,41 @@ import org.osgi.service.jaxrs.runtime.dto.RuntimeDTO;
 
 public class ServiceIdUtil {
 
-  @SuppressWarnings("unchecked")
-  public static <S> S getServiceByServiceID(BundleContext bundleContext,
-                                            Class<S> clazz,
-                                            long serviceId)
-          throws InvalidSyntaxException {
+	@SuppressWarnings("unchecked")
+	public static <S> S getServiceByServiceID(BundleContext bundleContext, Class<S> clazz, long serviceId)
+			throws InvalidSyntaxException {
 
-    String classname = null;
-    if (clazz != null) {
-      classname = clazz.getName();
-    }
-    ServiceReference<?>[] srs =
-            bundleContext.getServiceReferences(classname, "(service.id=" + serviceId + ")");
-    Collection<ServiceReference<?>> srcoll = Arrays.asList(srs);
+		String classname = null;
+		if (clazz != null) {
+			classname = clazz.getName();
+		}
+		ServiceReference<?>[] srs = bundleContext.getServiceReferences(classname, "(service.id=" + serviceId + ")");
+		Collection<ServiceReference<?>> srcoll = Arrays.asList(srs);
 
-    for (ServiceReference<?> serviceReference : srcoll) {
-      return (S) bundleContext.getService(serviceReference);
+		for (ServiceReference<?> serviceReference : srcoll) {
+			return (S) bundleContext.getService(serviceReference);
 
-    }
-    return null;
-  }
+		}
+		return null;
+	}
 
-  private ApplicationDTO getApplicationDTOByName(JaxrsServiceRuntime jaxrsServiceRuntime,
-                                                 String name) {
+	private ApplicationDTO getApplicationDTOByName(JaxrsServiceRuntime jaxrsServiceRuntime, String name) {
 
-    RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
+		RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
 
-    if (runtimeDTO.applicationDTOs != null) {
-      for (ApplicationDTO applicationDTO : runtimeDTO.applicationDTOs) {
+		if (runtimeDTO.applicationDTOs != null) {
+			for (ApplicationDTO applicationDTO : runtimeDTO.applicationDTOs) {
 
-        if (name.equals(applicationDTO.name)) {
+				if (name.equals(applicationDTO.name)) {
 
-          return applicationDTO;
-        }
+					return applicationDTO;
+				}
 
-      }
-    }
+			}
+		}
 
-    return null;
+		return null;
 
-  }
+	}
 
 }

@@ -11,6 +11,6 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 @JaxrsName(OpenApiApplication.APPLICATION_NAME)
 @JaxrsApplicationBase(OpenApiApplication.APPLICATION_BASE)
 public class OpenApiApplication extends Application {
-  public static final String APPLICATION_NAME = "OpenApiApplication";
-  public static final String APPLICATION_BASE = "/openapi";
+	public static final String APPLICATION_NAME = "OpenApiApplication";
+	public static final String APPLICATION_BASE = "/openapi";
 }

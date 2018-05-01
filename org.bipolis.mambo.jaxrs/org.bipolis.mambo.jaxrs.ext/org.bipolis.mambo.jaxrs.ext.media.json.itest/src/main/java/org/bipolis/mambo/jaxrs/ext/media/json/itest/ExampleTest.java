@@ -8,13 +8,12 @@ import org.osgi.framework.FrameworkUtil;
 
 public class ExampleTest {
 
-  private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class)
-                                                     .getBundleContext();
+	private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class).getBundleContext();
 
-  @Test
-  public void testExample() {
+	@Test
+	public void testExample() {
 
-    assertTrue(true);
-  }
+		assertTrue(true);
+	}
 
 }

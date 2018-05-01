@@ -23,120 +23,105 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 public abstract class AbstractJaxRsApiFragmentService implements OpenApiFragmentsService {
 
-  @Override
-  public OpenAPI getFragmentOpenApi(String apiBase) {
-    BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
-                                               .getBundleContext();
+	@Override
+	public OpenAPI getFragmentOpenApi(String apiBase) {
+		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
 
-    List<OpenAPI> openAPIs = new ArrayList<>();
-    List<ApplicationDTO> applicationDTOs = new ArrayList<>();
+		List<OpenAPI> openAPIs = new ArrayList<>();
+		List<ApplicationDTO> applicationDTOs = new ArrayList<>();
 
-    applicationDTOs.addAll(Arrays.asList(getJaxrsServiceRuntime().getRuntimeDTO().applicationDTOs));
-    applicationDTOs.add(getJaxrsServiceRuntime().getRuntimeDTO().defaultApplication);
+		applicationDTOs.addAll(Arrays.asList(getJaxrsServiceRuntime().getRuntimeDTO().applicationDTOs));
+		applicationDTOs.add(getJaxrsServiceRuntime().getRuntimeDTO().defaultApplication);
 
-    for (ApplicationDTO applicationDTO : applicationDTOs) {
-      if (apiBase != null && !apiBase.equals(applicationDTO.base.replaceAll("/", ""))) {
-        continue;
-      }
-      try {
-        Application application = ServiceIdUtil.getServiceByServiceID(bundleContext,
-                Application.class, applicationDTO.serviceId);
-        OpenAPI baseOpenAPI = createOpenApiForApplication(applicationDTO, application);
+		for (ApplicationDTO applicationDTO : applicationDTOs) {
+			if (apiBase != null && !apiBase.equals(applicationDTO.base.replaceAll("/", ""))) {
+				continue;
+			}
+			try {
+				Application application = ServiceIdUtil.getServiceByServiceID(bundleContext, Application.class,
+						applicationDTO.serviceId);
+				OpenAPI baseOpenAPI = createOpenApiForApplication(applicationDTO, application);
 
-        for (ExtensionDTO extensionDTO : applicationDTO.extensionDTOs) {
+				for (ExtensionDTO extensionDTO : applicationDTO.extensionDTOs) {
 
-          Object extension =
-                  ServiceIdUtil.getServiceByServiceID(bundleContext, null, extensionDTO.serviceId);
+					Object extension = ServiceIdUtil.getServiceByServiceID(bundleContext, null, extensionDTO.serviceId);
 
-          baseOpenAPI = handleOpenApiForExtentionInApplication(baseOpenAPI, applicationDTO,
-                  application, extensionDTO, extension);
+					baseOpenAPI = handleOpenApiForExtentionInApplication(baseOpenAPI, applicationDTO, application,
+							extensionDTO, extension);
 
-        }
-        for (ResourceMethodInfoDTO resourceMethodInfoDTOapplication : applicationDTO.resourceMethods) {
-          baseOpenAPI = handleOpenApiForRessourceMethofInforInApplication(baseOpenAPI,
-                  applicationDTO, application, resourceMethodInfoDTOapplication);
+				}
+				for (ResourceMethodInfoDTO resourceMethodInfoDTOapplication : applicationDTO.resourceMethods) {
+					baseOpenAPI = handleOpenApiForRessourceMethofInforInApplication(baseOpenAPI, applicationDTO,
+							application, resourceMethodInfoDTOapplication);
 
-        }
+				}
 
-        for (ResourceDTO resourceDTO : applicationDTO.resourceDTOs) {
-          Object ressource =
-                  ServiceIdUtil.getServiceByServiceID(bundleContext, null, resourceDTO.serviceId);
+				for (ResourceDTO resourceDTO : applicationDTO.resourceDTOs) {
+					Object ressource = ServiceIdUtil.getServiceByServiceID(bundleContext, null, resourceDTO.serviceId);
 
-          baseOpenAPI = handleOpenApiForRessource(baseOpenAPI, applicationDTO, application,
-                  resourceDTO, ressource);
-          for (ResourceMethodInfoDTO resourceMethodInfoDTO : resourceDTO.resourceMethods) {
+					baseOpenAPI = handleOpenApiForRessource(baseOpenAPI, applicationDTO, application, resourceDTO,
+							ressource);
+					for (ResourceMethodInfoDTO resourceMethodInfoDTO : resourceDTO.resourceMethods) {
 
-            baseOpenAPI = handleOpenApiForRessourceMethofInforInRessource(baseOpenAPI,
-                    applicationDTO, application, resourceDTO, ressource, resourceMethodInfoDTO);
+						baseOpenAPI = handleOpenApiForRessourceMethofInforInRessource(baseOpenAPI, applicationDTO,
+								application, resourceDTO, ressource, resourceMethodInfoDTO);
 
-          }
+					}
 
-        }
-        return baseOpenAPI;
-      } catch (InvalidSyntaxException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    }
+				}
+				return baseOpenAPI;
+			} catch (InvalidSyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-    return null;
-  }
+		return null;
+	}
 
-  protected abstract OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,
-                                                                    ApplicationDTO applicationDTO,
-                                                                    Application application,
-                                                                    ExtensionDTO extensionDTO,
-                                                                    Object extension);
+	protected abstract OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,
+			ApplicationDTO applicationDTO, Application application, ExtensionDTO extensionDTO, Object extension);
 
-  protected abstract OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
-                                                       ApplicationDTO applicationDTO,
-                                                       Application application,
-                                                       ResourceDTO resourceDTO,
-                                                       Object ressource);
+	protected abstract OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI, ApplicationDTO applicationDTO,
+			Application application, ResourceDTO resourceDTO, Object ressource);
 
-  protected abstract OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
-                                                                             ApplicationDTO applicationDTO,
-                                                                             Application application,
-                                                                             ResourceDTO resourceDTO,
-                                                                             Object ressource,
-                                                                             ResourceMethodInfoDTO resourceMethodInfoDTO);
+	protected abstract OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
+			ApplicationDTO applicationDTO, Application application, ResourceDTO resourceDTO, Object ressource,
+			ResourceMethodInfoDTO resourceMethodInfoDTO);
 
-  protected abstract OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
-                                                                               ApplicationDTO applicationDTO,
-                                                                               Application ressourceApplication,
-                                                                               ResourceMethodInfoDTO resourceMethodInfoDTOapplication);
+	protected abstract OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
+			ApplicationDTO applicationDTO, Application ressourceApplication,
+			ResourceMethodInfoDTO resourceMethodInfoDTOapplication);
 
-  protected abstract OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO,
-                                                         Application application);
+	protected abstract OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO, Application application);
 
-  private final JaxrsServiceRuntime getJaxrsServiceRuntime() {
+	private final JaxrsServiceRuntime getJaxrsServiceRuntime() {
 
-    return service(JaxrsServiceRuntime.class);
-  }
+		return service(JaxrsServiceRuntime.class);
+	}
 
-  protected Map<Class<?>, ServiceTracker<?, ?>> serviceTrackers =
-          Collections.synchronizedMap(new IdentityHashMap<>());
+	protected Map<Class<?>, ServiceTracker<?, ?>> serviceTrackers = Collections
+			.synchronizedMap(new IdentityHashMap<>());
 
-  @SuppressWarnings("unchecked")
-  protected <S> S service(final Class<S> serviceType) {
-    final ServiceTracker<S, ? extends S> tracker;
+	@SuppressWarnings("unchecked")
+	protected <S> S service(final Class<S> serviceType) {
+		final ServiceTracker<S, ? extends S> tracker;
 
-    if (serviceTrackers.containsKey(serviceType)) {
-      tracker = (ServiceTracker<S, ? extends S>) serviceTrackers.get(serviceType);
-    } else {
-      final BundleContext context = FrameworkUtil.getBundle(getClass())
-                                                 .getBundleContext();
-      tracker = new ServiceTracker<>(context, serviceType, null);
-      tracker.open();
-      serviceTrackers.put(serviceType, tracker);
-    }
+		if (serviceTrackers.containsKey(serviceType)) {
+			tracker = (ServiceTracker<S, ? extends S>) serviceTrackers.get(serviceType);
+		} else {
+			final BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
+			tracker = new ServiceTracker<>(context, serviceType, null);
+			tracker.open();
+			serviceTrackers.put(serviceType, tracker);
+		}
 
-    final S service = tracker.getService();
+		final S service = tracker.getService();
 
-    if (service == null) {
-      throw new RuntimeException("Service Not Found");
-    } else {
-      return service;
-    }
-  }
+		if (service == null) {
+			throw new RuntimeException("Service Not Found");
+		} else {
+			return service;
+		}
+	}
 }

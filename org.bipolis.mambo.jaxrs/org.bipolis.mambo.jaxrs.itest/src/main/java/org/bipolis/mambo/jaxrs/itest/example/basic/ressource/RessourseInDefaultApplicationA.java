@@ -12,18 +12,18 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 @Component(service = RessourseInDefaultApplicationA.class)
 @JaxrsResource
 @JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
-        + JaxrsWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")")
+		+ JaxrsWhiteboardConstants.JAX_RS_DEFAULT_APPLICATION + ")")
 @JaxrsName(RessourseInDefaultApplicationA.RESSOURCE_NAME)
 @Path("/" + RessourseInDefaultApplicationA.RESSOURCE_NAME)
 public class RessourseInDefaultApplicationA {
 
-  public static final String RESSOURCE_NAME = "RessourseInDefaultApplicationA";
+	public static final String RESSOURCE_NAME = "RessourseInDefaultApplicationA";
 
-  @GET
-  @Path("/value")
-  public String getValue() {
-    return getClass().getName();
+	@GET
+	@Path("/value")
+	public String getValue() {
+		return getClass().getName();
 
-  }
+	}
 
 };

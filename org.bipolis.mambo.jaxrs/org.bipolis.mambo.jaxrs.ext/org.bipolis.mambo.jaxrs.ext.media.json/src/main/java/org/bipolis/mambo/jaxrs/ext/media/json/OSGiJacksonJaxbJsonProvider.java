@@ -19,10 +19,8 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 @Consumes("*/*")
 @Produces("*/")
-@Component(
-        service = {OSGiJacksonJaxbJsonProvider.class,
-            javax.ws.rs.ext.MessageBodyReader.class,
-            javax.ws.rs.ext.MessageBodyWriter.class})
+@Component(service = { OSGiJacksonJaxbJsonProvider.class, javax.ws.rs.ext.MessageBodyReader.class,
+		javax.ws.rs.ext.MessageBodyWriter.class })
 @JaxrsExtension
 @Provider
 @JaxrsName("OSGiJacksonJaxbJsonProvider")
@@ -31,19 +29,19 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 @NameBindingJsonProvider
 public class OSGiJacksonJaxbJsonProvider extends JacksonJaxbJsonProvider {
 
-  private static ObjectMapper mapper = new ObjectMapper();
+	private static ObjectMapper mapper = new ObjectMapper();
 
-  static {
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    mapper.setSerializationInclusion(Include.NON_NULL);
-    mapper.setSerializationInclusion(Include.NON_EMPTY); 
-    mapper.enable(SerializationFeature.INDENT_OUTPUT);
-  }
+	static {
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		mapper.setSerializationInclusion(Include.NON_EMPTY);
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+	}
 
-  public OSGiJacksonJaxbJsonProvider() {
-    super(mapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS);
-  }
+	public OSGiJacksonJaxbJsonProvider() {
+		super(mapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS);
+	}
 
-  JaxbAnnotationIntrospector catchDependency;// needed as resolvinghelper
+	JaxbAnnotationIntrospector catchDependency;// needed as resolvinghelper
 
 }

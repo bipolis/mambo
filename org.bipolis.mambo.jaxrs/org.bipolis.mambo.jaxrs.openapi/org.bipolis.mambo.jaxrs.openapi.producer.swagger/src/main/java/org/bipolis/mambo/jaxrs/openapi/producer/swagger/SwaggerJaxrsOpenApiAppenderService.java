@@ -20,97 +20,86 @@ import io.swagger.v3.oas.models.OpenAPI;
 @Component(service = OpenApiFragmentsService.class)
 public class SwaggerJaxrsOpenApiAppenderService extends AbstractJaxRsApiFragmentService {
 
-  @ObjectClassDefinition
-  @interface Config {
+	@ObjectClassDefinition
+	@interface Config {
 
-    public int priority()
+		public int priority()
 
-    default 0;
+		default 0;
 
-  }
+	}
 
-  private Config config;
+	private Config config;
 
-  @Activate
-  private void activate(Config config) {
-    this.config = config;
-  }
+	@Activate
+	private void activate(Config config) {
+		this.config = config;
+	}
 
-  @Reference
-  MergerService mergerService;
+	@Reference
+	MergerService mergerService;
 
-  // @Reference
-  // Logger logger;
+	// @Reference
+	// Logger logger;
 
-  @Override
-  public int getPriority() {
+	@Override
+	public int getPriority() {
 
-    return config.priority();
-  }
+		return config.priority();
+	}
 
-  @Override
-  protected OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI,
-                                              ApplicationDTO applicationDTO,
-                                              Application application,
-                                              ResourceDTO resourceDTO,
-                                              Object ressource) {
-    JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
-    OpenAPI ressourceOpenApi = reader.read(ressource.getClass());
+	@Override
+	protected OpenAPI handleOpenApiForRessource(OpenAPI baseOpenAPI, ApplicationDTO applicationDTO,
+			Application application, ResourceDTO resourceDTO, Object ressource) {
+		JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
+		OpenAPI ressourceOpenApi = reader.read(ressource.getClass());
 
-    try {
-      baseOpenAPI = mergerService.merge(baseOpenAPI, ressourceOpenApi);
-    } catch (MergeException e) {
+		try {
+			baseOpenAPI = mergerService.merge(baseOpenAPI, ressourceOpenApi);
+		} catch (MergeException e) {
 
-      e.printStackTrace();
-    }
-    return baseOpenAPI;
-  }
+			e.printStackTrace();
+		}
+		return baseOpenAPI;
+	}
 
-  @Override
-  protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
-                                                                    ApplicationDTO applicationDTO,
-                                                                    Application application,
-                                                                    ResourceDTO resourceDTO,
-                                                                    Object ressource,
-                                                                    ResourceMethodInfoDTO resourceMethodInfoDTO) {
-    return baseOpenAPI;
-  }
+	@Override
+	protected OpenAPI handleOpenApiForRessourceMethofInforInRessource(OpenAPI baseOpenAPI,
+			ApplicationDTO applicationDTO, Application application, ResourceDTO resourceDTO, Object ressource,
+			ResourceMethodInfoDTO resourceMethodInfoDTO) {
+		return baseOpenAPI;
+	}
 
-  @Override
-  protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
-                                                                      ApplicationDTO applicationDTO,
-                                                                      Application ressourceApplication,
-                                                                      ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
-    return baseOpenAPI;
-  }
+	@Override
+	protected OpenAPI handleOpenApiForRessourceMethofInforInApplication(OpenAPI baseOpenAPI,
+			ApplicationDTO applicationDTO, Application ressourceApplication,
+			ResourceMethodInfoDTO resourceMethodInfoDTOapplication) {
+		return baseOpenAPI;
+	}
 
-  @Override
-  protected OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO,
-                                                Application application) {
-    JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
-    OpenAPI openAPI = reader.read(application.getClass());
+	@Override
+	protected OpenAPI createOpenApiForApplication(ApplicationDTO applicationDTO, Application application) {
+		JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
+		OpenAPI openAPI = reader.read(application.getClass());
 
-    return openAPI;
-  }
+		return openAPI;
+	}
 
-  @Override
-  protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI,
-                                                           ApplicationDTO applicationDTO,
-                                                           Application application,
-                                                           ExtensionDTO extensionDTO,
-                                                           Object extension) {
+	@Override
+	protected OpenAPI handleOpenApiForExtentionInApplication(OpenAPI baseOpenAPI, ApplicationDTO applicationDTO,
+			Application application, ExtensionDTO extensionDTO, Object extension) {
 
-    JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
-    OpenAPI extensionsOpenApi = reader.read(extension.getClass());
+		JaxrsWhiteboardOpenApiReader reader = new JaxrsWhiteboardOpenApiReader(applicationDTO);
+		OpenAPI extensionsOpenApi = reader.read(extension.getClass());
 
-    try {
-      baseOpenAPI = mergerService.merge(baseOpenAPI, extensionsOpenApi);
-    } catch (MergeException e) {
+		try {
+			baseOpenAPI = mergerService.merge(baseOpenAPI, extensionsOpenApi);
+		} catch (MergeException e) {
 
-      e.printStackTrace();
-    }
+			e.printStackTrace();
+		}
 
-    return baseOpenAPI;
-  }
+		return baseOpenAPI;
+	}
 
 }

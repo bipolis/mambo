@@ -51,151 +51,126 @@ import org.slf4j.LoggerFactory;
 @javax.ws.rs.Path("/r5")
 public class R5RepositoryRessource {
 
-  @ObjectClassDefinition(
-          name = "Bundle Repository",
-          description = "Configuration of the Bundle Repository")
-  public @interface Config {
+	@ObjectClassDefinition(name = "Bundle Repository", description = "Configuration of the Bundle Repository")
+	public @interface Config {
 
-  }
+	}
 
-  private static final Logger logger = LoggerFactory.getLogger(R5RepositoryRessource.class);
-  public static final String NAME = "R5RepositoryRessource";
+	private static final Logger logger = LoggerFactory.getLogger(R5RepositoryRessource.class);
+	public static final String NAME = "R5RepositoryRessource";
 
-  private BundleRepository bundleRepository;
-  private Config config;
+	private BundleRepository bundleRepository;
+	private Config config;
 
-  @Activate
-  protected void activate(final Config config) {
-    this.config = config;
-  }
+	@Activate
+	protected void activate(final Config config) {
+		this.config = config;
+	}
 
-  @GET
-  @Produces(MediaType.APPLICATION_OCTET_STREAM)
-  @javax.ws.rs.Path("/{subResources:.*}")
-  public Response getFile(@javax.ws.rs.PathParam("subResources") final String path) {
+	@GET
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	@javax.ws.rs.Path("/{subResources:.*}")
+	public Response getFile(@javax.ws.rs.PathParam("subResources") final String path) {
 
-    logger.debug("GET " + path);
+		logger.debug("GET " + path);
 
-    if (path.toLowerCase()
-            .endsWith(BundleRepository.EXT_JAR)
-            || path.toLowerCase()
-                   .endsWith(BundleRepository.EXT_EAS)) {
-      // direct access to Bundle
-      final Path bundleFile = bundleRepository.bundleFile(path);
+		if (path.toLowerCase().endsWith(BundleRepository.EXT_JAR)
+				|| path.toLowerCase().endsWith(BundleRepository.EXT_EAS)) {
+			// direct access to Bundle
+			final Path bundleFile = bundleRepository.bundleFile(path);
 
-      if (bundleFile == null) {
-        return Response.status(Response.Status.NOT_FOUND)
-                       .build();
+			if (bundleFile == null) {
+				return Response.status(Response.Status.NOT_FOUND).build();
 
-      }
+			}
 
-      // response.setContentType(MimeType.Bundle.toString());
-      // response.setContentLengthLong(Files.size(bundleFile));
+			// response.setContentType(MimeType.Bundle.toString());
+			// response.setContentLengthLong(Files.size(bundleFile));
 
-      try (OutputStream out = new ByteArrayOutputStream()) {
-        Files.copy(bundleFile, out);
-        out.flush();
-        return Response.ok(out, MimeType.Bundle.toString())
-                       .build();
-      } catch (final BundleRepositoryException bre) {
-        return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                       .entity(bre.getMessage())
-                       .build();
-      } catch (final IOException ioe) {
-        return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                       .entity(ioe.getMessage())
-                       .build();
+			try (OutputStream out = new ByteArrayOutputStream()) {
+				Files.copy(bundleFile, out);
+				out.flush();
+				return Response.ok(out, MimeType.Bundle.toString()).build();
+			} catch (final BundleRepositoryException bre) {
+				return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(bre.getMessage()).build();
+			} catch (final IOException ioe) {
+				return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(ioe.getMessage()).build();
 
-      }
+			}
 
-    }
+		}
 
-    // other paths as access to Index-Files
-    try {
-      final Path indexFile = bundleRepository.indexFile(path);
+		// other paths as access to Index-Files
+		try {
+			final Path indexFile = bundleRepository.indexFile(path);
 
-      if (indexFile == null) {
-        return Response.status(Status.NOT_FOUND)
-                       .build();
+			if (indexFile == null) {
+				return Response.status(Status.NOT_FOUND).build();
 
-      }
+			}
 
-      // response.setContentType(MediaType.APPLICATION_XML);
-      // response.setContentLengthLong(Files.size(indexFile));
+			// response.setContentType(MediaType.APPLICATION_XML);
+			// response.setContentLengthLong(Files.size(indexFile));
 
-      try (OutputStream out = new ByteArrayOutputStream()) {
-        Files.copy(indexFile, out);
-        out.flush();
-        return Response.ok(out, MediaType.APPLICATION_OCTET_STREAM)
-                       .build();
-      } catch (final IOException ioe) {
-        return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                       .entity(ioe.getMessage())
-                       .build();
-      }
-    } catch (final BundleRepositoryException bre) {
-      return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(bre.getMessage())
-                     .build();
+			try (OutputStream out = new ByteArrayOutputStream()) {
+				Files.copy(indexFile, out);
+				out.flush();
+				return Response.ok(out, MediaType.APPLICATION_OCTET_STREAM).build();
+			} catch (final IOException ioe) {
+				return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(ioe.getMessage()).build();
+			}
+		} catch (final BundleRepositoryException bre) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(bre.getMessage()).build();
 
-    }
+		}
 
-  }
+	}
 
-  @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-  @POST
-  @javax.ws.rs.Path("/{subResources:.*}")
-  public Response addFile(@javax.ws.rs.PathParam("subResources") final String path,
-                          final InputStream inputStream) {
-    logger.debug("POST " + path);
+	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
+	@POST
+	@javax.ws.rs.Path("/{subResources:.*}")
+	public Response addFile(@javax.ws.rs.PathParam("subResources") final String path, final InputStream inputStream) {
+		logger.debug("POST " + path);
 
-    try {
+		try {
 
-      final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
+			final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
 
-      return Response.created(new URI(result.location()))
-                     .build();
+			return Response.created(new URI(result.location())).build();
 
-    } catch (final BundleRepositoryException bre) {
-      logger.debug(bre.getMessage(), bre);
-      return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(bre.getMessage())
-                     .build();
-    } catch (final URISyntaxException e) {
-      logger.debug(e.getMessage(), e);
-      return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(e.getMessage())
-                     .build();
-    }
-  }
+		} catch (final BundleRepositoryException bre) {
+			logger.debug(bre.getMessage(), bre);
+			return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(bre.getMessage()).build();
+		} catch (final URISyntaxException e) {
+			logger.debug(e.getMessage(), e);
+			return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(e.getMessage()).build();
+		}
+	}
 
-  @DELETE
-  @javax.ws.rs.Path("/{subResources:.*}")
-  public Response removeFile(@javax.ws.rs.PathParam("subResources") final String path) {
+	@DELETE
+	@javax.ws.rs.Path("/{subResources:.*}")
+	public Response removeFile(@javax.ws.rs.PathParam("subResources") final String path) {
 
-    logger.debug("DELETE " + path);
+		logger.debug("DELETE " + path);
 
-    try {
-      final boolean deleted = bundleRepository.deleteBundle(path);
-      return Response.status(deleted ? Status.OK : Status.NOT_FOUND)
-                     .build();
-    } catch (final BundleRepositoryException bre) {
-      return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(bre.getMessage())
-                     .build();
-    }
-  }
+		try {
+			final boolean deleted = bundleRepository.deleteBundle(path);
+			return Response.status(deleted ? Status.OK : Status.NOT_FOUND).build();
+		} catch (final BundleRepositoryException bre) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(bre.getMessage()).build();
+		}
+	}
 
-  Map<String,BundleRepository> bundleRepositorys = new HashMap<>();
+	Map<String, BundleRepository> bundleRepositorys = new HashMap<>();
 
-  @Reference
-  public void bindRepo(final BundleRepository repo) {
-    logger.debug("repository service bound: " + repo);
-    bundleRepositorys.put(repo.getName(),repo);
-  }
+	@Reference
+	public void bindRepo(final BundleRepository repo) {
+		logger.debug("repository service bound: " + repo);
+		bundleRepositorys.put(repo.getName(), repo);
+	}
 
-  public void unbindRepo(BundleRepository repo) {
-    logger.debug("repository service unbound: " + repo);
-    bundleRepositorys.remove(repo.getName());
-  }
+	public void unbindRepo(BundleRepository repo) {
+		logger.debug("repository service unbound: " + repo);
+		bundleRepositorys.remove(repo.getName());
+	}
 }

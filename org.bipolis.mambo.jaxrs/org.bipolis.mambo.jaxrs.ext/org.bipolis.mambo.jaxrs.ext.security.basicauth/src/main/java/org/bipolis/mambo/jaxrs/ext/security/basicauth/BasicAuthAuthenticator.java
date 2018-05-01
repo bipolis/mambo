@@ -40,57 +40,56 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 @Priority(Priorities.AUTHENTICATION)
 public class BasicAuthAuthenticator extends AbstractSecurityFilter {
 
-  private static Logger logger = LoggerFactory.getLogger(BasicAuthAuthenticator.class);
+	private static Logger logger = LoggerFactory.getLogger(BasicAuthAuthenticator.class);
 
-  @Reference
-  UserAdmin userAdmin;
+	@Reference
+	UserAdmin userAdmin;
 
-  protected BaseSecurityContext authenticate(ContainerRequestContext filterContext)
-          throws AuthenticationException {
+	protected BaseSecurityContext authenticate(ContainerRequestContext filterContext) throws AuthenticationException {
 
-    // Extract authentication credentials
-    String authentication = filterContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-    if (authentication == null) {
-      throw new AuthenticationException("Authentication credentials are required");
-    }
+		// Extract authentication credentials
+		String authentication = filterContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+		if (authentication == null) {
+			throw new AuthenticationException("Authentication credentials are required");
+		}
 
-    if (!authentication.startsWith("Basic ")) {
-      throw new AuthenticationException("Basic Authentication credentials are required");
-    }
+		if (!authentication.startsWith("Basic ")) {
+			throw new AuthenticationException("Basic Authentication credentials are required");
+		}
 
-    authentication = authentication.substring("Basic ".length());
-    String[] values = new String(DatatypeConverter.parseBase64Binary(authentication),
-            Charset.forName("ASCII")).split(":");
-    if (values.length < 2) {
-      throw new WebApplicationException(400);
-      // "Invalid syntax for username and password"
-    }
-    String username = values[0];
-    String password = values[1];
-    if ((username == null) || (password == null)) {
-      throw new WebApplicationException(400);
+		authentication = authentication.substring("Basic ".length());
+		String[] values = new String(DatatypeConverter.parseBase64Binary(authentication), Charset.forName("ASCII"))
+				.split(":");
+		if (values.length < 2) {
+			throw new WebApplicationException(400);
+			// "Invalid syntax for username and password"
+		}
+		String username = values[0];
+		String password = values[1];
+		if ((username == null) || (password == null)) {
+			throw new WebApplicationException(400);
 
-    }
+		}
 
-    if (userAdmin == null) {
-      throw new AuthenticationException("No Authentication Service available");
-    }
+		if (userAdmin == null) {
+			throw new AuthenticationException("No Authentication Service available");
+		}
 
-    User user = userAdmin.getUser("username", username);
-    if (user == null || !user.hasCredential("password", password)) {
-      // or Anonymous User and Go?
-      throw new AuthenticationException("Wrong user or password");
-    }
+		User user = userAdmin.getUser("username", username);
+		if (user == null || !user.hasCredential("password", password)) {
+			// or Anonymous User and Go?
+			throw new AuthenticationException("Wrong user or password");
+		}
 
-    Authorization authorization = userAdmin.getAuthorization(user);
+		Authorization authorization = userAdmin.getAuthorization(user);
 
-    return new BaseSecurityContext(authorization, SecurityContext.BASIC_AUTH, filterContext);
-  }
+		return new BaseSecurityContext(authorization, SecurityContext.BASIC_AUTH, filterContext);
+	}
 
-  @Override
-  public io.swagger.v3.oas.models.security.SecurityScheme getSecurityScheme() {
-    // done with annotation
-    return null;
-  }
+	@Override
+	public io.swagger.v3.oas.models.security.SecurityScheme getSecurityScheme() {
+		// done with annotation
+		return null;
+	}
 
 }

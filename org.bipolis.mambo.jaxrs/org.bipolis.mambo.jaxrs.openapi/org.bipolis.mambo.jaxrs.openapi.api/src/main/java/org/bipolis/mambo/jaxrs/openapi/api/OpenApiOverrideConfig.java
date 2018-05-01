@@ -2,12 +2,12 @@ package org.bipolis.mambo.jaxrs.openapi.api;
 
 public interface OpenApiOverrideConfig {
 
-  boolean overrideContact();
+	boolean overrideContact();
 
-  boolean overrideExternalDocs();
+	boolean overrideExternalDocs();
 
-  boolean overrideInfo();
+	boolean overrideInfo();
 
-  boolean overrideLicense();
+	boolean overrideLicense();
 
 }

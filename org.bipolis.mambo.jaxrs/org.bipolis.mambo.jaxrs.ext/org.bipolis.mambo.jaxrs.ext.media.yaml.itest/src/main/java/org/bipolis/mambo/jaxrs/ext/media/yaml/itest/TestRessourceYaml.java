@@ -15,30 +15,29 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
 @Component(service = TestRessourceYaml.class)
-@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppYamlNameBind.NAME
-        + ")")
+@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppYamlNameBind.NAME + ")")
 @JaxrsName("r")
 @Path("r")
 @JaxrsResource
 
 @RequiresYamlProvider
 public class TestRessourceYaml {
-  ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
+	ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
 
-  @NameBindingYamlProvider
-  @GET
-  @Path("yaml")
-  @Produces("application/yaml")
-  public ExampleDTO getYaml() {
-    return example;
-  }
+	@NameBindingYamlProvider
+	@GET
+	@Path("yaml")
+	@Produces("application/yaml")
+	public ExampleDTO getYaml() {
+		return example;
+	}
 
-  @GET
-  @Path("non")
-  @Produces("application/yaml")
-  public ExampleDTO getNon() {
-    return example;
+	@GET
+	@Path("non")
+	@Produces("application/yaml")
+	public ExampleDTO getNon() {
+		return example;
 
-  }
+	}
 
 }

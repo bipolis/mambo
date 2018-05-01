@@ -22,85 +22,80 @@ import io.swagger.v3.oas.models.info.Info;
 @Component(service = OpenApiService.class)
 public class BaseOpenApiService implements OpenApiService {
 
-  @ObjectClassDefinition
-  @interface Config {
+	@ObjectClassDefinition
+	@interface Config {
 
-    public boolean someProperty() default false;
-  };
+		public boolean someProperty() default false;
+	};
 
-  @Reference
-  MergerService mergerService;
-  List<OpenApiFragmentsService> apiAppenderServices = new ArrayList<>();
+	@Reference
+	MergerService mergerService;
+	List<OpenApiFragmentsService> apiAppenderServices = new ArrayList<>();
 
-  // @Reference
-  // Logger logger;
+	// @Reference
+	// Logger logger;
 
-  private Config config;
+	private Config config;
 
-  @Activate
-  private void activate(Config config) {
-    this.config = config;
+	@Activate
+	private void activate(Config config) {
+		this.config = config;
 
-  };
+	};
 
-  @Reference
-  private JaxrsServiceRuntime jaxrsServiceRuntime;
+	@Reference
+	private JaxrsServiceRuntime jaxrsServiceRuntime;
 
-  @Reference(
-          service = OpenApiFragmentsService.class,
-          cardinality = ReferenceCardinality.MULTIPLE,
-          policy = ReferencePolicy.DYNAMIC)
-  void bindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
+	@Reference(service = OpenApiFragmentsService.class, cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
+	void bindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
 
-    // logger.debug(l -> l.debug("Bind {}", apiAppenderService));
-    apiAppenderServices.add(apiAppenderService);
-  }
+		// logger.debug(l -> l.debug("Bind {}", apiAppenderService));
+		apiAppenderServices.add(apiAppenderService);
+	}
 
-  @Override
-  public OpenAPI getOpenApis(List<String> basePaths,
-                             List<OpenApiTagType> filterTagTypes)
-          throws Exception {
+	@Override
+	public OpenAPI getOpenApis(List<String> basePaths, List<OpenApiTagType> filterTagTypes) throws Exception {
 
-    // logger.debug(l -> l.debug("getOpenApi {} {}"));
+		// logger.debug(l -> l.debug("getOpenApi {} {}"));
 
-    final List<OpenAPI> openAPIs = new ArrayList<>();;
+		final List<OpenAPI> openAPIs = new ArrayList<>();
+		;
 
-    if (apiAppenderServices == null) {
-      throw new Exception("Apis Api Found");
-    }
+		if (apiAppenderServices == null) {
+			throw new Exception("Apis Api Found");
+		}
 
-    for (String basePath : basePaths) {
+		for (String basePath : basePaths) {
 
-      final List<OpenAPI> basePathApiList = new ArrayList<>();;
-      for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
+			final List<OpenAPI> basePathApiList = new ArrayList<>();
+			;
+			for (OpenApiFragmentsService fragmentsService : apiAppenderServices) {
 
-        basePathApiList.add(fragmentsService.getFragmentOpenApi(basePath));
-      }
+				basePathApiList.add(fragmentsService.getFragmentOpenApi(basePath));
+			}
 
-      OpenAPI      pathOpenAPI = mergerService.merge(basePathApiList);
+			OpenAPI pathOpenAPI = mergerService.merge(basePathApiList);
 
-      openAPIs.add(pathOpenAPI);
-    }
+			openAPIs.add(pathOpenAPI);
+		}
 
-    return mergeOpenApis(openAPIs, filterTagTypes);
-  }
+		return mergeOpenApis(openAPIs, filterTagTypes);
+	}
 
-  private OpenAPI mergeOpenApis(List<OpenAPI> openAPIs,
-                                List<OpenApiTagType> filterTagTypes)
-          throws MergeException {
-    // TODO Auto-generated method stub
+	private OpenAPI mergeOpenApis(List<OpenAPI> openAPIs, List<OpenApiTagType> filterTagTypes) throws MergeException {
+		// TODO Auto-generated method stub
 
-    // check count of different apis.
-    // (if >1)
-    // extra group type is Application
+		// check count of different apis.
+		// (if >1)
+		// extra group type is Application
 
-    return mergerService.merge(openAPIs);
-  }
+		return mergerService.merge(openAPIs);
+	}
 
-  void unbindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
+	void unbindApiAppenderService(OpenApiFragmentsService apiAppenderService) {
 
-    // logger.debug(l -> l.debug("Unbind {}", apiAppenderService));
-    apiAppenderServices.remove(apiAppenderService);
-  }
+		// logger.debug(l -> l.debug("Unbind {}", apiAppenderService));
+		apiAppenderServices.remove(apiAppenderService);
+	}
 
 }

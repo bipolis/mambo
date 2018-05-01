@@ -36,47 +36,43 @@ import org.slf4j.LoggerFactory;
 @javax.ws.rs.Path("/bar")
 public class BundleArchivDeploymentRessource {
 
-  @ObjectClassDefinition(
-          name = "Bundle Repository",
-          description = "Configuration of the BundleArchivDeploymentRessource")
-  public @interface Config {
+	@ObjectClassDefinition(name = "Bundle Repository", description = "Configuration of the BundleArchivDeploymentRessource")
+	public @interface Config {
 
-  }
+	}
 
-  private static final Logger logger =
-          LoggerFactory.getLogger(BundleArchivDeploymentRessource.class);
-  public static final String NAME = "BundleArchivDeploymentRessource";
+	private static final Logger logger = LoggerFactory.getLogger(BundleArchivDeploymentRessource.class);
+	public static final String NAME = "BundleArchivDeploymentRessource";
 
-  private BundleRepository bundleRepository;
-  private Config config;
+	private BundleRepository bundleRepository;
+	private Config config;
 
-  @Activate
-  protected void activate(final Config config) {
-    this.config = config;
-  }
+	@Activate
+	protected void activate(final Config config) {
+		this.config = config;
+	}
 
-  @GET
-  @Produces(MediaType.APPLICATION_OCTET_STREAM)
-  @javax.ws.rs.Path("/{subResources:.*}")
-  public Response getFile(@javax.ws.rs.PathParam("subResources") final String path) {
-    // TODO: on the fly generateing Bundlearchive
+	@GET
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	@javax.ws.rs.Path("/{subResources:.*}")
+	public Response getFile(@javax.ws.rs.PathParam("subResources") final String path) {
+		// TODO: on the fly generateing Bundlearchive
 
-    return Response.status(404)
-                   .build();
+		return Response.status(404).build();
 
-  }
+	}
 
-  Map<String, BundleRepository> bundleRepositorys = new HashMap<>();
+	Map<String, BundleRepository> bundleRepositorys = new HashMap<>();
 
-  @Reference
-  public void bindRepo(final BundleRepository repo) {
-    logger.debug("repository service bound: " + repo);
-    bundleRepositorys.put(repo.getName(), repo);
-  }
+	@Reference
+	public void bindRepo(final BundleRepository repo) {
+		logger.debug("repository service bound: " + repo);
+		bundleRepositorys.put(repo.getName(), repo);
+	}
 
-  public void unbindRepo(BundleRepository repo) {
-    logger.debug("repository service unbound: " + repo);
-    bundleRepositorys.remove(repo.getName());
-  }
+	public void unbindRepo(BundleRepository repo) {
+		logger.debug("repository service unbound: " + repo);
+		bundleRepositorys.remove(repo.getName());
+	}
 
 }

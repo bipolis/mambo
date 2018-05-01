@@ -9,65 +9,65 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 public class JaxrsWhiteboardOpenAPIConfiguration implements OpenAPIConfiguration {
 
-  @Override
-  public Long getCacheTTL() {
+	@Override
+	public Long getCacheTTL() {
 
-    return null;
-  }
+		return null;
+	}
 
-  @Override
-  public String getFilterClass() {
-    return null;
-  }
+	@Override
+	public String getFilterClass() {
+		return null;
+	}
 
-  @Override
-  public Collection<String> getIgnoredRoutes() {
-    return null;
-  }
+	@Override
+	public Collection<String> getIgnoredRoutes() {
+		return null;
+	}
 
-  @Override
-  public OpenAPI getOpenAPI() {
-    return null;
-  }
+	@Override
+	public OpenAPI getOpenAPI() {
+		return null;
+	}
 
-  @Override
-  public String getReaderClass() {
-    return null;
-  }
+	@Override
+	public String getReaderClass() {
+		return null;
+	}
 
-  @Override
-  public Set<String> getResourceClasses() {
-    return null;
-  }
+	@Override
+	public Set<String> getResourceClasses() {
+		return null;
+	}
 
-  @Override
-  public Set<String> getResourcePackages() {
+	@Override
+	public Set<String> getResourcePackages() {
 
-    return null;
-  }
+		return null;
+	}
 
-  @Override
-  public String getScannerClass() {
+	@Override
+	public String getScannerClass() {
 
-    return null;
-  }
+		return null;
+	}
 
-  @Override
-  public Map<String, Object> getUserDefinedOptions() {
+	@Override
+	public Map<String, Object> getUserDefinedOptions() {
 
-    return null;
-  }
+		return null;
+	}
 
-  @Override
-  public Boolean isPrettyPrint() {
+	@Override
+	public Boolean isPrettyPrint() {
 
-    return false;
-  }
+		return false;
+	}
 
-  @Override
-  public Boolean isReadAllResources() {
+	@Override
+	public Boolean isReadAllResources() {
 
-    return true;
-  }
+		return true;
+	}
 
 }
