@@ -14,32 +14,32 @@ import io.swagger.v3.oas.models.OpenAPI;
 @Component(service = OpenApiFragmentsService.class)
 public class NodeApiAppenderService implements OpenApiFragmentsService {
 
-  @ObjectClassDefinition
-  @interface Config {
+	@ObjectClassDefinition
+	@interface Config {
 
-    public int priotity() default 0;
-  }
+		public int priotity() default 0;
+	}
 
-  @Activate
-  private void activate(Config config) {
-    this.config = config;
+	@Activate
+	private void activate(Config config) {
+		this.config = config;
 
-  }
+	}
 
-  private Config config;
-  @Reference
-  private Logger logger;
+	private Config config;
+	@Reference
+	private Logger logger;
 
-  @Override
-  public int getPriority() {
+	@Override
+	public int getPriority() {
 
-    return config.priotity();
-  }
+		return config.priotity();
+	}
 
-  @Override
-  public OpenAPI getFragmentOpenApi(String apiName) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+	@Override
+	public OpenAPI getFragmentOpenApi(String apiName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

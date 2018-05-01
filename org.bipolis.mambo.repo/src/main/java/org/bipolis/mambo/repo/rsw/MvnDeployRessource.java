@@ -39,77 +39,68 @@ import org.slf4j.LoggerFactory;
 @javax.ws.rs.Path("/mvn")
 public class MvnDeployRessource {
 
-  @ObjectClassDefinition(
-          name = "Bundle Repository",
-          description = "Configuration of the Bundle Repository")
-  public @interface Config {
+	@ObjectClassDefinition(name = "Bundle Repository", description = "Configuration of the Bundle Repository")
+	public @interface Config {
 
-  }
+	}
 
-  private static final Logger logger = LoggerFactory.getLogger(MvnDeployRessource.class);
-  public static final String NAME = "MvnDeployRessource";
+	private static final Logger logger = LoggerFactory.getLogger(MvnDeployRessource.class);
+	public static final String NAME = "MvnDeployRessource";
 
-  private BundleRepository bundleRepository;
-  private Config config;
+	private BundleRepository bundleRepository;
+	private Config config;
 
-  @Activate
-  protected void activate(final Config config) {
-    this.config = config;
-  }
+	@Activate
+	protected void activate(final Config config) {
+		this.config = config;
+	}
 
-  @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-  @PUT
-  @javax.ws.rs.Path("/{subResources:.*}")
-  public Response addFile(@javax.ws.rs.PathParam("subResources") final String path,
-                          final InputStream inputStream) {
-    logger.debug("PUT " + path);
+	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
+	@PUT
+	@javax.ws.rs.Path("/{subResources:.*}")
+	public Response addFile(@javax.ws.rs.PathParam("subResources") final String path, final InputStream inputStream) {
+		logger.debug("PUT " + path);
 
-    try {
+		try {
 
-      if (path.endsWith(".jar") || path.endsWith(".eas")) {
-        final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
-        System.out.println(result);
+			if (path.endsWith(".jar") || path.endsWith(".eas")) {
+				final RepositoryAdditionResult result = bundleRepository.addBundle(inputStream, path);
+				System.out.println(result);
 
-      }
-      return Response.status(Status.OK)
-                     .build();
+			}
+			return Response.status(Status.OK).build();
 
-    } catch (final BundleRepositoryException bre) {
-      logger.debug(bre.getMessage(), bre);
-      return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(bre.getMessage())
-                     .build();
-    }
-  }
+		} catch (final BundleRepositoryException bre) {
+			logger.debug(bre.getMessage(), bre);
+			return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(bre.getMessage()).build();
+		}
+	}
 
-  @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-  @GET
-  @javax.ws.rs.Path("/{subResources:.*}")
-  public Response addFile(@javax.ws.rs.PathParam("subResources") final String path) {
-    logger.debug("GET " + path);
+	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
+	@GET
+	@javax.ws.rs.Path("/{subResources:.*}")
+	public Response addFile(@javax.ws.rs.PathParam("subResources") final String path) {
+		logger.debug("GET " + path);
 
-    try {
+		try {
 
-      return Response.status(Status.OK)
-                     .build();
+			return Response.status(Status.OK).build();
 
-    } catch (final BundleRepositoryException bre) {
-      logger.debug(bre.getMessage(), bre);
-      return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                     .entity(bre.getMessage())
-                     .build();
-    }
-  }
+		} catch (final BundleRepositoryException bre) {
+			logger.debug(bre.getMessage(), bre);
+			return Response.status(Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(bre.getMessage()).build();
+		}
+	}
 
-  @Reference
-  public void bindRepo(final BundleRepository repo) {
-    logger.debug("repository service bound: " + repo);
-    bundleRepository = repo;
-  }
+	@Reference
+	public void bindRepo(final BundleRepository repo) {
+		logger.debug("repository service bound: " + repo);
+		bundleRepository = repo;
+	}
 
-  public void unbindRepo(BundleRepository repo) {
-    logger.debug("repository service unbound: " + repo);
-    repo = null;
-  }
+	public void unbindRepo(BundleRepository repo) {
+		logger.debug("repository service unbound: " + repo);
+		repo = null;
+	}
 
 }

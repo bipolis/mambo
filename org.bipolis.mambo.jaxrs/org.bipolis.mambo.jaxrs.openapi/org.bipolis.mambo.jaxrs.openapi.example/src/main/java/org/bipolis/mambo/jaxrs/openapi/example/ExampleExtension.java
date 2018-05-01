@@ -19,18 +19,15 @@ import io.swagger.v3.oas.annotations.security.SecuritySchemes;
 @JaxrsExtension
 @ExampleNameBinding
 
-@SecuritySchemes({
-    @SecurityScheme(name = "BasicAuth", type = SecuritySchemeType.HTTP, scheme = "basic")})
+@SecuritySchemes({ @SecurityScheme(name = "BasicAuth", type = SecuritySchemeType.HTTP, scheme = "basic") })
 public class ExampleExtension implements ReaderInterceptor {
 
-  public static final String EXTENSION_NAME = "ExampleExtension";
+	public static final String EXTENSION_NAME = "ExampleExtension";
 
-  @Override
-  public Object aroundReadFrom(ReaderInterceptorContext arg0)
-          throws IOException,
-          WebApplicationException {
+	@Override
+	public Object aroundReadFrom(ReaderInterceptorContext arg0) throws IOException, WebApplicationException {
 
-    return arg0;
-  }
+		return arg0;
+	}
 
 }

@@ -6,12 +6,12 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsApplicationBase;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 
-@Component(service = {Application.class})
+@Component(service = { Application.class })
 
 @JaxrsName(TestAppYamlNameBind.NAME)
 @JaxrsApplicationBase("/" + TestAppYamlNameBind.NAME)
 
 public class TestAppYamlNameBind extends Application {
-  public static final String NAME = "TestAppYamlNameBind";
+	public static final String NAME = "TestAppYamlNameBind";
 
 }

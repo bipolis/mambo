@@ -12,22 +12,21 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 @Component(service = ExampleResource.class)
 @JaxrsName("ExampleRessource")
 @JaxrsResource
-@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "="
-        + ExampleApplication.APP_NAME + ")")
+@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + ExampleApplication.APP_NAME + ")")
 @Path("/" + ExampleResource.NAME)
 public class ExampleResource {
-  public final static String NAME = "ExampleResource";
+	public final static String NAME = "ExampleResource";
 
-  @GET
-  @Path("/upper")
-  public String upper(String text) {
-    return text.toUpperCase();
-  }
+	@GET
+	@Path("/upper")
+	public String upper(String text) {
+		return text.toUpperCase();
+	}
 
-  @GET
-  @Path("/lowerAndFilter")
-  @ExampleNameBinding
-  public String lowerAndFilter(String text) {
-    return text.toLowerCase();
-  }
+	@GET
+	@Path("/lowerAndFilter")
+	@ExampleNameBinding
+	public String lowerAndFilter(String text) {
+		return text.toLowerCase();
+	}
 }

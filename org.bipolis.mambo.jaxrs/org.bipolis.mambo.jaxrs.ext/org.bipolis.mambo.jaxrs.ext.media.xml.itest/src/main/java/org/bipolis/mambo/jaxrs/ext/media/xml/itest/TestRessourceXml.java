@@ -16,30 +16,29 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
 @Component(service = TestRessourceXml.class)
-@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppXmlNameBind.NAME
-        + ")")
+@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppXmlNameBind.NAME + ")")
 @JaxrsName("r")
 @Path("r")
 @JaxrsResource
 
 @RequiresXmlProvider
 public class TestRessourceXml {
-  ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
+	ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
 
-  @NameBindingXmlProvider
-  @GET
-  @Path("xml")
-  @Produces(MediaType.APPLICATION_XML)
-  public ExampleDTO getXml() {
-    return example;
-  }
+	@NameBindingXmlProvider
+	@GET
+	@Path("xml")
+	@Produces(MediaType.APPLICATION_XML)
+	public ExampleDTO getXml() {
+		return example;
+	}
 
-  @GET
-  @Path("non")
-  @Produces(MediaType.APPLICATION_XML)
-  public ExampleDTO getNon() {
-    return example;
+	@GET
+	@Path("non")
+	@Produces(MediaType.APPLICATION_XML)
+	public ExampleDTO getNon() {
+		return example;
 
-  }
+	}
 
 }

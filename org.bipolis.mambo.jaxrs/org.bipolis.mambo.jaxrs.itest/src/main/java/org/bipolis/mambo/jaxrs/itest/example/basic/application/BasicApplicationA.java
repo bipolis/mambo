@@ -12,6 +12,6 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 @JaxrsApplicationBase("/" + BasicApplicationA.APPLICATION_NAME)
 public class BasicApplicationA extends Application {
 
-  public static final String APPLICATION_NAME = "BasicApplicationA";
+	public static final String APPLICATION_NAME = "BasicApplicationA";
 
 }

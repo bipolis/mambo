@@ -14,36 +14,34 @@ import org.osgi.util.tracker.ServiceTracker;
 
 public class ExampleTest {
 
-  private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class)
-                                                     .getBundleContext();
+	private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class).getBundleContext();
 
-  @BeforeClass
-  public static void beforeAll() {
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-  }
+	@BeforeClass
+	public static void beforeAll() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
-  @Test
-  public void testExample()
-          throws InterruptedException {
+	@Test
+	public void testExample() throws InterruptedException {
 
-    ServiceTracker<JaxrsServiceRuntime, ? extends JaxrsServiceRuntime> tracker =
-            new ServiceTracker<>(context, JaxrsServiceRuntime.class.getName(), null);
+		ServiceTracker<JaxrsServiceRuntime, ? extends JaxrsServiceRuntime> tracker = new ServiceTracker<>(context,
+				JaxrsServiceRuntime.class.getName(), null);
 
-    tracker.open();
-    JaxrsServiceRuntime jaxrsServiceRuntime = tracker.waitForService(5 * 1000);
+		tracker.open();
+		JaxrsServiceRuntime jaxrsServiceRuntime = tracker.waitForService(5 * 1000);
 
-    RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
-    assertNotNull(runtimeDTO);
-    assertNotNull(runtimeDTO.defaultApplication);
-    assertEquals(1, runtimeDTO.applicationDTOs.length);
-    assertEquals(1, runtimeDTO.applicationDTOs.length);
+		RuntimeDTO runtimeDTO = jaxrsServiceRuntime.getRuntimeDTO();
+		assertNotNull(runtimeDTO);
+		assertNotNull(runtimeDTO.defaultApplication);
+		assertEquals(1, runtimeDTO.applicationDTOs.length);
+		assertEquals(1, runtimeDTO.applicationDTOs.length);
 
-    assertEquals(ExampleApplication.APP_NAME, runtimeDTO.applicationDTOs[0].name);
+		assertEquals(ExampleApplication.APP_NAME, runtimeDTO.applicationDTOs[0].name);
 
-  }
+	}
 
 }

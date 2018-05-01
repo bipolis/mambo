@@ -31,33 +31,32 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @JaxrsName("OAuthAuthenticatorFilter")
 public class OAuthAuthenticatorFilter extends AbstractSecurityFilter {
 
-  OAuthRequestFilter oAuthRequestFilter = new OAuthRequestFilter();
+	OAuthRequestFilter oAuthRequestFilter = new OAuthRequestFilter();
 
-  @Override
-  public SecurityScheme getSecurityScheme() {
+	@Override
+	public SecurityScheme getSecurityScheme() {
 
-    OAuthFlow oAuthFlow = new OAuthFlow();
-    oAuthFlow.setAuthorizationUrl("readfrompropertyFile");
+		OAuthFlow oAuthFlow = new OAuthFlow();
+		oAuthFlow.setAuthorizationUrl("readfrompropertyFile");
 
-    OAuthFlows oAuthFlows = new OAuthFlows();
-    oAuthFlows.setImplicit(oAuthFlow);
+		OAuthFlows oAuthFlows = new OAuthFlows();
+		oAuthFlows.setImplicit(oAuthFlow);
 
-    SecurityScheme securityScheme = new SecurityScheme();
-    securityScheme.setName("Oauth2");
-    securityScheme.setType(SecurityScheme.Type.OAUTH2);
-    securityScheme.setIn(SecurityScheme.In.HEADER);
-    securityScheme.setFlows(oAuthFlows);
+		SecurityScheme securityScheme = new SecurityScheme();
+		securityScheme.setName("Oauth2");
+		securityScheme.setType(SecurityScheme.Type.OAUTH2);
+		securityScheme.setIn(SecurityScheme.In.HEADER);
+		securityScheme.setFlows(oAuthFlows);
 
-    return securityScheme;
-  }
+		return securityScheme;
+	}
 
-  @Override
-  protected SecurityContext authenticate(ContainerRequestContext requestContext)
-          throws AuthenticationException {
+	@Override
+	protected SecurityContext authenticate(ContainerRequestContext requestContext) throws AuthenticationException {
 
-    oAuthRequestFilter.filter(requestContext);
+		oAuthRequestFilter.filter(requestContext);
 
-    return requestContext.getSecurityContext();
-  }
+		return requestContext.getSecurityContext();
+	}
 
 }

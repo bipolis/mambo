@@ -16,31 +16,30 @@ import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsName;
 import org.osgi.service.jaxrs.whiteboard.propertytypes.JaxrsResource;
 
 @Component(service = TestRessourceJson.class)
-@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppJsonNameBind.NAME
-        + ")")
+@JaxrsApplicationSelect("(" + JaxrsWhiteboardConstants.JAX_RS_NAME + "=" + TestAppJsonNameBind.NAME + ")")
 @JaxrsName("r")
 @Path("r")
 @JaxrsResource
 
 @RequiresJsonProvider
 public class TestRessourceJson {
-  ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
+	ExampleDTO example = new ExampleDTO("Text1", Arrays.asList("Element1", "Element2"));
 
-  @NameBindingJsonProvider
-  @GET
-  @Path("json")
-  @Produces(MediaType.APPLICATION_JSON)
-  public ExampleDTO getJSon() {
-    return example;
+	@NameBindingJsonProvider
+	@GET
+	@Path("json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ExampleDTO getJSon() {
+		return example;
 
-  }
+	}
 
-  @GET
-  @Path("non")
-  @Produces(MediaType.APPLICATION_JSON)
-  public ExampleDTO getNon() {
-    return example;
+	@GET
+	@Path("non")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ExampleDTO getNon() {
+		return example;
 
-  }
+	}
 
 }

@@ -22,87 +22,78 @@ import org.osgi.util.tracker.ServiceTracker;
 
 public class ExampleTest {
 
-  // private final BundleContext context = FrameworkUtil.getBundle(ExampleTest.class)
-  // .getBundleContext();
+	// private final BundleContext context =
+	// FrameworkUtil.getBundle(ExampleTest.class)
+	// .getBundleContext();
 
-  private String getResult(String appPath,
-                           String ressourcePath,
-                           String methodPath)
-          throws Throwable {
-    StringBuilder sb = new StringBuilder();
-    sb.append(appPath == null ? "" : "/" + appPath);
-    sb.append(ressourcePath == null ? "" : "/" + ressourcePath);
-    sb.append(methodPath == null ? "" : "/" + methodPath);
+	private String getResult(String appPath, String ressourcePath, String methodPath) throws Throwable {
+		StringBuilder sb = new StringBuilder();
+		sb.append(appPath == null ? "" : "/" + appPath);
+		sb.append(ressourcePath == null ? "" : "/" + ressourcePath);
+		sb.append(methodPath == null ? "" : "/" + methodPath);
 
-    URLConnection connection = new URL("http://localhost:8080" + sb.toString()).openConnection();
-    HttpURLConnection con = (HttpURLConnection) connection;
+		URLConnection connection = new URL("http://localhost:8080" + sb.toString()).openConnection();
+		HttpURLConnection con = (HttpURLConnection) connection;
 
-    con.setRequestMethod("GET");
-    // for filterTests
-    con.setRequestProperty("User-Agent", "Mozilla/5.0");
+		con.setRequestMethod("GET");
+		// for filterTests
+		con.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-    int responseCode = con.getResponseCode();
-    if (responseCode != 200) {
-      throw new Exception("responsecode " + responseCode);
-    }
+		int responseCode = con.getResponseCode();
+		if (responseCode != 200) {
+			throw new Exception("responsecode " + responseCode);
+		}
 
-    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-    String inputLine;
-    StringBuffer response = new StringBuffer();
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
 
-    while ((inputLine = in.readLine()) != null) {
-      response.append(inputLine);
-    }
-    in.close();
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
 
-    return response.toString();
+		return response.toString();
 
-  }
+	}
 
-  @Test
-  public void setUp()
-          throws InterruptedException {
-    Thread.sleep(5000);
+	@Test
+	public void setUp() throws InterruptedException {
+		Thread.sleep(5000);
 
-    BundleContext bundleContext = FrameworkUtil.getBundle(ExampleTest.class)
-                                               .getBundleContext();
+		BundleContext bundleContext = FrameworkUtil.getBundle(ExampleTest.class).getBundleContext();
 
-    for (Bundle bundle : bundleContext.getBundles()) {
-      assertEquals("Bundle is not active: " + bundle.getSymbolicName(), bundle.getState(),
-              Bundle.ACTIVE);
-      assertFalse("Bundle must have a Name", bundle.getSymbolicName()
-                                                   .isEmpty());
-      assertFalse("Dont use Replacemarks in Bundlename", bundle.getSymbolicName()
-                                                               .contains("<"));
-    }
+		for (Bundle bundle : bundleContext.getBundles()) {
+			assertEquals("Bundle is not active: " + bundle.getSymbolicName(), bundle.getState(), Bundle.ACTIVE);
+			assertFalse("Bundle must have a Name", bundle.getSymbolicName().isEmpty());
+			assertFalse("Dont use Replacemarks in Bundlename", bundle.getSymbolicName().contains("<"));
+		}
 
-    ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> tracker =
-            new ServiceTracker<>(bundleContext, ServiceComponentRuntime.class, null);
-    tracker.open();
+		ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> tracker = new ServiceTracker<>(bundleContext,
+				ServiceComponentRuntime.class, null);
+		tracker.open();
 
-    final ServiceComponentRuntime serviceComponentRuntime = tracker.getService();
+		final ServiceComponentRuntime serviceComponentRuntime = tracker.getService();
 
-    for (ComponentDescriptionDTO component : serviceComponentRuntime.getComponentDescriptionDTOs()) {
+		for (ComponentDescriptionDTO component : serviceComponentRuntime.getComponentDescriptionDTOs()) {
 
-      for (ComponentConfigurationDTO config : serviceComponentRuntime.getComponentConfigurationDTOs(
-              component)) {
+			for (ComponentConfigurationDTO config : serviceComponentRuntime.getComponentConfigurationDTOs(component)) {
 
-        assertEquals("Service is not active: " + component.name, config.state,
-                ComponentConfigurationDTO.ACTIVE);
-      }
-    }
+				assertEquals("Service is not active: " + component.name, config.state,
+						ComponentConfigurationDTO.ACTIVE);
+			}
+		}
 
-  }
+	}
 
-  @Test
-  public void testExample()
-          throws Throwable {
-    assertEquals(RessourceInBasicApp.class.getName(), getResult(BasicApplication.APPLICATION_NAME,
-            RessourceInBasicApp.RESSOURCE_NAME, "value"));
-    // assertEquals(RessourceInBasicAppA.class.getName(),
-    // getResult(BasicApplicationA.APPLICATION_NAME,
-    // RessourceInBasicAppA.RESSOURCE_NAME, "value"));
+	@Test
+	public void testExample() throws Throwable {
+		assertEquals(RessourceInBasicApp.class.getName(),
+				getResult(BasicApplication.APPLICATION_NAME, RessourceInBasicApp.RESSOURCE_NAME, "value"));
+		// assertEquals(RessourceInBasicAppA.class.getName(),
+		// getResult(BasicApplicationA.APPLICATION_NAME,
+		// RessourceInBasicAppA.RESSOURCE_NAME, "value"));
 
-  }
+	}
 
 }

@@ -9,46 +9,43 @@ import org.osgi.service.useradmin.Authorization;
 
 public class BaseSecurityContext implements SecurityContext {
 
-  private Authorization authorization;
-  private String authenticationScheme;
-  private ContainerRequestContext filterContext;
+	private Authorization authorization;
+	private String authenticationScheme;
+	private ContainerRequestContext filterContext;
 
-  public BaseSecurityContext(final Authorization authorization,
-          String authenticationScheme,
-          ContainerRequestContext filterContext) {
-    this.authorization = authorization;
-    this.authenticationScheme = authenticationScheme;
-    this.filterContext = filterContext;
-  }
+	public BaseSecurityContext(final Authorization authorization, String authenticationScheme,
+			ContainerRequestContext filterContext) {
+		this.authorization = authorization;
+		this.authenticationScheme = authenticationScheme;
+		this.filterContext = filterContext;
+	}
 
-  @Override
-  public Principal getUserPrincipal() {
-    return new Principal() {
+	@Override
+	public Principal getUserPrincipal() {
+		return new Principal() {
 
-      @Override
-      public String getName() {
-        return authorization.getName();
-      }
-    };
-  }
+			@Override
+			public String getName() {
+				return authorization.getName();
+			}
+		};
+	}
 
-  @Override
-  public boolean isUserInRole(String role) {
+	@Override
+	public boolean isUserInRole(String role) {
 
-    return authorization.hasRole(role);
-  }
+		return authorization.hasRole(role);
+	}
 
-  @Override
-  public boolean isSecure() {
-    return "https".equals(filterContext.getUriInfo()
-                                       .getRequestUri()
-                                       .getScheme());
-  }
+	@Override
+	public boolean isSecure() {
+		return "https".equals(filterContext.getUriInfo().getRequestUri().getScheme());
+	}
 
-  @Override
-  public String getAuthenticationScheme() {
+	@Override
+	public String getAuthenticationScheme() {
 
-    return authenticationScheme;
-  }
+		return authenticationScheme;
+	}
 
 }

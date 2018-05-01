@@ -8,27 +8,26 @@ import org.osgi.service.component.annotations.Component;
 @Component(service = UiProvider.class)
 public class RedocUIProvider implements UiProvider {
 
-  private static final String SWAGGER_UI_PATH = "openapi/ui/swagger";
+	private static final String SWAGGER_UI_PATH = "openapi/ui/swagger";
 
-  @Override
-  public String getName() {
+	@Override
+	public String getName() {
 
-    return "Redoc-UI";
-  }
+		return "Redoc-UI";
+	}
 
-  @Override
-  public String getResponseTypes() {
+	@Override
+	public String getResponseTypes() {
 
-    return "yaml";
-  }
+		return "yaml";
+	}
 
-  @Override
-  public String getUrl(URI baseUrl,
-                       String openapiPath) {
+	@Override
+	public String getUrl(URI baseUrl, String openapiPath) {
 
-    final String uri = "https://rebilly.github.io/ReDoc/?url=" + openapiPath;
+		final String uri = "https://rebilly.github.io/ReDoc/?url=" + openapiPath;
 
-    return uri;
-  }
+		return uri;
+	}
 
 }

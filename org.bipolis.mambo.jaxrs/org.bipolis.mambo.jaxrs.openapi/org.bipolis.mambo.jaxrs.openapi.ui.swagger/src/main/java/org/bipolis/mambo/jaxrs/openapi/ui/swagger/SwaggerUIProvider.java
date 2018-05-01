@@ -8,28 +8,26 @@ import org.osgi.service.component.annotations.Component;
 @Component(service = UiProvider.class)
 public class SwaggerUIProvider implements UiProvider {
 
-  private static final String SWAGGER_UI_PATH = "openapi/ui/swagger";
+	private static final String SWAGGER_UI_PATH = "openapi/ui/swagger";
 
-  @Override
-  public String getName() {
+	@Override
+	public String getName() {
 
-    return "Swagger-UI";
-  }
+		return "Swagger-UI";
+	}
 
-  @Override
-  public String getResponseTypes() {
+	@Override
+	public String getResponseTypes() {
 
-    return "yaml";
-  }
+		return "yaml";
+	}
 
-  @Override
-  public String getUrl(URI baseUrl,
-                       String openapiPath) {
+	@Override
+	public String getUrl(URI baseUrl, String openapiPath) {
 
-    final String swaggeruri =
-            baseUrl.getScheme() + "://" + baseUrl.getAuthority() + "/" + SWAGGER_UI_PATH;
-    String url = swaggeruri + "/index.html?url=" + openapiPath;
-    return url;
-  }
+		final String swaggeruri = baseUrl.getScheme() + "://" + baseUrl.getAuthority() + "/" + SWAGGER_UI_PATH;
+		String url = swaggeruri + "/index.html?url=" + openapiPath;
+		return url;
+	}
 
 }
