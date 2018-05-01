@@ -1,5 +1,7 @@
 -standalone: target/index.xml
 
+-runtrace: true
+
 -runfw: org.apache.felix.framework
 -runee: JavaSE-1.8
 
@@ -8,9 +10,6 @@
 -runrequires: \
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.producer.swagger',\
-	bnd.identity;id='org.apache.felix.gogo.command',\
-	bnd.identity;id='org.apache.felix.gogo.runtime',\
-	bnd.identity;id='org.apache.felix.gogo.shell',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.basic',\
 	bnd.identity;id='org.bipolis.mambo.jaxrs.openapi.example'
 
@@ -30,9 +29,6 @@
 	org.osgi.util.promise;version='[1.1.0,1.1.1)',\
 	org.yaml.snakeyaml;version='[1.18.0,1.18.1)',\
 	slf4j.api;version='[1.7.25,1.7.26)',\
-	org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
-	org.apache.felix.gogo.runtime;version='[1.0.6,1.0.7)',\
-	org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)',\
 	org.bipolis.mambo.jaxrs.openapi.api;version='[0.0.1,0.0.2)',\
 	org.bipolis.mambo.jaxrs.openapi.basic;version='[0.0.1,0.0.2)',\
 	org.bipolis.mambo.jaxrs.openapi.example;version='[0.0.1,0.0.2)',\
