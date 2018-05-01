@@ -23,88 +23,76 @@ import io.swagger.v3.oas.models.info.License;
 
 public class SwaggerTest {
 
-  private final BundleContext context = FrameworkUtil.getBundle(SwaggerTest.class)
-                                                     .getBundleContext();
+	private final BundleContext context = FrameworkUtil.getBundle(SwaggerTest.class).getBundleContext();
 
-  @BeforeClass
-  public static void beforeAll() {
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-  }
+	@BeforeClass
+	public static void beforeAll() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
-  @Test
-  public void testExample()
-          throws InterruptedException {
+	@Test
+	public void testExample() throws InterruptedException {
 
-    ServiceTracker<OpenApiFragmentsService, ? extends OpenApiFragmentsService> tracker =
-            new ServiceTracker<>(context, OpenApiFragmentsService.class.getName(), null);
+		ServiceTracker<OpenApiFragmentsService, ? extends OpenApiFragmentsService> tracker = new ServiceTracker<>(
+				context, OpenApiFragmentsService.class.getName(), null);
 
-    tracker.open();
-    OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
+		tracker.open();
+		OpenApiFragmentsService openApiFragmentsService = tracker.waitForService(5 * 1000);
 
-    assertNotNull("Service not null", openApiFragmentsService);
+		assertNotNull("Service noshould not be null", openApiFragmentsService);
 
-    assertEquals("fetch correct Service", openApiFragmentsService.getClass()
-                                                                 .getName(),
-            "org.bipolis.mambo.jaxrs.openapi.producer.swagger.SwaggerJaxrsOpenApiAppenderService");
+		assertEquals("fetch correct Service", openApiFragmentsService.getClass().getName(),
+				"org.bipolis.mambo.jaxrs.openapi.producer.swagger.SwaggerJaxrsOpenApiAppenderService");
 
-    OpenAPI openAPI = openApiFragmentsService.getFragmentOpenApi(ExampleApplication.APP_NAME);//
+		OpenAPI openAPI = openApiFragmentsService.getFragmentOpenApi(ExampleApplication.APP_NAME);//
 
-    // this test application, default app.
-    assertNotNull("expected Applications", openAPI);
+		// this test application, default app.
+		assertNotNull("expected Applications", openAPI);
 
-    Info info = openAPI.getInfo();
+		Info info = openAPI.getInfo();
 
-    Contact contact = info.getContact();
-    License license = info.getLicense();
-    ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
+		Contact contact = info.getContact();
+		License license = info.getLicense();
+		ExternalDocumentation externalDocumentation = openAPI.getExternalDocs();
 
-    assertEquals(info.getTitle(), "Annotation-title");
-    assertEquals(info.getVersion(), "Annotation-version");
-    assertEquals(info.getTermsOfService(), "Annotation-termsOfService");
-    assertEquals(info.getDescription(), "Annotation-description");
-    assertEquals(license.getUrl(), "Annotation-License-url");
-    assertEquals(license.getName(), "Annotation-License-name");
+		assertEquals(info.getTitle(), "Annotation-title");
+		assertEquals(info.getVersion(), "Annotation-version");
+		assertEquals(info.getTermsOfService(), "Annotation-termsOfService");
+		assertEquals(info.getDescription(), "Annotation-description");
+		assertEquals(license.getUrl(), "Annotation-License-url");
+		assertEquals(license.getName(), "Annotation-License-name");
 
-    assertEquals(contact.getName(), "Annotation-Contact-name");
-    assertEquals(contact.getEmail(), "Annotation-Contact-email");
-    assertEquals(contact.getUrl(), "Annotation-Contact-url");
+		assertEquals(contact.getName(), "Annotation-Contact-name");
+		assertEquals(contact.getEmail(), "Annotation-Contact-email");
+		assertEquals(contact.getUrl(), "Annotation-Contact-url");
 
-    assertEquals(externalDocumentation.getUrl(), "Annotation-ExternalDocumentation-url");
-    assertEquals(externalDocumentation.getDescription(),
-            "Annotation-ExternalDocumentation-description");
+		assertEquals(externalDocumentation.getUrl(), "Annotation-ExternalDocumentation-url");
+		assertEquals(externalDocumentation.getDescription(), "Annotation-ExternalDocumentation-description");
 
-    // Test Extension
-    assertNotNull(openAPI.getComponents());
-    assertNotNull(openAPI.getComponents()
-                         .getSecuritySchemes());
-    assertNotNull(openAPI.getComponents()
-                         .getSecuritySchemes()
-                         .get("BasicAuth"));
+		// Test Extension
+		assertNotNull(openAPI.getComponents());
+		assertNotNull(openAPI.getComponents().getSecuritySchemes());
+		assertNotNull(openAPI.getComponents().getSecuritySchemes().get("BasicAuth"));
 
-    // Test Ressources
-    assertNotNull(openAPI.getPaths());
-    assertEquals(3, openAPI.getPaths()
-                           .size());
+		// Test Ressources
+		assertNotNull(openAPI.getPaths());
+		assertEquals(3, openAPI.getPaths().size());
 
-    PathItem pathItemApplicationEcho = openAPI.getPaths()
-                                              .get("/" + ExampleApplication.APP_NAME + "/echo");
-    assertNotNull(pathItemApplicationEcho);
+		PathItem pathItemApplicationEcho = openAPI.getPaths().get("/" + ExampleApplication.APP_NAME + "/echo");
+		assertNotNull(pathItemApplicationEcho);
 
-    PathItem pathItemRessourceUpper = openAPI.getPaths()
-                                             .get("/" + ExampleApplication.APP_NAME + "/"
-                                                     + ExampleResource.NAME + "/upper");
-    assertNotNull(pathItemRessourceUpper);
+		PathItem pathItemRessourceUpper = openAPI.getPaths()
+				.get("/" + ExampleApplication.APP_NAME + "/" + ExampleResource.NAME + "/upper");
+		assertNotNull(pathItemRessourceUpper);
 
-    PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
-                                                      .get("/" + ExampleApplication.APP_NAME + "/"
-                                                              + ExampleResource.NAME
-                                                              + "/lowerAndFilter");
-    assertNotNull(pathItemRessourceLowerAndFilter);
+		PathItem pathItemRessourceLowerAndFilter = openAPI.getPaths()
+				.get("/" + ExampleApplication.APP_NAME + "/" + ExampleResource.NAME + "/lowerAndFilter");
+		assertNotNull(pathItemRessourceLowerAndFilter);
 
-  }
+	}
 
 }
