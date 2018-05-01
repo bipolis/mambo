@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bipolis</groupId>
@@ -9,47 +8,43 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>_distro</module>
-		<module>_index</module>
-		<module>org.bipolis.mambo.jaxrs.itest</module>
-		<module>org.bipolis.mambo.jaxrs.annotation</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.json</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.yaml</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.core</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.media.yaml.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.api</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.rs</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.basic</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.example</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole</module>
-		<module>org.bipolis.mambo.jaxrs.restconsole.itest</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.ui.redoc</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger</module>
-		<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest</module>
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<module>org.bipolis.mambo.repo</module>
-		<module>org.bipolis.mambo.repo.itest</module>
+<!-- 		<module>org.bipolis.mambo.repo.itest</module> -->
 		<module>org.bipolis.mambo.jgit.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.oauth</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.basicauth.itest</module>
-		<module>org.bipolis.mambo.jaxrs.ext.security.oauth.itest</module>
-		<module>_assembly.bnd.executablejar</module>
-		<module>_assembly.bnd.runbundles</module>
-		<module>_assembly.docker.osgimultirepository</module>
-		<module>_assembly.osgi.subsystem.application</module>
-		<module>_assembly.osgi.subsystem.composit</module>
-		<module>_assembly.osgi.subsystem.feature</module>
+		
+		
+		
+		<module>org.bipolis.mambo.jaxrs</module>
 	</modules>
-	<!-- Declare a profile for CI builds, where indexes are not permitted to contain local file: URLs. -->
+	<!-- Declare a profile for CI builds, where indexes are not permitted to 
+		contain local file: URLs. -->
 	<profiles>
 		<profile>
 			<id>CI_Build</id>
@@ -63,13 +58,13 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<bnd.maven.version>4.0.0-SNAPSHOT</bnd.maven.version>
-		<swagger.version>2.0.0-SNAPSHOT</swagger.version>
-		<osgi.version>6.0.0</osgi.version>
-		<jackson.version>2.9.4</jackson.version>
-		<!-- <osgi.version>7.0.0-SNAPSHOT</osgi.version> -->
+		<swagger.version>2.0.1</swagger.version>
+		<osgi.version>7.0.0</osgi.version>
+		<jackson.version>2.9.5</jackson.version>
 	</properties>
 	<repositories>
-		<!-- These SNAPSHOT repositories are required for OSGi R7 usage in advance of the official release -->
+		<!-- These SNAPSHOT repositories are required for OSGi R7 usage in advance 
+			of the official release -->
 		<repository>
 			<id>OSSRH Snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
@@ -102,7 +97,8 @@
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		<!-- The bnd SNAPSHOT repository is required for OSGi R7 usage in advance of the official release -->
+		<!-- The bnd SNAPSHOT repository is required for OSGi R7 usage in advance 
+			of the official release -->
 		<pluginRepository>
 			<id>bnd.master</id>
 			<snapshots>
@@ -135,12 +131,12 @@
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.service.jaxrs</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>1.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.service.http.whiteboard</artifactId>
-				<version>1.1.0-SNAPSHOT</version>
+				<version>1.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
@@ -150,12 +146,12 @@
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.service.log</artifactId>
-				<version>1.4.0-SNAPSHOT</version>
+				<version>1.4.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>org.osgi.annotation.bundle</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>1.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -274,7 +270,8 @@
 					<artifactId>bnd-baseline-maven-plugin</artifactId>
 					<version>${bnd.maven.version}</version>
 					<configuration>
-						<!-- Recommended to remove the following setting after the first release of your project -->
+						<!-- Recommended to remove the following setting after the first release 
+							of your project -->
 						<failOnMissing>false</failOnMissing>
 					</configuration>
 					<executions>

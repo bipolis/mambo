@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.bipolis</groupId>
+    <artifactId>org.bipolis.mambo.jaxrs</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>org.bipolis.mambo.jaxrs.ext</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.binary</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.json</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.json.itest</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.xml</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.xml.itest</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.yaml</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.media.yaml.itest</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.security.basicauth</module>
+  	<module>
+  		org.bipolis.mambo.jaxrs.ext.security.basicauth.itest
+  	</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.security.core</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.security.oauth</module>
+  	<module>org.bipolis.mambo.jaxrs.ext.security.oauth.itest</module>
+  </modules>
+</project>

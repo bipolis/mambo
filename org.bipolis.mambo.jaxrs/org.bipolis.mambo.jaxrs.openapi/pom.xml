@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.bipolis</groupId>
+    <artifactId>org.bipolis.mambo.jaxrs</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>org.bipolis.mambo.jaxrs.openapi</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>org.bipolis.mambo.jaxrs.openapi.api</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.basic</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.example</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.itest</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.producer.bundle</module>
+  	<module>
+  		org.bipolis.mambo.jaxrs.openapi.producer.bundle.itest
+  	</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.producer.node</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.producer.swagger</module>
+  	<module>
+  		org.bipolis.mambo.jaxrs.openapi.producer.swagger.itest
+  	</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.rs</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.ui.redoc</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger</module>
+  	<module>org.bipolis.mambo.jaxrs.openapi.ui.swagger.itest</module>
+  </modules>
+</project>

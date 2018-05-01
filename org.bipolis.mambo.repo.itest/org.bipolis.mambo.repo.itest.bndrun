@@ -4,7 +4,7 @@
 	felix.cm.dir=cfg,\
 	felix.fileinstall.dir=cfg
 
--runfw: org.apache.felix.framework;version='[5.9.0.SNAPSHOT,5.9.0.SNAPSHOT]'
+-runfw: org.apache.felix.framework
 -runee: JavaSE-1.8
 
 -resolve.effective: active; skip:='osgi.service'

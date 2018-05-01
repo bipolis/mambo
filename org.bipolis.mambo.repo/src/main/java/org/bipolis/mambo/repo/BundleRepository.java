@@ -35,6 +35,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.bipolis.mambo.repo.rsw.R5RepositoryRessource;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -586,11 +588,11 @@ public class BundleRepository {
     return deleted;
   }
 
-  @Reference
-  public void bindLogService(final LogService log) {
-    this.log = log;
-    logger.debug("OSGi log service bound: " + log);
-  }
+//  @Reference
+//  public void bindLogService(final LogService log) {
+//    this.log = log;
+//    logger.debug("OSGi log service bound: " + log);
+//  }
 
   private boolean validate(final WatchKey key) {
     final String dir = key.watchable()
