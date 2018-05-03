@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bipolis</groupId>
@@ -8,39 +9,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>_distro</module>
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		<module>org.bipolis.mambo.repo</module>
-<!-- 		<module>org.bipolis.mambo.repo.itest</module> -->
 		<module>org.bipolis.mambo.jgit.itest</module>
-		
-		
-		
 		<module>org.bipolis.mambo.jaxrs</module>
 	</modules>
 	<!-- Declare a profile for CI builds, where indexes are not permitted to 

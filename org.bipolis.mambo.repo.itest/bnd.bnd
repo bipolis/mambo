@@ -1,2 +1,0 @@
-Test-Cases: ${classes;NAMED;*Test}
-Export-Package: org.bipolis.mambo.repo.itest
